@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_app_tv">
+    package="com.example.video_play_flutter_app">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -18,9 +18,9 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="mobile TV"
+        android:label="4K体育直播"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_sports">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -40,5 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--value的值填写你在友盟后台申请的应用Appkey-->
+        <meta-data android:value="5d78c4670cafb2b5dc0002ab" android:name="UMENG_APPKEY"/>
+        <!--value的值填写渠道名称，例如yingyongbao。这里设置动态渠道变量-->
+
     </application>
 </manifest>

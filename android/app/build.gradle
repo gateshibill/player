@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.flutter_app_tv"
+        applicationId "com.example.video_play_flutter_app"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
@@ -59,7 +59,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "com.android.support:support-v4:28.0.0"
+//    implementation  'com.umeng.umsdk:analytics:8.0.0'
+//    implementation  'com.umeng.umsdk:common:2.0.0'
+    /*友盟统计需要的最新版本组件化基础库和统计SDK*/
+    implementation 'com.umeng.sdk:common:latest.integration'
+    implementation 'com.umeng.sdk:analytics:latest.integration'
 }
+
 subprojects {
     project.configurations.all {
         resolutionStrategy.eachDependency { details ->
@@ -68,5 +74,17 @@ subprojects {
                 details.useVersion "1.0.1"
             }
         }
+    }
+}
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 }
