@@ -4,7 +4,7 @@ import '../my/my_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../config/i18n/i18n.dart';
 import '../home/home_page.dart';
-import 'package:video_play_flutter_app/tv/tv_home.dart';
+import '../tv/tv_home.dart';
 import '../program/program_home.dart';
 import '../live/live_home_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
