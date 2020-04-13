@@ -18,9 +18,9 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="4K体育直播"
+        android:label="直播电视"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/ic_sports">
+        android:icon="@mipmap/ic_strawberry">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
