@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_tv/data/cache_data.dart';
+import 'package:flutter_app_tv/tv/tv_page.dart';
+import 'package:flutter_app_tv/tv/tv_rcmd_page.dart';
+import 'package:flutter_app_tv/video/program_video_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
 import '../bloc/counter_bloc.dart'; // bloc
 import '../global_config.dart';
@@ -26,7 +30,7 @@ class _LiveHomePageState extends State<LiveHomePage> {
   Widget build(BuildContext context) {
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return new DefaultTabController(
-      length: 7,
+      length: 10,
       child: new Scaffold(
         appBar: new AppBar(
           //title: barSearch(),
@@ -38,25 +42,37 @@ class _LiveHomePageState extends State<LiveHomePage> {
                 GlobalConfig.dark == true ? Colors.white : Colors.black,
             tabs: [
               new Tab(text: "美女啦啦"),
-          new Tab(text: "电影"),
-            new Tab(text: "综艺"),
-           new Tab(text: "动作片"),
-          new Tab(text: "爱情片"),
-          new Tab(text: "喜剧片"),
-           new Tab(text: "18+直播"),
-              //new Tab(text: "新闻资讯"),
+              new Tab(text: "NBA"),
+              new Tab(text: "欧冠"),
+              new Tab(text: "英超"),
+              new Tab(text: "中超"),
+              new Tab(text: "CBA"),
+              new Tab(text: "电竞"),
+              new Tab(text: "足球"),
+              new Tab(text: "篮球世界杯"),
+              new Tab(text: "综合"),
             ],
           ),
         ),
         body: new TabBarView(children: [
          // new SvideoPage(),
           new LalaPage(),
-       new MoviePage(column: 0),
-        new MoviePage(column: 1),
-         new MoviePage(column: 2),
-         new MoviePage(column: 3),
-         new MoviePage(column: 4),
-         new LiveVideoPage(column: 0),
+       //new MoviePage(column: 0),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[3], type: 1004),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[4], type: 1005),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[5], type: 1006),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[6], type: 1007),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[7], type: 1008),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[8], type: 1009),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[2], type: 1003),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[1], type: 1002),
+          new ProgramVideoPage(vodList: sportsPlaybackVodList[9], type: 1010),
+
+          // new TVPage(type: 5),
+          // new TVPage(type: 6),
+          // new TVPage(type: 7),
+          //  new TVPage(type: 8),
+
 
           //new HomeDetail()
           //new HtmlPage(),

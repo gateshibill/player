@@ -45,24 +45,14 @@ class MainPageState extends State<MainPageWidget>
     super.initState();
     HttpUpgrade.showUpgrade(context);
     _navigationViews = <NavigationIconView>[
-//      new NavigationIconView(
-//        icon: new Icon(Icons.assignment),
-//        title: new Text("首页"),
-//        vsync: this,
-//      ),
       new NavigationIconView(
         icon: new Icon(Icons.home),
         title: new Text(currentI18n.bottonNavigateHome),
         vsync: this,
       ),
       new NavigationIconView(
-        icon: new Icon(Icons.date_range),
-        title: new Text(currentI18n.bottonNavigateSchedule),
-        vsync: this,
-      ),
-      new NavigationIconView(
-        icon: new Icon(Icons.live_tv),
-        title: new Text(currentI18n.bottonNavigateTv),
+        icon: new Icon(Icons.movie),
+        title: new Text(currentI18n.bottonNavigateMovie),
         vsync: this,
       ),
       new NavigationIconView(
@@ -71,10 +61,16 @@ class MainPageState extends State<MainPageWidget>
         vsync: this,
       ),
       new NavigationIconView(
+        icon: new Icon(Icons.date_range),
+        title: new Text(currentI18n.bottonNavigateSchedule),
+        vsync: this,
+      ),
+      new NavigationIconView(
         icon: new Icon(Icons.perm_identity),
         title: new Text(currentI18n.bottonNavigateMy),
         vsync: this,
       ),
+
     ];
     for (NavigationIconView view in _navigationViews) {
       view.controller.addListener(_rebuild);
@@ -83,9 +79,9 @@ class MainPageState extends State<MainPageWidget>
     _pageList = <Widget>[
       //new CarouselPage(),
       new HomePage(),
-      new ProgramHome(),
       new VideoPage(),
       new LiveHomePage(),
+      new ProgramHome(),
       new MyPage()
     ];
     _currentPage = _pageList[_currentIndex];

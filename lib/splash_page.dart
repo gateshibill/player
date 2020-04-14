@@ -27,7 +27,7 @@ class SplashPageState extends State<SplashPage> {
     return Stack(
       fit:StackFit.expand,
       children: <Widget>[
-        Image.asset("assets/images/" + "4kstartup.jpg",
+        Image.asset("assets/images/" + "startup1.jpg",
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           fit: BoxFit.cover,),

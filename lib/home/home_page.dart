@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_tv/tv/tv_page.dart';
+import 'package:flutter_app_tv/tv/tv_rcmd_page.dart';
 import '../global_config.dart';
 import '../utils/log_util.dart';
 import '../data/cache_data.dart';
@@ -24,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // LogUtil.v("_HomePageState build()");
     return new DefaultTabController(
-      length: 10,
+      length:6,
       child: new Scaffold(
         appBar: new AppBar(
           title: new TabBar(
@@ -35,35 +37,24 @@ class _HomePageState extends State<HomePage> {
                 GlobalConfig.dark == true ? Colors.white : Colors.black,
             tabs: [
               new Tab(text: "热点"),
-              new Tab(text: "NBA"),
-              new Tab(text: "欧冠"),
-              new Tab(text: "英超"),
-              new Tab(text: "中超"),
-              new Tab(text: "CBA"),
-              new Tab(text: "电竞"),
-              new Tab(text: "足球"),
-              new Tab(text: "篮球世界杯"),
-              new Tab(text: "综合"),
+              new Tab(text: "综合频道"),
+              new Tab(text: "精选体育频道"),
+              new Tab(text: "央视体育频道"),
+              new Tab(text: "国际体育频道"),
+              new Tab(text: "地方体育频道"),
+
+
              // new Tab(text: "美女啦啦"),
             ],
           ),
         ),
         body: new TabBarView(children: [
           new CarouselPage(),
-          // new LivePage(),
-          //  new ProgramPage(),
-
-          // new ProgramVideoPage(vodList: programVodList[0], type: 1001),
-
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[3], type: 1004),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[4], type: 1005),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[5], type: 1006),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[6], type: 1007),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[7], type: 1008),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[8], type: 1009),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[2], type: 1003),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[1], type: 1002),
-          new ProgramVideoPage(vodList: sportsPlaybackVodList[9], type: 1010),
+          new TvRcmdPage(),
+          new TVPage(type: 0),
+          new TVPage(type: 1),
+          new TVPage(type: 2),
+          new TVPage(type: 3),
          // new SvideoPage(),
           //new Live1Page(),
         ]),

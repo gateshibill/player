@@ -14,7 +14,7 @@ class _I18nZh extends I18n {
   @override
   String get bottonNavigateLive=> "直播";
   @override
-  String get bottonNavigateSchedule=>"赛程";
+  String get bottonNavigateSchedule=>"预告";
   @override
   String get bottonNavigateSports=>"体育";
   @override

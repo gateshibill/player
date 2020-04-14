@@ -31,7 +31,7 @@ class _FileManagerState extends State<FileManager> {
   void initState() {
     super.initState();
     sDCardDir = widget.sDCardDir;
-    sDCardDir = "/data/user/0/com.example.video_play_flutter_app/app_flutter";
+    sDCardDir = "/data/user/0/feikan/player";
     LogUtil.v("sDCardDir:" + sDCardDir.toString());
     parentDir = Directory(sDCardDir);
     initDirectory(sDCardDir);

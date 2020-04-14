@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_tv/live/live_video_page.dart';
+import 'package:flutter_app_tv/video/moive_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
 import '../bloc/counter_bloc.dart'; // bloc
 import '../global_config.dart';
@@ -26,7 +28,7 @@ class _VideoPageState extends State<VideoPage> {
   Widget build(BuildContext context) {
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return new DefaultTabController(
-      length: 5,
+      length: 6,
       child: new Scaffold(
         appBar: new AppBar(
           //title: barSearch(),
@@ -38,31 +40,26 @@ class _VideoPageState extends State<VideoPage> {
               ? Colors.white
               : Colors.black,
           tabs: [
-            new Tab(text: "精选体育频道"),
-            new Tab(text: "央视体育频道"),
-            new Tab(text: "国际体育频道"),
-            new Tab(text: "地方体育频道"),
-            new Tab(text: "综合频道"),
-           // new Tab(text: "卫视娱乐"),
-           // new Tab(text: "CCTV频道"),
-           // new Tab(text: "港台频道"),
-          //  new Tab(text: "国际频道"),
-           // new Tab(text: "电视节目单"),
-           // new Tab(text: "美女啦啦"),
+            new Tab(text: "电影"),
+            new Tab(text: "综艺"),
+            new Tab(text: "动作片"),
+            new Tab(text: "爱情片"),
+            new Tab(text: "喜剧片"),
+            new Tab(text: "18+直播"),
+
+
           ],
         ),
       ),
       body: new TabBarView(
           children: [
-            new TVPage(type: 0),
-            new TVPage(type: 1),
-            new TVPage(type: 2),
-            new TVPage(type: 3),
-            new TvRcmdPage(),
-           // new TVPage(type: 5),
-           // new TVPage(type: 6),
-           // new TVPage(type: 7),
-          //  new TVPage(type: 8),
+            new MoviePage(column: 0),
+            new MoviePage(column: 1),
+            new MoviePage(column: 2),
+            new MoviePage(column: 3),
+            new MoviePage(column: 4),
+            new LiveVideoPage(column: 0),
+
 
             //new ProgramPage(day: 0),
 

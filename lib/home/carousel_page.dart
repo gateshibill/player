@@ -38,7 +38,7 @@ class _HomePageState extends State<CarouselPage> {
   @override
   void initState() {
     super.initState();
-    String playUrl = "http://blg.beeyooo.com/live/cctv5hd.m3u8";
+    String playUrl = "http://121.31.30.91:8081/ysten-business/live/cctv-5/1.m3u8";
     freshChannel();
     if (null != sportsChannelList[0] && sportsChannelList[0].length > 0) {
       HttpClient.getChannelPlayUrl(sportsChannelList[0][0]).then((onValue) {

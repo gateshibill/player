@@ -1,4 +1,4 @@
-package com.example.video_play_flutter_app;
+package com.feikan.player;
 
 
 import android.os.Bundle;
