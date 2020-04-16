@@ -224,7 +224,7 @@ class _HomePageState extends State<NewsPage> {
           } else {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(mediaModel: mediaList[index * groupNum]);
+              return new MediaPage(mediaModel: mediaList[index * groupNum],context:context);
             }));
           }
         },
