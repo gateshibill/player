@@ -14,12 +14,12 @@ import '../../common/player_controller.dart';
 import '../../resource/local_storage.dart';
 
 class LiveDetail extends StatefulWidget {
-  LiveDetail({Key key, @required this.vod});
-
+  LiveDetail({Key key, @required this.vod,this.context});
+  BuildContext context;
   ChannelModel vod;
 
   @override
-  _LiveDetailState createState() => _LiveDetailState(channel: vod);
+  _LiveDetailState createState() => _LiveDetailState(channel: vod,context: context);
 }
 
 class TabTitle {
@@ -31,7 +31,8 @@ class TabTitle {
 
 class _LiveDetailState extends State<LiveDetail>
     with SingleTickerProviderStateMixin {
-  _LiveDetailState({Key key, @required this.channel});
+  _LiveDetailState({Key key, @required this.channel,this.context});
+  BuildContext context;
 
   TextEditingController editingController = TextEditingController();
   IjkMediaController mediaController = IjkMediaController();
@@ -118,9 +119,13 @@ class _LiveDetailState extends State<LiveDetail>
     int row = sportsChannelList.length ~/ 2 - 1;
     print("row:$row");
     return Scaffold(
-//      appBar: AppBar(
-//        title: Text("电视直播"),
-//      ),
+      appBar: new AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(this.context).pop(),
+        ),
+        title: new Text(this.channel.getName()),
+      ),
       body: Column(
 //        padding:
 //            const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5, right: 5),

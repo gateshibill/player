@@ -20,8 +20,8 @@ import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
 class VideoDetail extends StatelessWidget {
-  VideoDetail({Key key, @required this.vod});
-
+  VideoDetail({Key key, @required this.vod,this.context});
+  BuildContext context;
   VodModel vod;
 
   @override
@@ -32,6 +32,13 @@ class VideoDetail extends StatelessWidget {
       bloc: _counterBloc,
       builder: (BuildContext context, Map theme) {
         return Scaffold(
+          appBar: new AppBar(
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(this.context).pop(),
+            ),
+            title: new Text(this.vod.getName()),
+          ),
           body: VideoDetailPage(vod: this.vod),
         );
       },
