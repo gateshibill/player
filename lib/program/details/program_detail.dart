@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chewie/chewie.dart'; // 播放
+//import 'package:chewie/chewie.dart'; // 播放
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // UI适配库
 import '../../player/comment_detail.dart'; // 评论

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_tv/data/cache_data.dart';
-import 'package:flutter_app_tv/tv/tv_page.dart';
-import 'package:flutter_app_tv/tv/tv_rcmd_page.dart';
-import 'package:flutter_app_tv/video/program_video_page.dart';
+import '../data/cache_data.dart';
+import '../tv/tv_page.dart';
+import '../tv/tv_rcmd_page.dart';
+import '../video/program_video_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
 import '../bloc/counter_bloc.dart'; // bloc
+import '../data/cache_data.dart';
 import '../global_config.dart';
 import '../utils/log_util.dart';
+import '../video/program_video_page.dart';
 import './live_video_page.dart';
 import '../video/moive_page.dart';
 import '../video/svideo_page.dart';

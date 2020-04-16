@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_tv/live/live_video_page.dart';
-import 'package:flutter_app_tv/video/moive_page.dart';
+import '../live/live_video_page.dart';
+import '../video/moive_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
 import '../bloc/counter_bloc.dart'; // bloc
 import '../global_config.dart';

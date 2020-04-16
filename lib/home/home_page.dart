@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_tv/tv/tv_page.dart';
-import 'package:flutter_app_tv/tv/tv_rcmd_page.dart';
+import '../tv/tv_page.dart';
+import '../tv/tv_rcmd_page.dart';
 import '../global_config.dart';
+import '../tv/tv_page.dart';
+import '../tv/tv_rcmd_page.dart';
 import '../utils/log_util.dart';
 import '../data/cache_data.dart';
 import '../video/program_video_page.dart';
