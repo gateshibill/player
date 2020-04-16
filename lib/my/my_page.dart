@@ -212,7 +212,7 @@ class _MyPageState extends State<MyPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Container(
-                  width: (MediaQuery.of(context).size.width - 6.0) / 4,
+                  width: (MediaQuery.of(context).size.width - 30.0) / 3,
                   child: new FlatButton(
                       onPressed: () {},
                       child: new Container(
@@ -221,7 +221,7 @@ class _MyPageState extends State<MyPage> {
                           children: <Widget>[
                             new Container(
                               child: new Text(
-                                "57",
+                                "2020-10-01",
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: GlobalConfig.fontColor),
@@ -229,7 +229,7 @@ class _MyPageState extends State<MyPage> {
                             ),
                             new Container(
                               child: new Text(
-                                "我的积分",
+                                "VIP会员",
                                 style: new TextStyle(
                                     fontSize: 12.0,
                                     color: GlobalConfig.fontColor),
@@ -251,7 +251,7 @@ class _MyPageState extends State<MyPage> {
                               width: 1.0))),
                 ),
                 new Container(
-                  width: (MediaQuery.of(context).size.width - 6.0) / 4,
+                  width: (MediaQuery.of(context).size.width - 50.0) / 4,
                   child: new FlatButton(
                       onPressed: () {},
                       child: new Container(
@@ -290,7 +290,7 @@ class _MyPageState extends State<MyPage> {
                               width: 1.0))),
                 ),
                 new Container(
-                  width: (MediaQuery.of(context).size.width - 6.0) / 4,
+                  width: (MediaQuery.of(context).size.width -50.0) / 4,
                   child: new FlatButton(
                       onPressed: () {
                         this.viewMessageCounter++;
@@ -340,7 +340,7 @@ class _MyPageState extends State<MyPage> {
                               width: 1.0))),
                 ),
                 new Container(
-                    width: (MediaQuery.of(context).size.width - 6.0) / 4,
+                    width: (MediaQuery.of(context).size.width - 50.0) / 4,
                     child: new FlatButton(
                         onPressed: () {},
                         child: new Container(
