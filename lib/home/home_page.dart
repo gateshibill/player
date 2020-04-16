@@ -38,12 +38,12 @@ class _HomePageState extends State<HomePage> {
             unselectedLabelColor:
                 GlobalConfig.dark == true ? Colors.white : Colors.black,
             tabs: [
-              new Tab(text: "热点"),
+              new Tab(text: "热点推荐"),
               new Tab(text: "综合频道"),
-              new Tab(text: "精选体育频道"),
-              new Tab(text: "央视体育频道"),
-              new Tab(text: "国际体育频道"),
-              new Tab(text: "地方体育频道"),
+              new Tab(text: "精选体育"),
+              new Tab(text: "娱乐卫视"),
+              new Tab(text: "央视频道"),
+              new Tab(text: "国家频道"),
 
 
              // new Tab(text: "美女啦啦"),

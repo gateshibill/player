@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import '../config/config.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import '../data/cache_data.dart';
 import 'package:flutter/material.dart';
 import 'package:ini/ini.dart';
@@ -86,10 +86,10 @@ class HttpUpgrade {
 
   static launchURL() async {
     print("DOWNLOAD_URL:$downlaodLink");
-    if (await canLaunch(downlaodLink)) {
-      await launch(downlaodLink);
-    } else {
-      throw 'Could not launch $downlaodLink';
-    }
+//    if (await canLaunch(downlaodLink)) {
+//      await launch(downlaodLink);
+//    } else {
+//      throw 'Could not launch $downlaodLink';
+//    }
   }
 }

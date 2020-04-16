@@ -4,6 +4,10 @@ const servicePath = {
    'audioWords':'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=213508', // 歌词列表
    'audioInfo':'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play', // 歌曲信息
 };
+
+const String DefaultChannleUrl= "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2768348726,1854484849&fm=11&gp=0.jpg";
+
+
 String VERSION="1.0.0";
 const int LOG_LEVEL=0;
 const int APP_ID=1;

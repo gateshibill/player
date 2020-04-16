@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:player/home/carousel_page.dart';
 import 'navigation_icon_view.dart';
 import '../my/my_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,8 +57,8 @@ class MainPageState extends State<MainPageWidget>
         vsync: this,
       ),
       new NavigationIconView(
-        icon: new Icon(Icons.child_care),
-        title: new Text(currentI18n.bottonNavigateTricks),
+        icon: new Icon(Icons.ondemand_video),
+        title: new Text(currentI18n.bottonNavigateVideo),
         vsync: this,
       ),
       new NavigationIconView(

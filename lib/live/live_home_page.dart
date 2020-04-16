@@ -32,7 +32,7 @@ class _LiveHomePageState extends State<LiveHomePage> {
   Widget build(BuildContext context) {
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return new DefaultTabController(
-      length: 10,
+      length: 9,
       child: new Scaffold(
         appBar: new AppBar(
           //title: barSearch(),
@@ -43,7 +43,7 @@ class _LiveHomePageState extends State<LiveHomePage> {
             unselectedLabelColor:
                 GlobalConfig.dark == true ? Colors.white : Colors.black,
             tabs: [
-              new Tab(text: "美女啦啦"),
+              //new Tab(text: "美女啦啦"),
               new Tab(text: "NBA"),
               new Tab(text: "欧冠"),
               new Tab(text: "英超"),
@@ -58,7 +58,7 @@ class _LiveHomePageState extends State<LiveHomePage> {
         ),
         body: new TabBarView(children: [
          // new SvideoPage(),
-          new LalaPage(),
+        //  new LalaPage(),
        //new MoviePage(column: 0),
           new ProgramVideoPage(vodList: sportsPlaybackVodList[3], type: 1004),
           new ProgramVideoPage(vodList: sportsPlaybackVodList[4], type: 1005),

@@ -6,9 +6,9 @@ import '../player/anchor_player.dart';
 import '../common/html_page.dart';
 import '../tv/details/live_detail.dart';
  class MediaPage extends StatelessWidget {
-  MediaPage({Key key, @required this.mediaModel});
+  MediaPage({Key key, @required this.mediaModel,this.context});
   MediaModel mediaModel;
-
+  BuildContext context;
   @override
   Widget build(BuildContext context) {
    switch (mediaModel.getMediaType()){
@@ -16,7 +16,7 @@ import '../tv/details/live_detail.dart';
        return VideoDetail(vod:mediaModel);
        break;
      case MediaType.Topic:
-       return HtmlPage(mediaModel:mediaModel);
+       return HtmlPage(mediaModel:mediaModel, context:this.context);
        break;
      case MediaType.Channel:
        return LiveDetail(vod:mediaModel);

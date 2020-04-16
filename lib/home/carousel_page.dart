@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:player/config/config.dart';
+import 'package:player/utils/ui_util.dart';
 import '../global_config.dart';
 import '../model/client_log.dart';
 import '../program/details/program_detail.dart';
@@ -38,26 +40,26 @@ class _HomePageState extends State<CarouselPage> {
   @override
   void initState() {
     super.initState();
-    String playUrl = "http://121.31.30.91:8081/ysten-business/live/cctv-5/1.m3u8";
+    String playUrl = "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
     freshChannel();
-    if (null != sportsChannelList[0] && sportsChannelList[0].length > 0) {
-      HttpClient.getChannelPlayUrl(sportsChannelList[0][0]).then((onValue) {
-        print("onValue:$onValue");
-        String playUrlTmp = onValue;
-        if (null != playUrlTmp && playUrlTmp != "") {
-          playUrl = playUrlTmp;
-        }
+//    if (null != sportsChannelList[0] && sportsChannelList[0].length > 0) {
+//      HttpClient.getChannelPlayUrl(sportsChannelList[0][0]).then((onValue) {
+//        print("onValue:$onValue");
+//        String playUrlTmp = onValue;
+//        if (null != playUrlTmp && playUrlTmp != "") {
+//          playUrl = playUrlTmp;
+//        }
         homeMediaController.setNetworkDataSource(playUrl, autoPlay: true);
         print("playUrling:${playUrl}");
 //        LocalStorage.historyChannelMap[sportsChannelList[0][0].id] =
 //            sportsChannelList[0][0];
 //        LocalStorage.saveHistoryChannel(sportsChannelList[0][0]);
-      });
-    } else {
+     // });
+  //  } else {
       //homeMediaController.setNetworkDataSource(playUrl, autoPlay: true);
-    }
-    mediaList.addAll(topicList);
-    mediaList.addAll(homeVodList);
+   // }
+    //mediaList.addAll(topicList);
+    mediaList.addAll(tvChannelList[0]);
     if (mediaList.length == 0) {
       handleRefresh();
     }
@@ -337,7 +339,7 @@ class _HomePageState extends State<CarouselPage> {
           children: <Widget>[
             new Container(
               width: 190,
-              alignment: Alignment.topLeft,
+              alignment: Alignment.center,
               child: new Column(
                 children: <Widget>[
                   new Text(subString(mediaList[index * groupNum].getName(), 50),
@@ -363,7 +365,7 @@ class _HomePageState extends State<CarouselPage> {
               child: new CachedNetworkImage(
                 imageUrl: "${mediaList[index * groupNum].getPics()[0]}",
                 placeholder: (context, url) => cachPlaceHolder(),
-                errorWidget: (context, url, error) => new Icon(Icons.autorenew),
+                errorWidget: (context, url, error) => defaultCacheNetworkImage(DefaultChannleUrl),
               ),
               margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
             ),
@@ -378,7 +380,7 @@ class _HomePageState extends State<CarouselPage> {
           } else {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(mediaModel: mediaList[index * groupNum + 1]);
+              return new MediaPage(mediaModel: mediaList[index * groupNum + 1],context:context);
             }));
           }
         },
@@ -411,7 +413,7 @@ class _HomePageState extends State<CarouselPage> {
               child: new CachedNetworkImage(
                 imageUrl: "${mediaList[index * groupNum + 1].getPics()[0]}",
                 placeholder: (context, url) => cachPlaceHolder(),
-                errorWidget: (context, url, error) => new Icon(Icons.autorenew),
+                errorWidget: (context, url, error) => defaultCacheNetworkImage(DefaultChannleUrl),
               ),
               margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
             ),
@@ -459,7 +461,8 @@ class _HomePageState extends State<CarouselPage> {
               child: new CachedNetworkImage(
                 imageUrl: "${mediaList[index * groupNum + 2].getPics()[0]}",
                 placeholder: (context, url) => cachPlaceHolder(),
-                errorWidget: (context, url, error) => new Icon(Icons.autorenew),
+               // errorWidget: (context, url,error) => cachPlaceHolder(),
+               errorWidget: (context, url, error) => defaultCacheNetworkImage(DefaultChannleUrl),
               ),
               margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
             ),
@@ -491,12 +494,12 @@ class _HomePageState extends State<CarouselPage> {
               child: new CachedNetworkImage(
                 imageUrl: "${mediaList[index * groupNum + 3].getPics()[0]}",
                 placeholder: (context, url) => cachPlaceHolder(),
-                errorWidget: (context, url, error) => new Icon(Icons.autorenew),
+                errorWidget: (context, url, error) => defaultCacheNetworkImage(DefaultChannleUrl),
                 fit: BoxFit.fill,
               ),
               //),
-              // margin: new EdgeInsets.only(top: 6.0, bottom: 14.0),
-              // alignment: Alignment.topLeft
+              margin: new EdgeInsets.only(top: 6.0, bottom: 14.0),
+               alignment: Alignment.topLeft
             ),
             new Container(
               width: 400,
@@ -505,12 +508,13 @@ class _HomePageState extends State<CarouselPage> {
                   new Text(
                       subString(mediaList[index * groupNum + 3].getName(), 50),
                       maxLines: 1,
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                       style: new TextStyle(color: GlobalConfig.fontColor)),
                   //new Text("演员: ${widgets[index2].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                 ],
               ),
               //  padding: const EdgeInsets.only(bottom: 10.0),
+              alignment: Alignment.center,
               margin: new EdgeInsets.only(top: 0.0, bottom: 6.0),
             ),
           ],

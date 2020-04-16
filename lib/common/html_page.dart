@@ -6,8 +6,9 @@ import '../model/media_model.dart';
 import '../model/topic_model.dart';
 
 class HtmlPage  extends MediaPage{
-  HtmlPage({Key key, @required this.mediaModel});
+  HtmlPage({Key key, @required this.mediaModel,this.context});
   MediaModel mediaModel;
+  BuildContext context;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -15,30 +16,35 @@ class HtmlPage  extends MediaPage{
 //      theme: new ThemeData(
 //        primarySwatch: Colors.blue,
 //      ),
-      home: new MyHomePage(mediaModel: mediaModel),
+      home: new MyHomePage(mediaModel: mediaModel,context:context),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.mediaModel}) : super(key: key);
+  MyHomePage({Key key, this.mediaModel,this.context}) : super(key: key);
   //MediaPage({Key key, @required this.mediaModel});
   //final String title;
   MediaModel mediaModel;
-
+  BuildContext context;
   @override
-  _MyHomePageState createState() => new _MyHomePageState(mediaModel: mediaModel);
+  _MyHomePageState createState() => new _MyHomePageState(mediaModel: mediaModel,context: this.context);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  _MyHomePageState({Key key, this.mediaModel});
+  _MyHomePageState({Key key, this.mediaModel,this.context});
   TopicModel mediaModel;
+  BuildContext context;
   @override
   Widget build(BuildContext context) {
     String content="<h1>${mediaModel.getName()}</h1>  " + mediaModel.topicContent;
 
     return new Scaffold(
       appBar: new AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(this.context).pop(),
+        ),
         title: new Text(mediaModel.getName()),
       ),
       body: new Center(

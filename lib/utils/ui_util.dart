@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:player/common/widget_common.dart';
 
 class UiUtil {
   static void showToast(String value) {
@@ -31,4 +33,11 @@ class UiUtil {
 
     return false;
   }
+}
+defaultCacheNetworkImage(String url) {
+  return new CachedNetworkImage(
+    imageUrl: url,
+    placeholder: (context, url) => cachPlaceHolder(),
+    errorWidget: (context, url, error) => cachPlaceHolder(),
+  );
 }

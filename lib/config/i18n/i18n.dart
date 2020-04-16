@@ -21,7 +21,7 @@ abstract class I18n {
   String get bottonNavigateSchedule;
   String get bottonNavigateSports;
   String get bottonNavigateMy;
-
+  String get bottonNavigateVideo;
 
 
   String get indexTitle;
