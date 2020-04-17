@@ -8,12 +8,12 @@ import 'package:intl/intl.dart';
 import './sports_page.dart';
 import 'sportshot_page.dart';
 
-class ProgramHome extends StatefulWidget {
+class findPage extends StatefulWidget {
   @override
-  _ProgramHomeState createState() => _ProgramHomeState();
+  _findPageState createState() => _findPageState();
 }
 
-class _ProgramHomeState extends State<ProgramHome> {
+class _findPageState extends State<findPage> {
   TabBarView mytab;
 
   @override

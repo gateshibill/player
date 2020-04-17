@@ -330,7 +330,7 @@ class _HomePageState extends State<CarouselPage> {
           } else {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(mediaModel: mediaList[index * groupNum]);
+              return new MediaPage(mediaModel: mediaList[index * groupNum],context:context);
             }));
           }
         },
@@ -428,7 +428,7 @@ class _HomePageState extends State<CarouselPage> {
           } else {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(mediaModel: mediaList[index * groupNum + 2]);
+              return new MediaPage(mediaModel: mediaList[index * groupNum + 2],context:context);
             }));
           }
         },
@@ -478,7 +478,7 @@ class _HomePageState extends State<CarouselPage> {
             homeMediaController.reset();
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(mediaModel: mediaList[index * groupNum + 3]);
+              return new MediaPage(mediaModel: mediaList[index * groupNum + 3],context:context);
             }));
           }
         },

@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_util.dart';
-import '../tv/details/live_detail.dart';
+import './details/live_detail.dart';
 import '../resource/local_storage.dart';
 import '../service/http_client.dart';
 import '../model/channel_model.dart';
@@ -131,7 +131,7 @@ class _TVPageState extends State<TVPage> {
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
                         return new LiveDetail(
-                            vod: sportsChannelList[column][index]);
+                            vod: sportsChannelList[column][index],context: context);
                       }));
                     } else {
                       Navigator.of(context)
@@ -208,7 +208,7 @@ class _TVPageState extends State<TVPage> {
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (context) {
                     return new LiveDetail(
-                        vod: sportsChannelList[column][index]);
+                        vod: sportsChannelList[column][index],context: context);
                   }));
                 },
                 child: Stack(

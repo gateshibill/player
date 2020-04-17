@@ -19,7 +19,7 @@ import '../service/local_data_provider.dart';
 import '../service/http_client.dart';
 import '../common/widget_common.dart';
 import '../model/channel_model.dart';
-import '../tv/details/live_detail.dart';
+import '../moive/details/live_detail.dart';
 import '../data/cache_data.dart';
 
 class MyPage extends StatefulWidget {

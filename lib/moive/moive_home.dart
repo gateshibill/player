@@ -4,18 +4,15 @@ import '../video/moive_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
 import '../bloc/counter_bloc.dart'; // bloc
 import '../global_config.dart';
-import '../program/program_page.dart';
 import '../utils/log_util.dart';
-import '../tv/tv_rcmd_page.dart';
-import '../tv/tv_page.dart';
-import '../home/news_page.dart';
 
-class VideoPage extends StatefulWidget {
+
+class moivePage extends StatefulWidget {
   @override
-  _VideoPageState createState() => _VideoPageState();
+  _moivePageState createState() => _moivePageState();
 }
 
-class _VideoPageState extends State<VideoPage> {
+class _moivePageState extends State<moivePage> {
   @override
   void initState() {
     super.initState();

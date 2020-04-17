@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/cache_data.dart';
-import '../tv/tv_page.dart';
-import '../tv/tv_rcmd_page.dart';
+import '../moive/moive_page.dart';
+import '../moive/moive_rcmd_page.dart';
 import '../video/program_video_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
 import '../bloc/counter_bloc.dart'; // bloc
@@ -15,12 +15,12 @@ import '../video/svideo_page.dart';
 import '../video/lala_page.dart';
 
 
-class LiveHomePage extends StatefulWidget {
+class videoPage extends StatefulWidget {
   @override
-  _LiveHomePageState createState() => _LiveHomePageState();
+  _videoPageState createState() => _videoPageState();
 }
 
-class _LiveHomePageState extends State<LiveHomePage> {
+class _videoPageState extends State<videoPage> {
   @override
   void initState() {
     super.initState();

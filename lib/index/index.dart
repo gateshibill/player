@@ -5,7 +5,7 @@ import '../my/my_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../config/i18n/i18n.dart';
 import '../home/home_page.dart';
-import '../tv/tv_home.dart';
+import '../moive/moive_home.dart';
 import '../program/program_home.dart';
 import '../live/live_home_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -80,9 +80,9 @@ class MainPageState extends State<MainPageWidget>
     _pageList = <Widget>[
       //new CarouselPage(),
       new HomePage(),
-      new VideoPage(),
-      new LiveHomePage(),
-      new ProgramHome(),
+      new moivePage(),
+      new videoPage(),
+      new findPage(),
       new MyPage()
     ];
     _currentPage = _pageList[_currentIndex];
