@@ -54,15 +54,11 @@ class _findPageState extends State<findPage> {
             unselectedLabelColor:
             GlobalConfig.dark == true ? Colors.white : Colors.black,
             tabs: [
-              new Tab(text: "综合赛事"),
+
             //  new Tab(text: "热门赛事"),
               new Tab(text: "CCTV节目"),
-           //   new Tab(text: "篮球世界杯"),
               new Tab(text: "美图美女"),
-//              new Tab(text: "西甲"),
-//              new Tab(text: "NBA"),
-//              new Tab(text: "中超"),
-//              new Tab(text: "CBA"),
+              new Tab(text: "综合赛事"),
             ],
           ),
         ),
@@ -73,16 +69,13 @@ class _findPageState extends State<findPage> {
 
   TabBarView MyTabBarView() {
     return new TabBarView(children: [
-      new SportsPage(), //总赛事
+
      // new SportshotPage(day: 0, name: "热门"),
       // new NewsWebPage("http://sportslive.hongxiuba.com","积分榜"),
       new ProgramPage(day: 0), //普通节目单
-    //  new ProgramEventPage(day: 0), //世界杯
-//          new ProgramPage(day: 0),
-//          new ProgramPage(day: 0),
-//          new ProgramPage(day: 0),
-//          new ProgramPage(day: 0)
-      new SvideoPage()
+      new SvideoPage(),
+      new SportsPage(), //总赛事
+
     ]);
   }
 

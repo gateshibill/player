@@ -205,24 +205,6 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
                 .push(new MaterialPageRoute(builder: (context) {
               return new VideoDetail(vod: vodList[index],context: context);
             }));
-
-//            setState(() {
-//              if (statusList[index]) {//处于播放状态
-//                this.mediaControllerList[index].reset();
-//                statusList[index]=false;
-//              } else {
-//                for (IjkMediaController mc in this.mediaControllerList) {
-//                  mc.reset();
-//                }
-//                for (bool s in this.statusList) {
-//                  s = false;
-//                }
-//                statusList[index] = true;
-//                mediaController.setNetworkDataSource(vodList[index].getPlayUrl(),
-//                    autoPlay: true);
-//                //  play(mediaController, vodList[index].vodPic);
-//              }
-//            });
           },
           child: new Column(
             children: <Widget>[

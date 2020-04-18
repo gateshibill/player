@@ -45,7 +45,7 @@ class HttpClient {
         }
       });
       //央视频道
-      await getChannelList(5, 0, 0, 50).then((channelModelList) {
+      await getChannelList(0, 5, 0, 50).then((channelModelList) {
         if (null != channelModelList) {
           tvChannelList[1] = channelModelList.channelModelList;
           for (ChannelModel cm in sportsChannelList[1]) {
@@ -56,7 +56,7 @@ class HttpClient {
         }
       });
       //体育频道
-      await getChannelList(0, 3, 0, 50).then((channelModelList) {
+      await getChannelList(1, 0, 0, 50).then((channelModelList) {
         if (null != channelModelList) {
           tvChannelList[2] = channelModelList.channelModelList;
           for (ChannelModel cm in sportsChannelList[0]) {
@@ -67,7 +67,7 @@ class HttpClient {
         }
       });
       //卫视频道
-      await getChannelList(4, 0, 0, 50).then((channelModelList) {
+      await getChannelList(2, 4, 0, 50).then((channelModelList) {
         if (null != channelModelList) {
           tvChannelList[3] = channelModelList.channelModelList;
           for (ChannelModel cm in sportsChannelList[1]) {
@@ -78,7 +78,7 @@ class HttpClient {
         }
       });
       //港澳频道
-      await getChannelList(2, 0, 0, 50).then((channelModelList) {
+      await getChannelList(0, 2, 0, 50).then((channelModelList) {
         if (null != channelModelList) {
           tvChannelList[4] = channelModelList.channelModelList;
           for (ChannelModel cm in sportsChannelList[1]) {
@@ -89,7 +89,7 @@ class HttpClient {
         }
       });
       //国际频道
-      await getChannelList(3, 0, 0, 50).then((channelModelList) {
+      await getChannelList(0, 3, 0, 50).then((channelModelList) {
         if (null != channelModelList) {
           tvChannelList[5] = channelModelList.channelModelList;
           for (ChannelModel cm in sportsChannelList[1]) {

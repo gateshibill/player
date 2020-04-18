@@ -84,12 +84,12 @@ class _TVPageState extends State<TVPage> {
   Widget itemBuilder1(BuildContext context, int index) {
     String url = tvChannelList[column][index].playUrl;
     return new Container(
-        // margin: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+        margin: const EdgeInsets.only(top: 5.0, bottom: 5.0),
         color: GlobalConfig.cardBackgroundColor,
         child: new Column(
           children: <Widget>[
             new Container(
-              width: 360,
+             // width: 400,
               child: new Row(
                 children: <Widget>[
                   new Text(
@@ -120,7 +120,7 @@ class _TVPageState extends State<TVPage> {
               padding: const EdgeInsets.only(top: 10.0),
             ),
             new Container(
-              width: 320,
+              //width: 400,
               child: new GestureDetector(
                 onTap: () {
                   bool isLogin = LocalDataProvider.getInstance().isLogin();
@@ -170,7 +170,7 @@ class _TVPageState extends State<TVPage> {
         child: new Column(
           children: <Widget>[
             new Container(
-              width: 360,
+              //width: 360,
               child: new Row(
                 children: <Widget>[
                   new Text(
@@ -202,7 +202,7 @@ class _TVPageState extends State<TVPage> {
               padding: const EdgeInsets.only(top: 10.0),
             ),
             new Container(
-              width: 320,
+            //  width: 320,
               child: new GestureDetector(
                 onTap: () {
                   Navigator.of(context)
@@ -245,75 +245,10 @@ class _TVPageState extends State<TVPage> {
 
   Future handleRefresh() async {
     LogUtil.e("_handleRefresh");
-    int type = 0;
-    int groupId = 0;
-    switch (column) {
-      case 0:
-        type = 1;
-        break;
-      case 1: //央视体育
-        type = 1;
-        groupId = 5;
-        break;
-      case 2: //国际体育
-        type = 1;
-        groupId = 3;
-        break;
-      case 3: //地方体育
-        type = 1;
-        groupId = 4;
-        break;
-      case 4: //综合推荐
-        type = 0;
-        groupId = 0;
-        break;
-      case 5: //卫视娱乐
-        type = 2;
-        groupId = 0;
-        break;
-      case 6: //CCTV
-        type = 0;
-        groupId = 5;
-        break;
-      case 7: //港台
-        type = 0;
-        groupId = 2;
-        break;
-      case 8: //国际
-        type = 0;
-        groupId = 3;
-        break;
-      default:
-        break;
-    }
-
-    await HttpClient.getChannelList(type, groupId, 0, 50).then((list) {
-      if (null != list) {
-        tvChannelList[column] = list.channelModelList;
-        for (ChannelModel cm in tvChannelList[column]) {
-          //缓存到本地"vod_0_"为首页栏目内容
-          LocalStorage.saveChannel(cm);
-        }
-      } else {
-        LogUtil.e("fail to get channel");
-        ClientLog cl = new ClientLog(
-            "live_page.dart|handleRefresh()|fail to get channel ${column}",
-            "error");
-        HttpClient.logReport(cl);
-      }
-      try {
-        setState(() {});
-      } catch (e) {}
-    });
-
-    return tvChannelList;
+    HttpClient.init();
   }
 
   Future _getMoreData() async {
     LogUtil.e("_getMoreData()");
-  }
-
-  Future _test() async {
-    LogUtil.e("_test()");
   }
 }

@@ -27,7 +27,8 @@ class CarouselPage extends StatefulWidget {
 
 class _HomePageState extends State<CarouselPage> {
   static const String TAG = "CarouselPage";
-  int groupNum = 4;
+
+  // int groupNum = 4;
   List<MediaModel> mediaList = [];
 
   @override
@@ -40,7 +41,7 @@ class _HomePageState extends State<CarouselPage> {
     super.initState();
     String playUrl =
         "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
-  //  freshChannel();
+    //  freshChannel();
 //    if (null != sportsChannelList[0] && sportsChannelList[0].length > 0) {
 //      HttpClient.getChannelPlayUrl(sportsChannelList[0][0]).then((onValue) {
 //        print("onValue:$onValue");
@@ -48,7 +49,7 @@ class _HomePageState extends State<CarouselPage> {
 //        if (null != playUrlTmp && playUrlTmp != "") {
 //          playUrl = playUrlTmp;
 //        }
-    homeMediaController.setNetworkDataSource(playUrl, autoPlay: true);
+    homeMediaController.setNetworkDataSource(tvChannelList[0][0]?.getPlayUrl():playUrl, autoPlay: true);
     LogUtil.d("$TAG initState():playUrling:${playUrl}");
 //        LocalStorage.historyChannelMap[sportsChannelList[0][0].id] =
 //            sportsChannelList[0][0];
@@ -74,7 +75,7 @@ class _HomePageState extends State<CarouselPage> {
             itemBuilder: (BuildContext context, int index) {
               return itemBuilder1(context, index);
             },
-            itemCount: mediaList.length ~/ groupNum,
+            itemCount: mediaList.length,
           );
         },
       ),
@@ -95,10 +96,9 @@ class _HomePageState extends State<CarouselPage> {
     return;
   }
 
-
   Widget hot() {
     return new Container(
-        height: 60.0,
+        height: 70.0,
         alignment: Alignment.center,
         decoration: new BoxDecoration(
           border: new Border.all(color: Colors.grey, width: 0.5), // 边色与边宽度
@@ -202,165 +202,10 @@ class _HomePageState extends State<CarouselPage> {
   }
 
   Widget newRecommend(BuildContext context, int index) {
-    return new Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-            Widget>[
-      new FlatButton(
-        onPressed: () {
-          if (null == mediaList[index].getPlayUrl ||
-              "" == mediaList[index].getPlayUrl) {
-            LogUtil.v("playUrl is blank");
-          } else {
-            Navigator.of(context)
-                .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(
-                  mediaModel: mediaList[index * groupNum], context: context);
-            }));
-          }
-        },
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            new Container(
-              width: 190,
-              alignment: Alignment.center,
-              child: new Column(
-                children: <Widget>[
-                  new Text(subString(mediaList[index * groupNum].getName(), 50),
-                      maxLines: 3,
-                      textAlign: TextAlign.left,
-                      style: new TextStyle(
-                        color: GlobalConfig.fontColor,
-                        fontSize: 15,
-                      )),
-                  //new Text("演员: ${widgets[index2].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-                ],
-              ),
-              //  padding: const EdgeInsets.only(bottom: 10.0),
-              margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
-            ),
-            new Container(
-              //Expanded(
-              // flex: 1,
-              // child: new AspectRatio(
-              //aspectRatio: 3.5 / 2,
-              width: 130,
-              //height: 110,
-              child: new CachedNetworkImage(
-                imageUrl: "${mediaList[index * groupNum].getPics()[0]}",
-                placeholder: (context, url) => cachPlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    defaultCacheNetworkImage(DefaultChannleUrl),
-              ),
-              margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
-            ),
-          ],
-        ),
-      ),
-      new FlatButton(
-        onPressed: () {
-          if (null == mediaList[index].getPlayUrl ||
-              "" == mediaList[index].getPlayUrl) {
-            LogUtil.v("playUrl is blank");
-          } else {
-            Navigator.of(context)
-                .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(
-                  mediaModel: mediaList[index * groupNum + 1],
-                  context: context);
-            }));
-          }
-        },
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            new Container(
-              width: 190,
-              child: new Column(
-                children: <Widget>[
-                  new Text(
-                      subString(mediaList[index * groupNum + 1].getName(), 50),
-                      maxLines: 3,
-                      textAlign: TextAlign.left,
-                      style: new TextStyle(
-                          color: GlobalConfig.fontColor, fontSize: 15)),
-                  //new Text("演员: ${widgets[index2].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-                ],
-              ),
-              //padding: const EdgeInsets.only(bottom: 10.0),
-              margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
-            ),
-            new Container(
-              //Expanded(
-              // flex: 1,
-              // child: new AspectRatio(
-              //aspectRatio: 3.5 / 2,
-              width: 130,
-              //height: 110,
-              child: new CachedNetworkImage(
-                imageUrl: "${mediaList[index * groupNum + 1].getPics()[0]}",
-                placeholder: (context, url) => cachPlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    defaultCacheNetworkImage(DefaultChannleUrl),
-              ),
-              margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
-            ),
-          ],
-        ),
-      ),
-      new FlatButton(
-        onPressed: () {
-          if (null == mediaList[index].getPlayUrl ||
-              "" == mediaList[index].getPlayUrl) {
-            LogUtil.v("playUrl is blank");
-          } else {
-            Navigator.of(context)
-                .push(new MaterialPageRoute(builder: (context) {
-              return new MediaPage(
-                  mediaModel: mediaList[index * groupNum + 2],
-                  context: context);
-            }));
-          }
-        },
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            new Container(
-              width: 190,
-              child: new Column(
-                children: <Widget>[
-                  new Text(
-                      subString(mediaList[index * groupNum + 2].getName(), 50),
-                      maxLines: 3,
-                      textAlign: TextAlign.left,
-                      style: new TextStyle(
-                          color: GlobalConfig.fontColor, fontSize: 15)),
-                  //new Text("演员: ${widgets[index2].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-                ],
-              ),
-              padding: const EdgeInsets.only(bottom: 10.0),
-              margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
-            ),
-            new Container(
-              //Expanded(
-              // flex: 1,
-              // child: new AspectRatio(
-              //aspectRatio: 3.5 / 2,
-              width: 130,
-              //height: 110,
-              child: new CachedNetworkImage(
-                imageUrl: "${mediaList[index * groupNum + 2].getPics()[0]}",
-                placeholder: (context, url) => cachPlaceHolder(),
-                // errorWidget: (context, url,error) => cachPlaceHolder(),
-                errorWidget: (context, url, error) =>
-                    defaultCacheNetworkImage(DefaultChannleUrl),
-              ),
-              margin: new EdgeInsets.only(top: 6.0, bottom: 6.0),
-            ),
-          ],
-        ),
-      ),
-      new FlatButton(
-        onPressed: () {
+    return new Container(
+      color: GlobalConfig.cardBackgroundColor,
+      child: new GestureDetector(
+        onTap: () {
           if (null == mediaList[index].getPlayUrl ||
               "" == mediaList[index].getPlayUrl) {
             LogUtil.v("playUrl is blank");
@@ -369,36 +214,39 @@ class _HomePageState extends State<CarouselPage> {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
               return new MediaPage(
-                  mediaModel: mediaList[index * groupNum + 3],
-                  context: context);
+                  mediaModel: mediaList[index], context: context);
             }));
           }
         },
         child: new Column(
           children: <Widget>[
+            new Stack(alignment: Alignment.center, children: <Widget>[
+              new Container(
+                  child: new AspectRatio(
+                      aspectRatio: 3.5 / 2,
+                      child: new CachedNetworkImage(
+                        imageUrl: "${mediaList[index].getPics()[0]}",
+                        placeholder: (context, url) => cachPlaceHolder(),
+                        errorWidget: (context, url, error) =>
+                            new Icon(Icons.error),
+                      )),
+                  //  child: play(mediaController, vodList[index].vodPic),
+                  margin: new EdgeInsets.only(top: 10.0, bottom: 4.0),
+                  alignment: Alignment.topLeft),
+              Positioned(
+                  // child: Icon(Icons.play_circle_outline),
+                  child: Offstage(
+                      offstage: false,
+                      child: Image.asset(
+                        "assets/play1.png",
+                        width: 45.0,
+                      ))),
+            ]),
             new Container(
-                //Expanded(
-                // flex: 1,
-                // child: new AspectRatio(
-                //aspectRatio: 3.5 / 2,
-                width: 400,
-                // height: 110,
-                child: new CachedNetworkImage(
-                  imageUrl: "${mediaList[index * groupNum + 3].getPics()[0]}",
-                  placeholder: (context, url) => cachPlaceHolder(),
-                  errorWidget: (context, url, error) =>
-                      defaultCacheNetworkImage(DefaultChannleUrl),
-                  fit: BoxFit.fill,
-                ),
-                //),
-                margin: new EdgeInsets.only(top: 6.0, bottom: 14.0),
-                alignment: Alignment.topLeft),
-            new Container(
-              width: 400,
+              // width: 400,
               child: new Column(
                 children: <Widget>[
-                  new Text(
-                      subString(mediaList[index * groupNum + 3].getName(), 50),
+                  new Text(subString(mediaList[index].getName(), 50),
                       maxLines: 1,
                       textAlign: TextAlign.center,
                       style: new TextStyle(color: GlobalConfig.fontColor)),
@@ -412,9 +260,9 @@ class _HomePageState extends State<CarouselPage> {
           ],
         ),
       ),
-    ]
-        // )
-        );
+      //]
+      // )
+    );
   }
 
   Widget itemBuilder1(BuildContext context, int index) {
@@ -442,5 +290,4 @@ class _HomePageState extends State<CarouselPage> {
     homeMediaController.reset();
     super.dispose();
   }
-
 }
