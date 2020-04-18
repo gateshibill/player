@@ -41,25 +41,15 @@ class _HomePageState extends State<CarouselPage> {
     super.initState();
     String playUrl =
         "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
-    //  freshChannel();
-//    if (null != sportsChannelList[0] && sportsChannelList[0].length > 0) {
-//      HttpClient.getChannelPlayUrl(sportsChannelList[0][0]).then((onValue) {
-//        print("onValue:$onValue");
-//        String playUrlTmp = onValue;
-//        if (null != playUrlTmp && playUrlTmp != "") {
-//          playUrl = playUrlTmp;
-//        }
-    homeMediaController.setNetworkDataSource(tvChannelList[0][0]?.getPlayUrl():playUrl, autoPlay: true);
+
+    homeMediaController.setNetworkDataSource(
+        tvChannelList[0][0]?.getPlayUrl() ?? playUrl,
+        autoPlay: true);
     LogUtil.d("$TAG initState():playUrling:${playUrl}");
-//        LocalStorage.historyChannelMap[sportsChannelList[0][0].id] =
-//            sportsChannelList[0][0];
-//        LocalStorage.saveHistoryChannel(sportsChannelList[0][0]);
-    // });
-    //  } else {
-    //homeMediaController.setNetworkDataSource(playUrl, autoPlay: true);
-    // }
-    //mediaList.addAll(topicList);
-    mediaList.addAll(tvChannelList[0]);
+    if (tvChannelList[0].length > 0) {
+      mediaList = tvChannelList[0].sublist(1, tvChannelList[0].length - 1);
+    }
+    //mediaList.shuffle();
     if (mediaList.length == 0) {
       handleRefresh();
     }
