@@ -36,10 +36,10 @@ class _TVPageState extends State<TVPage> {
   @override
   void initState() {
     super.initState();
-    if (sportsChannelList[column].length < 1) {
+    if (tvChannelList[column].length < 1) {
       handleRefresh();
     }
-    LogUtil.v("channelList lenght:${sportsChannelList.length}");
+    LogUtil.v("channelList lenght:${tvChannelList.length}");
     setState(() {
       _scrollController.addListener(() {
         if (_scrollController.position.pixels ==
@@ -56,7 +56,7 @@ class _TVPageState extends State<TVPage> {
     ClientAction ca = new ClientAction(
         200 + column, "sportChannelPage", 0, "", 0, "", 1, "bowser");
     HttpClient.actionReport(ca);
-    return (sportsChannelList[column].length < 1)
+    return (tvChannelList[column].length < 1)
         ? refreshButton(this)
         : RefreshIndicator(
             onRefresh: handleRefresh,
@@ -67,7 +67,7 @@ class _TVPageState extends State<TVPage> {
                     // LogUtil.e("itemBuilder index:${index}");
                     return itemPlayerBuilder(context, index);
                   },
-                  itemCount: sportsChannelList[column].length,
+                  itemCount: tvChannelList[column].length,
                   controller: _scrollController,
                 );
               },
@@ -82,7 +82,7 @@ class _TVPageState extends State<TVPage> {
   }
 
   Widget itemBuilder1(BuildContext context, int index) {
-    String url = sportsChannelList[column][index].playUrl;
+    String url = tvChannelList[column][index].playUrl;
     return new Container(
         // margin: const EdgeInsets.only(top: 5.0, bottom: 5.0),
         color: GlobalConfig.cardBackgroundColor,
@@ -94,7 +94,7 @@ class _TVPageState extends State<TVPage> {
                 children: <Widget>[
                   new Text(
                       subString(
-                          "    " + sportsChannelList[column][index].name, 23),
+                          "    " + tvChannelList[column][index].name, 23),
                       style: new TextStyle(color: GlobalConfig.fontColor)),
                   new Expanded(
                     child: new Text("       "),
@@ -131,7 +131,7 @@ class _TVPageState extends State<TVPage> {
                       Navigator.of(context)
                           .push(new MaterialPageRoute(builder: (context) {
                         return new LiveDetail(
-                            vod: sportsChannelList[column][index],context: context);
+                            vod: tvChannelList[column][index],context: context);
                       }));
                     } else {
                       Navigator.of(context)
@@ -149,7 +149,7 @@ class _TVPageState extends State<TVPage> {
                 child: new AspectRatio(
                     aspectRatio: 3.5 / 2,
                     child: new CachedNetworkImage(
-                      imageUrl: "${sportsChannelList[column][index].posterUrl}",
+                      imageUrl: "${tvChannelList[column][index].posterUrl}",
                       placeholder: (context, url) => cachPlaceHolder(),
                       errorWidget: (context, url, error) =>
                           new Icon(Icons.error),
@@ -163,7 +163,7 @@ class _TVPageState extends State<TVPage> {
   }
 
   Widget itemPlayerBuilder(BuildContext context, int index) {
-    String url = sportsChannelList[column][index].playUrl;
+    String url = tvChannelList[column][index].playUrl;
     return new Container(
         // margin: const EdgeInsets.only(top: 5.0, bottom: 5.0),
         color: GlobalConfig.cardBackgroundColor,
@@ -175,7 +175,7 @@ class _TVPageState extends State<TVPage> {
                 children: <Widget>[
                   new Text(
                       subString(
-                          "    " + sportsChannelList[column][index].name, 23),
+                          "    " + tvChannelList[column][index].name, 23),
                       style: new TextStyle(color: GlobalConfig.fontColor)),
                   new Expanded(
                     child: new Text("       "),
@@ -208,7 +208,7 @@ class _TVPageState extends State<TVPage> {
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (context) {
                     return new LiveDetail(
-                        vod: sportsChannelList[column][index],context: context);
+                        vod: tvChannelList[column][index],context: context);
                   }));
                 },
                 child: Stack(
@@ -219,7 +219,7 @@ class _TVPageState extends State<TVPage> {
                           aspectRatio: 3.5 / 2,
                           child: new CachedNetworkImage(
                             imageUrl:
-                                "${sportsChannelList[column][index].posterUrl}",
+                                "${tvChannelList[column][index].posterUrl}",
                             placeholder: (context, url) => cachPlaceHolder(),
                             errorWidget: (context, url, error) =>
                                 new Icon(Icons.error),
@@ -289,8 +289,8 @@ class _TVPageState extends State<TVPage> {
 
     await HttpClient.getChannelList(type, groupId, 0, 50).then((list) {
       if (null != list) {
-        sportsChannelList[column] = list.channelModelList;
-        for (ChannelModel cm in sportsChannelList[column]) {
+        tvChannelList[column] = list.channelModelList;
+        for (ChannelModel cm in tvChannelList[column]) {
           //缓存到本地"vod_0_"为首页栏目内容
           LocalStorage.saveChannel(cm);
         }
@@ -306,7 +306,7 @@ class _TVPageState extends State<TVPage> {
       } catch (e) {}
     });
 
-    return sportsChannelList;
+    return tvChannelList;
   }
 
   Future _getMoreData() async {

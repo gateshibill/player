@@ -41,3 +41,44 @@ defaultCacheNetworkImage(String url) {
     errorWidget: (context, url, error) => cachPlaceHolder(),
   );
 }
+
+//  Widget carousel() {
+//    return new Container(
+//        height: 180.0,
+//        margin: new EdgeInsets.only(top: 0.0, bottom: 0),
+//        padding: const EdgeInsets.only(top: 0.0),
+//        child: CarouselSlider(
+//          height: 180.0,
+//          viewportFraction: 1.0,
+//          autoPlay: true,
+//          items: [
+//            'http://sportslive.hongxiuba.com/pic/carousel/ad1.png?1',
+//            'http://sportslive.hongxiuba.com/pic/carousel/ad2.png?2',
+//            'http://sportslive.hongxiuba.com/pic/carousel/ad3.png',
+//            'http://sportslive.hongxiuba.com/pic/carousel/ad4.png',
+//            'http://sportslive.hongxiuba.com/pic/carousel/ad6.png',
+//            //'http://sportslive.hongxiuba.com/pic/carousel/ad1.png',
+//            'http://sportslive.hongxiuba.com/pic/carousel/chinafoot.png',
+//            // 'http://sportslive.hongxiuba.com/pic/carousel/ad2.png',
+//          ].map((i) {
+//            return Builder(
+//              builder: (BuildContext context) {
+////                return new FlatButton(
+////                  onPressed: () {
+////                    Navigator.of(context)
+////                        .push(new MaterialPageRoute(builder: (context) {
+////                      return new LiveDetail(vod: channelList[2][3]);
+////                    }));
+////                  },
+//                //child:
+//                return new CachedNetworkImage(
+//                  imageUrl: i,
+//                  placeholder: (context, url) => cachPlaceHolder(),
+//                  errorWidget: (context, url, error) => new Icon(Icons.error),
+//                  // ),
+//                );
+//              },
+//            );
+//          }).toList(),
+//        ));
+//  }

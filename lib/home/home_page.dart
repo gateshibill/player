@@ -38,11 +38,12 @@ class _HomePageState extends State<HomePage> {
                 GlobalConfig.dark == true ? Colors.white : Colors.black,
             tabs: [
               new Tab(text: "热点推荐"),
-              new Tab(text: "综合频道"),
-              new Tab(text: "精选体育"),
-              new Tab(text: "娱乐卫视"),
+             // new Tab(text: "综合频道"),
               new Tab(text: "央视频道"),
-              new Tab(text: "国家频道"),
+              new Tab(text: "体育频道"),
+              new Tab(text: "娱乐卫视"),
+              new Tab(text: "港澳频道"),
+              new Tab(text: "国际频道"),
 
 
              // new Tab(text: "美女啦啦"),
@@ -51,11 +52,12 @@ class _HomePageState extends State<HomePage> {
         ),
         body: new TabBarView(children: [
           new CarouselPage(),
-          new TvRcmdPage(),
-          new TVPage(type: 0),
+        //  new TvRcmdPage(),
           new TVPage(type: 1),
           new TVPage(type: 2),
           new TVPage(type: 3),
+          new TVPage(type: 4),
+          new TVPage(type: 5),
          // new SvideoPage(),
           //new Live1Page(),
         ]),

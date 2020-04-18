@@ -31,15 +31,68 @@ import '../video/lala_page.dart';
 class HttpClient {
   static var sourceMap = new Map();
 
-  //static var dio = new Dio();
-
   static Future<bool> init() async {
     try {
-      //精选体育频道
-      await getChannelList(1, 0, 0, 50).then((channelModelList) {
+      //推荐频道
+      await getRcmdChannels(0, 10).then((channelModelList) {
         if (null != channelModelList) {
-          sportsChannelList[0] = channelModelList.channelModelList;
+          tvChannelList[0] = channelModelList;
+          for (ChannelModel cm in channelModelList) {
+            LocalStorage.saveRcmdChannel(cm);
+          }
+        } else {
+          print("fail to getRcmdChannels");
+        }
+      });
+      //央视频道
+      await getChannelList(5, 0, 0, 50).then((channelModelList) {
+        if (null != channelModelList) {
+          tvChannelList[1] = channelModelList.channelModelList;
+          for (ChannelModel cm in sportsChannelList[1]) {
+            LocalStorage.saveChannel(cm);
+          }
+        } else {
+          print("fail to getChannelList");
+        }
+      });
+      //体育频道
+      await getChannelList(0, 3, 0, 50).then((channelModelList) {
+        if (null != channelModelList) {
+          tvChannelList[2] = channelModelList.channelModelList;
           for (ChannelModel cm in sportsChannelList[0]) {
+            LocalStorage.saveChannel(cm);
+          }
+        } else {
+          print("fail to getChannelList");
+        }
+      });
+      //卫视频道
+      await getChannelList(4, 0, 0, 50).then((channelModelList) {
+        if (null != channelModelList) {
+          tvChannelList[3] = channelModelList.channelModelList;
+          for (ChannelModel cm in sportsChannelList[1]) {
+            LocalStorage.saveChannel(cm);
+          }
+        } else {
+          print("fail to getChannelList");
+        }
+      });
+      //港澳频道
+      await getChannelList(2, 0, 0, 50).then((channelModelList) {
+        if (null != channelModelList) {
+          tvChannelList[4] = channelModelList.channelModelList;
+          for (ChannelModel cm in sportsChannelList[1]) {
+            LocalStorage.saveChannel(cm);
+          }
+        } else {
+          print("fail to getChannelList");
+        }
+      });
+      //国际频道
+      await getChannelList(3, 0, 0, 50).then((channelModelList) {
+        if (null != channelModelList) {
+          tvChannelList[5] = channelModelList.channelModelList;
+          for (ChannelModel cm in sportsChannelList[1]) {
             LocalStorage.saveChannel(cm);
           }
         } else {
@@ -58,16 +111,16 @@ class HttpClient {
         }
       });
       //精选体育资讯
-      await getTopics(1, 0, 10).then((list) {
-        if (null != list) {
-          topicList = list;
-          for (TopicModel m in topicList) {
-            // LocalStorage.saveTopic(m);
-          }
-        } else {
-          print("fail to getTopics");
-        }
-      });
+//      await getTopics(1, 0, 10).then((list) {
+//        if (null != list) {
+//          topicList = list;
+//          for (TopicModel m in topicList) {
+//            // LocalStorage.saveTopic(m);
+//          }
+//        } else {
+//          print("fail to getTopics");
+//        }
+//      });
       //提前加载花絮
       await getLalas(LalaPage.page, 6).then((list) {
         if (null != list) {
@@ -76,50 +129,30 @@ class HttpClient {
           print("fail to getTopics");
         }
       });
-      //推荐频道
-      await getRcmdChannels(0, 10).then((channelModelList) {
-        if (null != channelModelList) {
-          tvChannelList[0] = channelModelList;
-          for (ChannelModel cm in channelModelList) {
-            LocalStorage.saveChannel(cm);
-          }
-        } else {
-          print("fail to getRcmdChannels");
-        }
-      });
+
       //央视体育
-      await getChannelList(1, 5, 0, 50).then((channelModelList) {
-        if (null != channelModelList) {
-          sportsChannelList[1] = channelModelList.channelModelList;
-          for (ChannelModel cm in sportsChannelList[1]) {
-            LocalStorage.saveChannel(cm);
-          }
-        } else {
-          print("fail to getChannelList");
-        }
-      });
-      //央视频道
-      await getChannelList(1, 5, 0, 50).then((channelModelList) {
-        if (null != channelModelList) {
-          tvChannelList[2] = channelModelList.channelModelList;
-          for (ChannelModel cm in sportsChannelList[1]) {
-            LocalStorage.saveChannel(cm);
-          }
-        } else {
-          print("fail to getChannelList");
-        }
-      });
+//      await getChannelList(1, 5, 0, 50).then((channelModelList) {
+//        if (null != channelModelList) {
+//          sportsChannelList[1] = channelModelList.channelModelList;
+//          for (ChannelModel cm in sportsChannelList[1]) {
+//            LocalStorage.saveChannel(cm);
+//          }
+//        } else {
+//          print("fail to getChannelList");
+//        }
+//      });
+
       //国际频道
-      await getChannelList(1, 3, 0, 50).then((channelModelList) {
-        if (null != channelModelList) {
-          sportsChannelList[3] = channelModelList.channelModelList;
-          for (ChannelModel cm in sportsChannelList[1]) {
-            LocalStorage.saveChannel(cm);
-          }
-        } else {
-          print("fail to getChannelList");
-        }
-      });
+//      await getChannelList(1, 3, 0, 50).then((channelModelList) {
+//        if (null != channelModelList) {
+//          sportsChannelList[3] = channelModelList.channelModelList;
+//          for (ChannelModel cm in sportsChannelList[1]) {
+//            LocalStorage.saveChannel(cm);
+//          }
+//        } else {
+//          print("fail to getChannelList");
+//        }
+//      });
       //当前播放节目单
       await getCurrentPrograms(0).then((programModelList) {
         if (null != programModelList) {
@@ -187,13 +220,13 @@ class HttpClient {
         }
       });
       //girl live
-      await getAnchors(0).then((vomeVodList) {
-        if (null != vomeVodList) {
-          anchorList = vomeVodList;
-        } else {
-          print("fail to get column vod");
-        }
-      });
+//      await getAnchors(0).then((vomeVodList) {
+//        if (null != vomeVodList) {
+//          anchorList = vomeVodList;
+//        } else {
+//          print("fail to get column vod");
+//        }
+//      });
       //movie
       await getVodList(1).then((vomeVodList) {
         if (null != vomeVodList) {

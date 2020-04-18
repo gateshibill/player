@@ -31,19 +31,16 @@ class LocalStorage {
     LogUtil.v("LocalStorage init start base_dir:${BASE_DIR}");
     await SharedPreferences.getInstance().then((sp) {
       sharedPreferences = sp;
-      //sharedPreferences.clear();
       Set<String> keys = sharedPreferences.getKeys();
       LogUtil.v("sharedPreferences keys length:" + keys.length.toString());
       for (var key in keys) {
-        // if (key.startsWith("vod_")) {
         String vodJson = sharedPreferences.get(key);
         LogUtil.v("sp:${key}:${vodJson}");
         try {
-          if (key.startsWith("vod_100_")) {
+          if (key.startsWith("rcmdChannel_")) {
             final Map parsed = json.decode(vodJson);
-            VodModel vm = VodModel.fromJson(parsed);
-            //vodMap[vm.vodId] = vm;
-            homeVodList.add(vm);
+            ChannelModel m = ChannelModel.fromJson(parsed);
+            tvChannelList[0].add(m);
           } else if (key.startsWith("vod_1_")) {
             final Map parsed = json.decode(vodJson);
             VodModel vm = VodModel.fromJson(parsed);
@@ -121,6 +118,11 @@ class LocalStorage {
     } catch (e) {
       print(e);
     }
+  }
+
+  //保持首页推荐频道
+  static void saveRcmdChannel(ChannelModel m) async {
+    LocalStorage._saveString("rcmdChannel_${m.id.toString()}_" ,json.encode(m));
   }
 
   //未限制长度，待完善

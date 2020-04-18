@@ -18,9 +18,7 @@ import './config/config.dart';
 import './splash_page.dart';
 import 'package:package_info/package_info.dart';
 
-
 void saveSystemInfo() async {
-
   //user auto login
   await LocalDataProvider.getInstance().initData();
 
@@ -34,12 +32,11 @@ void main() async {
   VERSION = packageInfo.version;
   print("version:${VERSION}");
   getDeviceInfo();
-  await start();
+  await startInit();
   await startSplash();
 
   HttpUpgrade.getVersion();
   saveSystemInfo();
-  //p2pCheck();
 }
 
 Future startSplash() async {
@@ -49,15 +46,14 @@ Future startSplash() async {
   ));
 }
 
-Future start() async {
-  LogUtil.init(false);
+Future startInit() async {
   //1.读取本地信息；
   await init().then((isReady) {
     //2.连接服务器
-    connectServer();
-    //3.启动worker线程；
-    const period = const Duration(seconds: 3);
-    CacheIsolate.init();
+    httpConnectServer();
+    //3.启动worker线程；P2P只用
+  //  const period = const Duration(seconds: 3);
+  //  CacheIsolate.init();
   });
 }
 
@@ -72,8 +68,7 @@ Future init() async {
 }
 //1.读取本地信息,并检查完整性，是否需要重下载；
 
-
-Future connectServer() async {
+Future httpConnectServer() async {
   try {
     await HttpClient.init().then((isReady) {
       print("HttpClient.init() finished");
@@ -81,8 +76,7 @@ Future connectServer() async {
   } catch (e) {
     print(e);
 
-    ClientLog cl = new ClientLog(
-        "main.dart|connectServer()|$e", "error");
+    ClientLog cl = new ClientLog("main.dart|connectServer()|$e", "error");
     HttpClient.logReport(cl);
   }
 }
@@ -90,7 +84,8 @@ Future connectServer() async {
 class APPStartup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ClientAction ca=new ClientAction(10, "APPStartup", 0, "", 0, "", 3, "startup");
+    ClientAction ca =
+        new ClientAction(10, "APPStartup", 0, "", 0, "", 3, "startup");
     HttpClient.actionReport(ca);
 
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
@@ -111,5 +106,3 @@ class APPStartup extends StatelessWidget {
     );
   }
 }
-
-

@@ -26,6 +26,8 @@ List<List<VodModel>> videoVodList=[[],[],[]];
 List<MetadataModel> metadataList=[];
 //List<VodModel> rcmdVodList=[];
 
+//首页推荐频道
+List<ChannelModel> rcmdChannellist=[];
 //体育频道
 List<List<ChannelModel>> sportsChannelList=[[],[],[],[],[],[],[],[],[],[]];
 //电视频道,
@@ -41,12 +43,11 @@ List<ProgramModel> eventProgramlist=[];
 List<ProgramModel> currentProgramlist=[];
 //当前正在播出赛事节目单
 List<ProgramModel> currentEventProgramlist=[];
-
 //视频内容
 List<List<VodModel>> movieList=[[],[],[],[],[],[],[],[]];
 //花絮
 List results = []; // 数据数组
-List<PictureModel> lalas = []; // 数据数组
+List<PictureModel> lalas = []; // 花絮数据
 
 //主播内容
 List<AnchorModel> anchorList=[];
@@ -60,7 +61,7 @@ List<TopicModel> topicList=[];
 
 //搜索VOD列表
 Set <String> searchVodKeyWordSet=Set<String>();
-
+//全局播放器
 IjkMediaController homeMediaController = IjkMediaController();
 
 

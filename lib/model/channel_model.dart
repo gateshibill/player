@@ -14,13 +14,14 @@ class ChannelModel extends MediaModel {
   String reserveUrls = "";
   String posterUrl = "";
   String desc = "";
-  int type;
+  int type;//1为体育，2为娱乐，3为新闻，4为军事，5为财经，6为儿童,7为音乐，8为戏曲，9为旅游，10为剧场,
+  int groupId;//0网络,1国内,2港澳台,3海外,4卫视,5央视
   String country = "";
   String language = "";
   var creatTime = DateTime.now();
   var lastTime = DateTime.now();
   String tvid;
-  String parts;
+  String parts;//用于动态获取播放串
   String serverUrl;
 
   List<String> reserveUrlList = new List();
