@@ -33,7 +33,7 @@ const String VIDEO_SERVER_IP="119.28.188.181";
 const String TURN_SERVER_IP="119.28.188.181";
 const String MAIN_SERVER_URL="https://4kkan.com";
 
-const String BASE_SERVER_URL="http://www.feikantec.com:8080/pvideo";
+const String BASE_SERVER_URL="http://119.28.180.177:8080/pvideo";
 
 
 const String BASE_VIDEO_URL="http://$VIDEO_SERVER_IP";

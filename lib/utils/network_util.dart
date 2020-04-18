@@ -3,7 +3,7 @@
 import 'dart:io';
 import 'dart:convert';
 import '../config/config.dart';
-import 'package:unique_identifier/unique_identifier.dart';
+//import 'package:unique_identifier/unique_identifier.dart';
 
 
 Future<String> initLocalIp() async {
