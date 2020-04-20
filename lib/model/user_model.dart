@@ -12,6 +12,7 @@ class UserModel {
   int groupId;
   String userName="";
   DateTime vipExpire;
+  String deviceId="";
   String userPwd="";
   String userNickName="";
   String userQq="";

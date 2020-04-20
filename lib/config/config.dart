@@ -59,6 +59,7 @@ const String GET_VERSION_URL="$MAIN_SERVER_URL/version";
 const String HOME_URL="$MAIN_SERVER_URL/home.html";
 const String LOGIN_URL="$BASE_SERVER_URL/client/login.do?";
 const String REGISTER_URL="$BASE_SERVER_URL/client/register.do?";
+const String GUEST_URL="$BASE_SERVER_URL/client/guest.do?";//访客
 const String ACTION_REPORT_URL="$BASE_SERVER_URL/client/clientReport.do?";
 const String HOLE_REPORT_URL="$BASE_SERVER_URL/client/peerReport.do?";
 const String LOG_REPORT_URL="$BASE_SERVER_URL/client/logReport.do?";

@@ -17,6 +17,7 @@ import '../model/program_model.dart';
 import '../model/client_log.dart';
 import 'package:http_server/http_server.dart' show VirtualDirectory;
 import '../model/user_model.dart';
+
 //import './local_data_provider.dart';
 import '../model/anchor_model.dart';
 import '../model/stype_model.dart';
@@ -865,7 +866,7 @@ class HttpClient {
       if (code == '200') {
         print("login success");
         UserModel userModel = UserModel.fromJson(objectJson);
-        if(null!=userModel) me=userModel;
+        if (null != userModel) me = userModel;
 //        LocalDataProvider.getInstance().saveUserInfo(
 //            userModel.userId.toString(),
 //            userModel.userNickName,
@@ -899,8 +900,33 @@ class HttpClient {
       return null;
     }
   }
+
+  // 访客
+  static Future<Msg> guest(UserModel guest) async {
+    String url = GUEST_URL;
+    LogMyUtil.d("$TAG guest():url:$url|deviceId:${guest.deviceId}");
+    Msg msg = new Msg();
+    try {
+      var dio = new Dio();
+      final response = await dio.post(url, data: guest.toJson());
+      String res = response.data.toString();
+      LogMyUtil.d("$TAG res:" + res);
+      String res2Json = json.encode(response.data);
+      final Map parsed = json.decode(res2Json);
+      msg.code = parsed["code"];
+      msg.desc = parsed["msg"];
+      if (msg.code == '0') {
+        msg.object = parsed["object"];
+      }
+    } catch (e) {
+      msg.code = Msg.FAILURE;
+      LogMyUtil.d("$TAG fail to guest() |$e");
+    }
+    return msg;
+  }
+
   //充值
-  static Future<Msg> charge(int userId,int cardId) async {
+  static Future<Msg> charge(int userId, int cardId) async {
     String url = "${user_charge_URL}userId=$userId&cardId=$cardId";
     LogMyUtil.d("$TAG charge():url:$url");
     Msg msg = new Msg();
