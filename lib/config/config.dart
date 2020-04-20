@@ -22,7 +22,7 @@ String LOCAL_IP="";
 String EXTERNAL_IP="";
 String DEVICE_ID;
 String DEVICE_BRAND;
-int USER_ID;
+//int USER_ID;
 int WS_PORT=8416;
 const int TRUN_UDP_SERVER_PORT=9999;
 const int TRUN_WS_SERVER_PORT=8181;

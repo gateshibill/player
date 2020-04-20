@@ -16,7 +16,7 @@ import '../config/config.dart';
 import '../service/http_upgrade.dart';
 import './pnode_page.dart';
 import './login/login_page.dart';
-import '../service/local_data_provider.dart';
+
 import '../service/http_client.dart';
 import '../common/widget_common.dart';
 import '../model/channel_model.dart';
@@ -99,7 +99,7 @@ class _MyPageState extends State<MyPage> {
   @override
   void initState() {
     super.initState();
-    isLogin = LocalDataProvider.getInstance().isLogin();
+  //  isLogin = LocalDataProvider.getInstance().isLogin();
     historyVodList = LocalStorage.historyVoMap.values.toList().reversed.toList();
     historyChannelList = LocalStorage.historyChannelMap.values.toList().reversed.toList();
     guessChannelList.insertAll(0, sportsChannelList[0].length>0?sportsChannelList[0]:historyChannelList);
@@ -142,7 +142,7 @@ class _MyPageState extends State<MyPage> {
                     title: new Container(
                       margin: const EdgeInsets.only(bottom: 2.0),
                       child: new Text(isLogin
-                          ? "${LocalDataProvider.getInstance().getUserNickName()}"
+                          ? "${me.userNickName}"
                           : "LVPlayer"),
                     ),
                     subtitle: new Container(

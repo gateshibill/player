@@ -11,7 +11,6 @@ import './utils/network_util.dart';
 import './utils/log_my_util.dart';
 import './service/http_upgrade.dart';
 import './global_config.dart';
-import './service/local_data_provider.dart';
 import './model/client_action.dart';
 import './model/client_log.dart';
 import './config/config.dart';
@@ -20,11 +19,11 @@ import 'package:package_info/package_info.dart';
 
 void saveSystemInfo() async {
   //user auto login
-  await LocalDataProvider.getInstance().initData();
-
-  if (Platform.isIOS) {
-    LocalDataProvider.getInstance().setIos();
-  }
+//  await LocalDataProvider.getInstance().initData();
+//
+//  if (Platform.isIOS) {
+//    LocalDataProvider.getInstance().setIos();
+//  }
 }
 
 void main() async {

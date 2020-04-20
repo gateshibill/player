@@ -17,7 +17,7 @@ import '../model/program_model.dart';
 import '../model/client_log.dart';
 import 'package:http_server/http_server.dart' show VirtualDirectory;
 import '../model/user_model.dart';
-import './local_data_provider.dart';
+//import './local_data_provider.dart';
 import '../model/anchor_model.dart';
 import '../model/stype_model.dart';
 import '../model/topic_model.dart';
@@ -865,15 +865,16 @@ class HttpClient {
       if (code == '200') {
         print("login success");
         UserModel userModel = UserModel.fromJson(objectJson);
-        LocalDataProvider.getInstance().saveUserInfo(
-            userModel.userId.toString(),
-            userModel.userNickName,
-            userModel.userPortrait,
-            userModel.userPhone,
-            params["userPwd"]);
-        LocalDataProvider.getInstance()
-            .setLoginTime(new DateTime.now().millisecondsSinceEpoch);
-        USER_ID = userModel.userId;
+        if(null!=userModel) me=userModel;
+//        LocalDataProvider.getInstance().saveUserInfo(
+//            userModel.userId.toString(),
+//            userModel.userNickName,
+//            userModel.userPortrait,
+//            userModel.userPhone,
+//            params["userPwd"]);
+//        LocalDataProvider.getInstance()
+//            .setLoginTime(new DateTime.now().millisecondsSinceEpoch);
+//        USER_ID = userModel.userId;
         token = userModel.userRandom;
       }
       return res2Json;

@@ -10,7 +10,6 @@ import '../model/channel_model.dart';
 import '../utils/string_util.dart';
 import 'package:share/share.dart';
 import '../config/config.dart';
-import '../service/local_data_provider.dart';
 import '../my/login/login_page.dart';
 import '../model/client_action.dart';
 import '../common/widget_common.dart';
@@ -116,7 +115,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
               width: 420,
               child: new FlatButton(
                 onPressed: () {
-                  bool isLogin = LocalDataProvider.getInstance().isLogin();
+                 // bool isLogin = LocalDataProvider.getInstance().isLogin();
                   //if (isLogin != null) {
                   //  if (isLogin) {
                   if (true) {

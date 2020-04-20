@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:player/data/cache_data.dart';
 import '../../model/client_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,7 +11,7 @@ import '../../utils/ui_util.dart';
 import 'login_btn.dart';
 import 'login_input.dart';
 import '../../model/user_model.dart';
-import '../../service/local_data_provider.dart';
+
 
 class PasswordLoginInfo {
   String phone;
@@ -137,12 +138,8 @@ class _RegisterPageState extends State<RegisterPage> {
           print("register success");
           UiUtil.showToast('恭喜您，注册成功！');
           UserModel userModel = UserModel.fromJson(objectJson);
-          LocalDataProvider.getInstance().saveUserInfo(
-              userModel.userId,
-              userModel.userNickName,
-              userModel.userPortrait,
-              userModel.userPhone,
-              passwordLoginInfo.password);//保存原始密码
+me=userModel;
+              passwordLoginInfo.password;//保存原始密码
 
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => LoginPage()));

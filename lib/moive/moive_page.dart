@@ -10,7 +10,7 @@ import '../model/channel_model.dart';
 import '../utils/string_util.dart';
 import 'package:share/share.dart';
 import '../config/config.dart';
-import '../service/local_data_provider.dart';
+
 import '../my/login/login_page.dart';
 import '../model/client_action.dart';
 import '../common/widget_common.dart';
@@ -123,7 +123,7 @@ class _TVPageState extends State<TVPage> {
               //width: 400,
               child: new GestureDetector(
                 onTap: () {
-                  bool isLogin = LocalDataProvider.getInstance().isLogin();
+                //  bool isLogin = LocalDataProvider.getInstance().isLogin();
                   //if (isLogin != null) {
                   //  if (isLogin) {
                   if (true) {

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../service/local_data_provider.dart';
 import '../../service/http_client.dart';
 import './register_page.dart';
 import '../../utils/ui_util.dart';
@@ -10,8 +9,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import '../../index/index.dart';
 import 'login_btn.dart';
 import 'login_input.dart';
-import '../../model/user_model.dart';
-import '../../service/local_data_provider.dart';
+
 
 class PasswordLoginInfo {
   String phone = "18565826288";

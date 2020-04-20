@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:player/data/cache_data.dart';
 import '../config/config.dart';
 part 'client_log.g.dart';
 
@@ -6,7 +7,7 @@ part 'client_log.g.dart';
 class ClientLog {
   int id;
   int appId = APP_ID; // 应用ID；
-  int userId = USER_ID;
+  int userId = me.userId;
   String deviceId = DEVICE_ID;
   String deviceBrand = DEVICE_BRAND;
   String clientIp;
