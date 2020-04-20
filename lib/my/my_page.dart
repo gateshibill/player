@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../global_config.dart';
 import '../model/client_action.dart';
 import '../resource/file_manager.dart';
@@ -221,7 +222,8 @@ class _MyPageState extends State<MyPage> {
                           children: <Widget>[
                             new Container(
                               child: new Text(
-                                "2020-10-01",
+    DateFormat('kk:mm')
+        .format(user.v),
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: GlobalConfig.fontColor),
