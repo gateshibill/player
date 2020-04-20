@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../global_config.dart';
 import '../service/http_client.dart';
 import '../player/video_detail.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../utils/string_util.dart';
 import '../data/cache_data.dart';
 import '../common/widget_common.dart';
@@ -59,7 +59,7 @@ class _VodPageState extends State<VodPage> {
     super.dispose();
   }
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     await HttpClient.getVodList(1).then((list) {
       if (null != list) {
         movieList[1] = list.vodModelList;
@@ -71,13 +71,13 @@ class _VodPageState extends State<VodPage> {
           setState(() {});
         } catch (e) {}
       } else {
-        LogUtil.e("fail to get column vod");
+        LogMyUtil.e("fail to get column vod");
       }
     });
     return;
   }
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
   }
 
   Widget itemBuilder1(BuildContext context, int index) {

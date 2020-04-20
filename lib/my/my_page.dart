@@ -7,7 +7,7 @@ import './task_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/vod_model.dart';
 import '../player/video_detail.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../utils/string_util.dart';
 import 'package:share/share.dart';
@@ -562,7 +562,7 @@ class _MyPageState extends State<MyPage> {
             onTap: () {
               if (null == historyVodList[index].vodPlayUrl ||
                   "" == historyVodList[index].vodPlayUrl) {
-                LogUtil.v("playUrl is blank");
+                LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
@@ -666,7 +666,7 @@ class _MyPageState extends State<MyPage> {
             onTap: () {
               if (null == historyChannelList[index].getPlayUrl() ||
                   "" == historyChannelList[index].getPlayUrl()) {
-                LogUtil.v("playUrl is blank");
+                LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
@@ -771,7 +771,7 @@ class _MyPageState extends State<MyPage> {
             onTap: () {
               if (null == guessChannelList[index].getPlayUrl() ||
                   "" == guessChannelList[index].getPlayUrl()) {
-                LogUtil.v("playUrl is blank");
+                LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {

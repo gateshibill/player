@@ -3,7 +3,7 @@ import '../moive/moive_page.dart';
 import '../moive/moive_rcmd_page.dart';
 import '../global_config.dart';
 import '../moive/moive_page.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../data/cache_data.dart';
 import '../video/program_video_page.dart';
 import './carousel_page.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     setState(() {});
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override

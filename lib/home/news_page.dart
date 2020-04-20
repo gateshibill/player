@@ -8,7 +8,7 @@ import '../resource/local_storage.dart';
 import '../data/cache_data.dart';
 import '../model/vod_model.dart';
 import '../player/video_detail.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../utils/string_util.dart';
 import '../common/widget_common.dart';
@@ -66,7 +66,7 @@ class _HomePageState extends State<NewsPage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     await HttpClient.getCurrentPrograms(0).then((list) {
       if (null != list) {
         currentProgramlist = list.programModelList;
@@ -97,7 +97,7 @@ class _HomePageState extends State<NewsPage> {
           LocalStorage.saveChannel(cm);
         }
       } else {
-        LogUtil.e("fail to get channel");
+        LogMyUtil.e("fail to get channel");
         ClientLog cl = new ClientLog(
             "live_page.dart|handleRefresh()|fail to get channel ${column}",
             "error");
@@ -220,7 +220,7 @@ class _HomePageState extends State<NewsPage> {
         onPressed: () {
           if (null == mediaList[index].getPlayUrl ||
               "" == mediaList[index].getPlayUrl) {
-            LogUtil.v("playUrl is blank");
+            LogMyUtil.v("playUrl is blank");
           } else {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {

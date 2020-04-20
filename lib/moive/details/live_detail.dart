@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // UI适配库
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import '../../service/http_client.dart';
-import '../../utils/log_util.dart';
+import '../../utils/log_my_util.dart';
 import '../../model/client_action.dart';
 import '../../model/channel_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -56,14 +56,14 @@ class _LiveDetailState extends State<LiveDetail>
     pc = PlayerController();
     pc.mc = mediaController;
     //editingController.text =vod.name;
-    LogUtil.v(channel.toString());
+    LogMyUtil.v(channel.toString());
     playUrl = channel.playUrl;
     channel.reserveUrlList = new List();
     if (null != channel.reserveUrls) {
       channel.reserveUrlList = channel.reserveUrls.split(',');
     }
     channel.reserveUrlList.add(playUrl.trim());
-    LogUtil.v("channel.reserveUrlList:${channel.reserveUrlList.length}");
+    LogMyUtil.v("channel.reserveUrlList:${channel.reserveUrlList.length}");
     channelName = channel.name;
     startPlay(playUrl.trim());
     initTabData();

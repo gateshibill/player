@@ -8,9 +8,10 @@ import 'package:http/http.dart' as http;
 import '../config/config.dart';
 import '../model/client_action.dart';
 import '../data/cache_data.dart';
+import 'date_util.dart';
 import 'download_service.dart';
 import '../resource/local_storage.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../model/channel_model.dart';
 import '../model/program_model.dart';
 import '../model/client_log.dart';
@@ -30,6 +31,7 @@ import '../video/lala_page.dart';
  */
 class HttpClient {
   static var sourceMap = new Map();
+  static const String TAG = "HttpClient";
 
   static Future<bool> init() async {
     try {
@@ -182,9 +184,9 @@ class HttpClient {
           if (programList != null && programList.length > 0) {
             leagueProgramList.addAll(programList);
           }
-          LogUtil.e("leagueProgramList lengh :${leagueProgramList.length}");
+          LogMyUtil.e("leagueProgramList lengh :${leagueProgramList.length}");
         } else {
-          LogUtil.e("fail to leagueProgramList");
+          LogMyUtil.e("fail to leagueProgramList");
         }
       });
       //赛事节目单
@@ -295,7 +297,7 @@ class HttpClient {
         if (null != list) {
           movieList[0] = list.vodModelList;
         } else {
-          LogUtil.e("fail to get column vod");
+          LogMyUtil.e("fail to get column vod");
         }
       });
       //提前加载综艺
@@ -303,7 +305,7 @@ class HttpClient {
         if (null != list) {
           movieList[1] = list.vodModelList;
         } else {
-          LogUtil.e("fail to get column vod");
+          LogMyUtil.e("fail to get column vod");
         }
       });
       return true;
@@ -321,7 +323,7 @@ class HttpClient {
       int limit = 30]) async {
     String url =
         "$GET_VODS_URL${columnId.toString()}&typeId1=$typeId1&groupId=$groupId&page=$page&limit=$limit";
-    LogUtil.e("getVodList() url:${url}");
+    LogMyUtil.e("getVodList() url:${url}");
     try {
       var dio = new Dio();
       final response = await dio.get(url);
@@ -354,7 +356,7 @@ class HttpClient {
       int limit = 30]) async {
     String url =
         "$GET_SPORTSVODS_URL${columnId.toString()}&typeId1=$typeId1&groupId=$groupId&page=$page&limit=$limit";
-    LogUtil.e("getSportsVodList() url:${url}");
+    LogMyUtil.e("getSportsVodList() url:${url}");
     try {
       var dio = new Dio();
       final response = await dio.get(url);
@@ -383,7 +385,7 @@ class HttpClient {
       [int type = 0, int groupId = 0, int page = 0, int limit = 10]) async {
     String url =
         "$BASE_SERVER_URL$GET_CHANNELS_URL${type.toString()}&groupId=$groupId&page=$page&limit=$limit";
-    LogUtil.e("getChannelList() url:${url}");
+    LogMyUtil.e("getChannelList() url:${url}");
     try {
       var dio = new Dio();
       final response = await dio.get(url);
@@ -407,7 +409,7 @@ class HttpClient {
 
   static Future getProgramList([int type = 0, bool isCache = true]) async {
     String url = "$GET_PROGRAMS_URL${type.toString()}&page=0&limit=50";
-    LogUtil.e("getPorgramList() url:${url}");
+    LogMyUtil.e("getPorgramList() url:${url}");
     try {
       var dio = new Dio();
       final response = await dio.get(url);
@@ -434,7 +436,7 @@ class HttpClient {
   }
 
   static Future getCurrentPrograms([int day = 0, bool isCache = true]) async {
-    LogUtil.e("getCurrentPrograms() url:${GET_CURRENT_PROGRAMS_URL}");
+    LogMyUtil.e("getCurrentPrograms() url:${GET_CURRENT_PROGRAMS_URL}");
     try {
       var dio = new Dio();
       final response = await dio.get(GET_CURRENT_PROGRAMS_URL);
@@ -461,7 +463,7 @@ class HttpClient {
   }
 
   static Future getHotPrograms([int day = 0, bool isCache = true]) async {
-    LogUtil.e("getCurrentPrograms() url:${GET_HOT_PROGRAMS_URL}");
+    LogMyUtil.e("getCurrentPrograms() url:${GET_HOT_PROGRAMS_URL}");
     try {
       var dio = new Dio();
       final response = await dio.get(GET_HOT_PROGRAMS_URL);
@@ -488,7 +490,7 @@ class HttpClient {
   }
 
   static Future getAnchors(int page) async {
-    LogUtil.e("getAnchors() url:$GET_ANCHORS_URL");
+    LogMyUtil.e("getAnchors() url:$GET_ANCHORS_URL");
     try {
       var dio = new Dio();
       final response = await dio.get("${GET_ANCHORS_URL}&page=$page&limit=10");
@@ -508,7 +510,7 @@ class HttpClient {
   static Future getProgramByEventList(
       [int page = 0, bool isCache = true]) async {
     String url = "$GET_PROGRAMSBYEVENT_URL&page=$page&limit=30";
-    LogUtil.e("getProgramByEventList() url:${url}");
+    LogMyUtil.e("getProgramByEventList() url:${url}");
     try {
       var dio = new Dio();
       final response = await dio.get(url);
@@ -538,7 +540,7 @@ class HttpClient {
       [int page = 0, int limit = 10]) async {
     String url =
         "$GET_GET_LEAGUE_PROGRAMS_URL&event=$event&page=$page&limit=$limit";
-    LogUtil.e("getLeagueProgramList() url:${url}");
+    LogMyUtil.e("getLeagueProgramList() url:${url}");
     try {
       var dio = new Dio();
       final response = await dio.get(url);
@@ -561,7 +563,7 @@ class HttpClient {
   static Future getProgramByDayList([int day = 0, bool isCache = true]) async {
     String url =
         tokenUrl("$GET_PROGRAMSBYDAY_URL${day.toString()}&page=0&limit=50");
-    LogUtil.e("getPorgramList() url:${url}");
+    LogMyUtil.e("getPorgramList() url:${url}");
     try {
       var dio = new Dio();
       final response = await dio.get(url);
@@ -643,7 +645,7 @@ class HttpClient {
   }
 
   static Future fuzzyQueryVod(String condition) async {
-    LogUtil.e("fuzzyQuery() url:$FUZZY_QUERY_URL");
+    LogMyUtil.e("fuzzyQuery() url:$FUZZY_QUERY_URL");
     try {
       var dio = new Dio();
       final response = await dio.get("${FUZZY_QUERY_URL}condition=$condition");
@@ -895,6 +897,30 @@ class HttpClient {
       print("fail to register|$e");
       return null;
     }
+  }
+  //充值
+  static Future<Msg> charge(int userId,int cardId) async {
+    String url = "${user_charge_URL}userId=$userId&cardId=$cardId";
+    LogMyUtil.d("$TAG charge():url:$url");
+    Msg msg = new Msg();
+    try {
+      var dio = new Dio();
+      await dio.get(url).then((response) {
+        String res = response.data.toString();
+        LogMyUtil.d("$TAG res:" + res);
+        String res2Json = json.encode(response.data);
+        final Map parsed = json.decode(res2Json);
+        msg.code = parsed["code"];
+        msg.desc = parsed["msg"];
+        if (msg.code == '0') {
+          msg.object = parsed["object"];
+        }
+      });
+    } catch (e) {
+      msg.code = Msg.FAILURE;
+      LogMyUtil.d("$TAG fail to charge() |$e");
+    }
+    return msg;
   }
 
   //行为上报

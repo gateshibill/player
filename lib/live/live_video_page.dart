@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import 'package:intl/intl.dart';
 import '../resource/local_storage.dart';
 import '../service/http_client.dart';
@@ -33,7 +33,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
   void initState() {
     super.initState();
     handleRefresh();
-    LogUtil.v("girlLiveList lenght:${movieList.length}");
+    LogMyUtil.v("girlLiveList lenght:${movieList.length}");
     setState(() {
       _scrollController.addListener(() {
         if (_scrollController.position.pixels ==
@@ -42,7 +42,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
         }
       });
     });
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override
@@ -87,7 +87,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
             onTap: () {
               if (null == anchorList[index * 2].playUrl ||
                   "" == anchorList[index * 2].playUrl) {
-                LogUtil.v("playUrl is blank");
+                LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
@@ -142,7 +142,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
             onTap: () {
               if (null == anchorList[index * 2 + 1].playUrl ||
                   "" == anchorList[index * 2 + 1].playUrl) {
-                LogUtil.v("playUrl is blank");
+                LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
@@ -209,14 +209,14 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
           } catch (e) {}
         }
       } else {
-        LogUtil.e("fail to get column vod");
+        LogMyUtil.e("fail to get column vod");
       }
     });
     return;
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
     await HttpClient.getAnchors(page).then((list) {
       if (null != list) {
         List<AnchorModel> tmpList = list;
@@ -228,7 +228,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
           } catch (e) {}
         }
       } else {
-        LogUtil.e("fail to get column vod");
+        LogMyUtil.e("fail to get column vod");
       }
     });
     return;

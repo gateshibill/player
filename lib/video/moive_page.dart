@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '../global_config.dart';
 import '../service/http_client.dart';
 import '../player/video_detail.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../utils/string_util.dart';
 import '../data/cache_data.dart';
 import '../common/widget_common.dart';
@@ -76,7 +76,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     int type = 0;
     //int groupId=0;
     switch (column) {
@@ -114,14 +114,14 @@ class _MoviePageState extends State<MoviePage> {
           setState(() {});
         } catch (e) {}
       } else {
-        LogUtil.e("fail to get column vod");
+        LogMyUtil.e("fail to get column vod");
       }
     });
     return;
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
     await HttpClient.getVodList(1).then((list) {
       if (null != list) {
         List<VodModel> tmpList=list.vodModelList;
@@ -133,7 +133,7 @@ class _MoviePageState extends State<MoviePage> {
           } catch (e) {}
         }
       } else {
-        LogUtil.e("fail to get column vod");
+        LogMyUtil.e("fail to get column vod");
       }
     });
     return;
@@ -148,7 +148,7 @@ class _MoviePageState extends State<MoviePage> {
             onTap: () {
               if (null == movieList[column][index].vodPlayUrl ||
                   "" == movieList[column][index].vodPlayUrl) {
-                LogUtil.v("playUrl is blank");
+                LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
@@ -193,7 +193,7 @@ class _MoviePageState extends State<MoviePage> {
             onTap: () {
               if (null == movieList[column][index * 2 + 1].vodPlayUrl ||
                   "" == movieList[column][index * 2 + 1].vodPlayUrl) {
-                LogUtil.v("playUrl is blank");
+                LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {

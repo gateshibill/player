@@ -8,7 +8,7 @@ import '../service/download_service.dart';
 import '../config/config.dart';
 import '../data/cache_data.dart';
 import '../service/http_client.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 
 class CacheIsolate {
   //  Isolate isolate;
@@ -25,17 +25,17 @@ class CacheIsolate {
   }
 
   static Future<dynamic> startPrivilegeThread(MetadataModel task) async {
-    LogUtil.v("startPrivilegeThread()");
+    LogMyUtil.v("startPrivilegeThread()");
     final receivePort = new ReceivePort();
     Isolate isolate = await Isolate.spawn(execute, receivePort.sendPort);
     final sendPort = await receivePort.first as SendPort;
-    LogUtil.v("sendPort is ok receivePort");
+    LogMyUtil.v("sendPort is ok receivePort");
     final response = new ReceivePort();
     //发送数据
     sendPort.send([task, response.sendPort]);
-    LogUtil.v("sendPort task to isolate!");
+    LogMyUtil.v("sendPort task to isolate!");
     response.listen((isSuccess) {
-      LogUtil.v("privilege download is finished!");
+      LogMyUtil.v("privilege download is finished!");
       receivePort.close();
       isolate.kill(priority: Isolate.immediate);
       return isSuccess;
@@ -43,7 +43,7 @@ class CacheIsolate {
   }
 
   static Future<dynamic> startNormalThread(MetadataModel task) async {
-    LogUtil.v("startNormalThread()");
+    LogMyUtil.v("startNormalThread()");
     counter++;
     final receivePort = new ReceivePort();
     Isolate isolate = await Isolate.spawn(execute, receivePort.sendPort);
@@ -52,7 +52,7 @@ class CacheIsolate {
     //发送数据
     sendPort.send([task, response.sendPort]);
     response.listen((mm) async {
-      LogUtil.v("isolate download finished:" + mm.toString());
+      LogMyUtil.v("isolate download finished:" + mm.toString());
       if (null != mm && 2 == mm.status) {
         //描述记录本地
         LocalStorage.saveMetadata(mm);

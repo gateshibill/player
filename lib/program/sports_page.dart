@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../service/http_client.dart';
 import '../data/cache_data.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../model/client_action.dart';
 import './program_page.dart';
 import './league_page.dart';
@@ -39,7 +39,7 @@ class _SportsPageState extends State<SportsPage> {
       handleRefresh();
     }
     setState(() {});
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override
@@ -81,7 +81,7 @@ class _SportsPageState extends State<SportsPage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     //List<ProgramModel> programList = [];
     await HttpClient.getSportsTypes().then((list) {
       if (null != list) {
@@ -93,14 +93,14 @@ class _SportsPageState extends State<SportsPage> {
 //            LocalStorage.saveProgram(pm);
 //          }
         }
-        LogUtil.e("getSportsTypes lengh :${eventProgramlist.length}");
+        LogMyUtil.e("getSportsTypes lengh :${eventProgramlist.length}");
       } else {
-        LogUtil.e("fail to getSportsTypes");
+        LogMyUtil.e("fail to getSportsTypes");
       }
       try {
         setState(() {});
       } catch (e) {
-        LogUtil.e(e);
+        LogMyUtil.e(e);
       }
     });
     // return programList;

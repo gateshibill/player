@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '../global_config.dart';
 import '../service/http_client.dart';
 import '../player/video_detail.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../utils/string_util.dart';
 import '../data/cache_data.dart';
 import '../common/widget_common.dart';
@@ -76,7 +76,7 @@ class _SearchResultState extends State<SearchResult> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     await HttpClient.fuzzyQueryVod(keyword).then((list) {
       if (null != list) {
         resultList = list;
@@ -89,7 +89,7 @@ class _SearchResultState extends State<SearchResult> {
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
   }
 
   Widget itemBuilder(BuildContext context, int index) {
@@ -102,7 +102,7 @@ class _SearchResultState extends State<SearchResult> {
               onTap: () {
                 if (null == resultList[index].vodPlayUrl ||
                     "" == resultList[index].vodPlayUrl) {
-                  LogUtil.v("playUrl is blank");
+                  LogMyUtil.v("playUrl is blank");
                 } else {
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (context) {
@@ -150,7 +150,7 @@ class _SearchResultState extends State<SearchResult> {
               onTap: () {
                 if (null == resultList[index].vodPlayUrl ||
                     "" == resultList[index].vodPlayUrl) {
-                  LogUtil.v("playUrl is blank");
+                  LogMyUtil.v("playUrl is blank");
                 } else {
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (context) {

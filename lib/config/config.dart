@@ -64,6 +64,10 @@ const String HOLE_REPORT_URL="$BASE_SERVER_URL/client/peerReport.do?";
 const String LOG_REPORT_URL="$BASE_SERVER_URL/client/logReport.do?";
 const String GET_RCMD_VODS_URL="$BASE_SERVER_URL/video/getRcmdVods.do?";
 const String GET_RCMD_CHANNELS_URL="$BASE_SERVER_URL/video/getRcmdChannels.do?";
+//充值
+const String user_charge_URL="$BASE_SERVER_URL/client/charge.do?";
+
+
 const String WS_SERVER_URL="ws://$TURN_SERVER_IP:$TRUN_WS_SERVER_PORT";
 
 

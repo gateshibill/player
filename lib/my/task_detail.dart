@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../resource/local_storage.dart';
 import '../model/metadata_model.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../global_config.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -30,7 +30,7 @@ class _TaskDetailState extends State<TaskDetail> {
         }
       });
     });
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
   @override
   void dispose() {
@@ -66,11 +66,11 @@ class _TaskDetailState extends State<TaskDetail> {
   }
 
   Future _handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     return;
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
   }
 }

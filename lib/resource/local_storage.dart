@@ -8,7 +8,7 @@ import '../data/cache_data.dart';
 import '../model/channel_model.dart';
 import '../model/program_model.dart';
 import '../service/download_service.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../model/topic_model.dart';
 
 //VirtualDirectory可以从根路径获取文件和目录清单
@@ -28,14 +28,14 @@ class LocalStorage {
 
   static Future<bool> init() async {
     BASE_DIR = (await getApplicationDocumentsDirectory()).path;
-    LogUtil.v("LocalStorage init start base_dir:${BASE_DIR}");
+    LogMyUtil.v("LocalStorage init start base_dir:${BASE_DIR}");
     await SharedPreferences.getInstance().then((sp) {
       sharedPreferences = sp;
       Set<String> keys = sharedPreferences.getKeys();
-      LogUtil.v("sharedPreferences keys length:" + keys.length.toString());
+      LogMyUtil.v("sharedPreferences keys length:" + keys.length.toString());
       for (var key in keys) {
         String vodJson = sharedPreferences.get(key);
-        LogUtil.v("sp:${key}:${vodJson}");
+        LogMyUtil.v("sp:${key}:${vodJson}");
         try {
           if (key.startsWith("rcmdChannel_")) {
             final Map parsed = json.decode(vodJson);
@@ -186,12 +186,12 @@ class LocalStorage {
       List<MetadataModel> mmlist = LocalStorage.metadataMap.values.toList();
       for (MetadataModel mm in mmlist) {
         String filePath = '$BASE_DIR/${mm.vodId}/${mm.piece}';
-        LogUtil.v("delete:" + filePath);
+        LogMyUtil.v("delete:" + filePath);
         File file = File(filePath);
         file.delete();
       }
     } catch (e) {
-      LogUtil.v("clearnCache() e" + e.toString());
+      LogMyUtil.v("clearnCache() e" + e.toString());
     }
   }
 }

@@ -7,7 +7,7 @@ import './task_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/vod_model.dart';
 import '../resource/local_storage.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class MyPage extends StatefulWidget {
@@ -521,7 +521,7 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     historyVodList = LocalStorage.historyVoMap.values.toList();
-    LogUtil.v("historyVodList:lenght:${historyVodList.length}");
+    LogMyUtil.v("historyVodList:lenght:${historyVodList.length}");
     return new MaterialApp(
         theme: GlobalConfig.themeData,
         debugShowCheckedModeBanner: false,

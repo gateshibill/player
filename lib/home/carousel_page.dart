@@ -10,7 +10,7 @@ import '../resource/local_storage.dart';
 import '../data/cache_data.dart';
 import '../model/vod_model.dart';
 import '../player/video_detail.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../utils/string_util.dart';
 import '../common/widget_common.dart';
@@ -45,7 +45,7 @@ class _HomePageState extends State<CarouselPage> {
     homeMediaController.setNetworkDataSource(
         tvChannelList[0][0]?.getPlayUrl() ?? playUrl,
         autoPlay: true);
-    LogUtil.d("$TAG initState():playUrling:${playUrl}");
+    LogMyUtil.d("$TAG initState():playUrling:${playUrl}");
     if (tvChannelList[0].length > 0) {
       mediaList = tvChannelList[0].sublist(1, tvChannelList[0].length - 1);
     }
@@ -73,7 +73,7 @@ class _HomePageState extends State<CarouselPage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.d("_handleRefresh");
     await HttpClient.getCurrentPrograms(0).then((list) {
       if (null != list) {
         currentProgramlist = list.programModelList;
@@ -198,7 +198,7 @@ class _HomePageState extends State<CarouselPage> {
         onTap: () {
           if (null == mediaList[index].getPlayUrl ||
               "" == mediaList[index].getPlayUrl) {
-            LogUtil.v("playUrl is blank");
+            LogMyUtil.v("playUrl is blank");
           } else {
             homeMediaController.reset();
             Navigator.of(context)

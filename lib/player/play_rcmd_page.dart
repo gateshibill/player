@@ -9,7 +9,7 @@ import '../service/http_client.dart';
 import '../common/widget_common.dart';
 import '../common/player_controller.dart';
 import '../utils/string_util.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 
 class PlayRcmdPage extends StatefulWidget {
   PlayRcmdPage({Key key, @required this.vod, this.pc});
@@ -114,7 +114,7 @@ class _PlayRcmdPageState extends State<PlayRcmdPage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     await HttpClient.getRcmdVods(vod).then((list) {
       if (null != list) {
         rcmdList = list;
@@ -122,7 +122,7 @@ class _PlayRcmdPageState extends State<PlayRcmdPage> {
           setState(() {});
         } catch (e) {}
       } else {
-        LogUtil.e("list is null");
+        LogMyUtil.e("list is null");
       }
     });
     return;

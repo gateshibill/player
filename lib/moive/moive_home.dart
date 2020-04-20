@@ -4,7 +4,7 @@ import '../video/moive_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
 import '../bloc/counter_bloc.dart'; // bloc
 import '../global_config.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 
 
 class moivePage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _moivePageState extends State<moivePage> {
   void initState() {
     super.initState();
     setState(() {});
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
 

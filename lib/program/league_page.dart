@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../service/http_client.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../resource/local_storage.dart';
 import '../common/widget_common.dart';
 import '../model/program_model.dart';
@@ -50,7 +50,7 @@ class _LeaguePageState extends State<LeaguePage> {
         }
       });
     });
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override
@@ -315,7 +315,7 @@ class _LeaguePageState extends State<LeaguePage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     List<ProgramModel> programList = [];
     await HttpClient.getLeagueProgramList(name, 0, 20).then((list) {
       if (null != list) {
@@ -329,22 +329,22 @@ class _LeaguePageState extends State<LeaguePage> {
 //            LocalStorage.saveProgram(pm);
 //          }
         }
-        LogUtil.e("leagueProgramList lengh :${leagueProgramList.length}");
+        LogMyUtil.e("leagueProgramList lengh :${leagueProgramList.length}");
       } else {
-        LogUtil.e("fail to leagueProgramList");
+        LogMyUtil.e("fail to leagueProgramList");
       }
 
       try {
         setState(() {});
       } catch (e) {
-        LogUtil.e(e);
+        LogMyUtil.e(e);
       }
     });
     return programList;
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
     List<ProgramModel> programList = [];
     await HttpClient.getLeagueProgramList(this.name, page, 20).then((list) {
       if (null != list) {
@@ -357,15 +357,15 @@ class _LeaguePageState extends State<LeaguePage> {
             //缓存到本地"vod_0_"为首页栏目内容
             LocalStorage.saveProgram(pm);
           }
-          LogUtil.e("leagueProgramList lengh :${leagueProgramList.length}");
+          LogMyUtil.e("leagueProgramList lengh :${leagueProgramList.length}");
         }
       } else {
-        LogUtil.e("no more data!");
+        LogMyUtil.e("no more data!");
       }
       try {
         setState(() {});
       } catch (e) {
-        LogUtil.e(e);
+        LogMyUtil.e(e);
       }
     });
     return programList;

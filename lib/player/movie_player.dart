@@ -8,7 +8,7 @@ import '../bloc/counter_bloc.dart';
 import '../model/vod_model.dart';
 import '../model/metadata_model.dart';
 import '../config/config.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../data/cache_data.dart';
 import '../resource/cache_isolate.dart';
 import '../resource/local_storage.dart';
@@ -266,7 +266,7 @@ class _VideoContainerState extends State<VideoContainer> {
       playUrl =
           "$LOCAL_VIDEO_URL/${this.vod.vodId.toString()}/${this.vod.playlistFileName}";
     }
-    LogUtil.v("playUrl:" + playUrl);
+    LogMyUtil.v("playUrl:" + playUrl);
     _mediaController.setNetworkDataSource(playUrl, autoPlay: true);
 
     _mediaController.getVideoInfo().then((videoInfo) {

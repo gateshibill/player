@@ -8,7 +8,7 @@ import './service/http_client.dart';
 import './utils/device_util.dart';
 import './resource/cache_isolate.dart';
 import './utils/network_util.dart';
-import './utils/log_util.dart';
+import './utils/log_my_util.dart';
 import './service/http_upgrade.dart';
 import './global_config.dart';
 import './service/local_data_provider.dart';

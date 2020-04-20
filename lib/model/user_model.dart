@@ -11,6 +11,7 @@ class UserModel {
   int appId;
   int groupId;
   String userName="";
+  DateTime vipExpire;
   String userPwd="";
   String userNickName="";
   String userQq="";

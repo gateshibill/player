@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../service/http_client.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../resource/local_storage.dart';
 import '../common/widget_common.dart';
 import '../model/program_model.dart';
@@ -45,7 +45,7 @@ class _ProgramPageState extends State<ProgramPage> {
         }
       });
     });
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override
@@ -169,18 +169,18 @@ class _ProgramPageState extends State<ProgramPage> {
         ));
   }
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     await HttpClient.getProgramByDayList(this.day).then((list) {
       if (null != list) {
         programList = list.programModelList;
         commonProgramlist[day] = programList;
-        LogUtil.e(" program_list[day] :${commonProgramlist[day]}");
+        LogMyUtil.e(" program_list[day] :${commonProgramlist[day]}");
         for (ProgramModel pm in programList) {
           //缓存到本地"vod_0_"为首页栏目内容
           LocalStorage.saveProgram(pm);
         }
       } else {
-        LogUtil.e("fail to get column vod");
+        LogMyUtil.e("fail to get column vod");
 
         ClientLog cl = new ClientLog(
             "program_page.dart|handleRefresh()|fail to getProgramByDayList ${day}", "error");
@@ -189,14 +189,14 @@ class _ProgramPageState extends State<ProgramPage> {
       try {
         setState(() {});
       }catch(e){
-        LogUtil.e(e);
+        LogMyUtil.e(e);
       }
     });
     return programList;
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
   }
 
 }

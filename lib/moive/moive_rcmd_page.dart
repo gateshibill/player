@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import './details/live_detail.dart';
 import '../resource/local_storage.dart';
 import '../service/http_client.dart';
@@ -36,7 +36,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
   void initState() {
     super.initState();
     handleRefresh();
-    LogUtil.v("channelList lenght:${sportsChannelList.length}");
+    LogMyUtil.v("channelList lenght:${sportsChannelList.length}");
     setState(() {
       _scrollController.addListener(() {
         if (_scrollController.position.pixels ==
@@ -45,7 +45,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
         }
       });
     });
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override
@@ -156,7 +156,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
   }
 
   Future <void>handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     int type = 0;
     int groupId=0;
     switch (column) {
@@ -207,7 +207,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
           LocalStorage.saveChannel(cm);
         }
       } else {
-        LogUtil.e("fail to get channel");
+        LogMyUtil.e("fail to get channel");
         ClientLog cl = new ClientLog(
             "tv_rcmd_page.dart|handleRefresh()|fail to getRcmdChannels", "error");
         HttpClient.logReport(cl);
@@ -217,10 +217,10 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
   }
 
   Future _test() async {
-    LogUtil.e("_test()");
+    LogMyUtil.e("_test()");
   }
 }

@@ -1,7 +1,7 @@
 
 
 
-class LogUtil {
+class LogMyUtil {
   static bool _isDebug = true; //是否是debug模式,true: log v 不输出.
 
   static d(Object object) => _printLog("d:"+object.toString());

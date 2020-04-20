@@ -8,7 +8,7 @@ import '../bloc/counter_bloc.dart';
 import '../model/vod_model.dart';
 import '../model/metadata_model.dart';
 import '../config/config.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../data/cache_data.dart';
 import '../resource/cache_isolate.dart';
 import '../resource/local_storage.dart';
@@ -193,13 +193,13 @@ class _VideoContainerState extends State<VideoContainer> {
       vod.progress = videoInfo.progress;
       vod.duration = videoInfo.duration;
     });
-    LogUtil.v("cache():${this.vod.toString()}");
+    LogMyUtil.v("cache():${this.vod.toString()}");
     List<MetadataModel> mmList = vod.metadataList;
     int currentProgress = 0;
     if (vod.duration != null && vod.duration > 1 && mmList.length > 0) {
       currentProgress = (vod.progress / vod.duration * mmList.length).toInt();
     }
-    LogUtil.v("${vod.vodName} current play index: :$currentProgress");
+    LogMyUtil.v("${vod.vodName} current play index: :$currentProgress");
     //播放到当前的TS流顺序
     int currentCacheIndex = 0;
     if (null != vod.cacheIndex) {
@@ -216,22 +216,22 @@ class _VideoContainerState extends State<VideoContainer> {
         currentCacheIndex - currentProgress; //max=60,play for 10 mins;
     if (surplusPoolsNum > MOVIE_CACHE_NUM_MAX) {
       //单部最大缓存
-      LogUtil.v("reach the max cache pool of ${vod.vodName}:$surplusPoolsNum");
+      LogMyUtil.v("reach the max cache pool of ${vod.vodName}:$surplusPoolsNum");
       return;
     } else if (currentCacheIndex > mmList.length) {
       //是否结束
-      LogUtil.v("cache end ${vod.vodName}");
+      LogMyUtil.v("cache end ${vod.vodName}");
       return;
     } else if (TOTAL_CACHE_NUM_MAX > TOTAL_CACHE_NUM_MAX) {
       //总缓存reach max;
-      LogUtil.v("reach the total of app: $TOTAL_CACHE_NUM_MAX");
+      LogMyUtil.v("reach the total of app: $TOTAL_CACHE_NUM_MAX");
       //这里需要增加代码，启动系统清除缓存策略；
       //return;
     }
     MetadataModel mm = mmList.elementAt(currentCacheIndex);
     CacheIsolate.startNormalThread(mm).then((onValue) {
       //继续缓存
-      LogUtil.v("vod: ${this.vod.toString()}");
+      LogMyUtil.v("vod: ${this.vod.toString()}");
       LocalStorage.saveVod(vod);
       LocalStorage.saveMetadata(mm);
       vod.cacheIndex++;
@@ -241,7 +241,7 @@ class _VideoContainerState extends State<VideoContainer> {
 //缓存视频
   Future initVOD() async {
     if(false==vod.vodCopyright){
-      LogUtil.v("${vod.vodName} doesn't need cache!");
+      LogMyUtil.v("${vod.vodName} doesn't need cache!");
       return;
     }
     String fileName = "playlist.m3u8"; //临时，有可能不妥
@@ -254,7 +254,7 @@ class _VideoContainerState extends State<VideoContainer> {
       await DownloadService.parseM3u8(vod).then((vm) async {
         vod.metadataList = vm.metadataList; //主要是获取ts列表
         if (vm.metadataList.isEmpty) {
-          LogUtil.v("vm.metadataList.isEmpty");
+          LogMyUtil.v("vm.metadataList.isEmpty");
         } else {
           await cache();
         }
@@ -271,7 +271,7 @@ class _VideoContainerState extends State<VideoContainer> {
       playUrl =
           "$LOCAL_VIDEO_URL/${this.vod.vodId.toString()}/${this.vod.playlistFileName}";
     }
-    LogUtil.v("playUrl:" + playUrl);
+    LogMyUtil.v("playUrl:" + playUrl);
     _mediaController.setNetworkDataSource(playUrl, autoPlay: true);
 
     _mediaController.getVideoInfo().then((videoInfo) {

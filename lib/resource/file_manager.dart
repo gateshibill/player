@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'selection_icon.dart';
 import '../data/cache_data.dart';
 import 'package:flutter/foundation.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../model/metadata_model.dart';
 
 class FileManager extends StatefulWidget {
@@ -32,7 +32,7 @@ class _FileManagerState extends State<FileManager> {
     super.initState();
     sDCardDir = widget.sDCardDir;
     sDCardDir = "/data/user/0/feikan/player";
-    LogUtil.v("sDCardDir:" + sDCardDir.toString());
+    LogMyUtil.v("sDCardDir:" + sDCardDir.toString());
     parentDir = Directory(sDCardDir);
     initDirectory(sDCardDir);
   }
@@ -221,7 +221,7 @@ class _FileManagerState extends State<FileManager> {
               );
             },
           ).then((val) {
-            LogUtil.v(val);
+            LogMyUtil.v(val);
           });
         }
       },
@@ -247,8 +247,8 @@ class _FileManagerState extends State<FileManager> {
         files = directory.listSync();
       });
     } catch (e) {
-      LogUtil.v(e);
-      LogUtil.v("Directory does not exist！");
+      LogMyUtil.v(e);
+      LogMyUtil.v("Directory does not exist！");
     }
   }
 
@@ -283,14 +283,14 @@ class _FileManagerState extends State<FileManager> {
   Future<File> _getLocalFile() async {
     // get the path to the document directory.
     String dir = (await getApplicationDocumentsDirectory()).path;
-    LogUtil.v("getApplicationDocumentsDirectory：" + dir);
+    LogMyUtil.v("getApplicationDocumentsDirectory：" + dir);
     return new File('$dir/counter.txt');
   }
 
   Future<File> _getLocalPlayListFile() async {
     // get the path to the document directory.
     String dir = (await getApplicationDocumentsDirectory()).path;
-    LogUtil.v("getApplicationDocumentsDirectory：" + dir);
+    LogMyUtil.v("getApplicationDocumentsDirectory：" + dir);
     return new File('$dir/playlist.m3u8');
   }
 }

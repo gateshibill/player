@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import './details/live_detail.dart';
 import '../resource/local_storage.dart';
 import '../service/http_client.dart';
@@ -39,7 +39,7 @@ class _TVPageState extends State<TVPage> {
     if (tvChannelList[column].length < 1) {
       handleRefresh();
     }
-    LogUtil.v("channelList lenght:${tvChannelList.length}");
+    LogMyUtil.v("channelList lenght:${tvChannelList.length}");
     setState(() {
       _scrollController.addListener(() {
         if (_scrollController.position.pixels ==
@@ -48,7 +48,7 @@ class _TVPageState extends State<TVPage> {
         }
       });
     });
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override
@@ -244,11 +244,11 @@ class _TVPageState extends State<TVPage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     HttpClient.init();
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
   }
 }

@@ -8,7 +8,7 @@ import 'dart:convert' show utf8;
 import '../model/source_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 import '../config/config.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 
 
 import 'package:http_server/http_server.dart' show VirtualDirectory;
@@ -16,7 +16,7 @@ import 'package:http_server/http_server.dart' show VirtualDirectory;
 
 class HttpService{
   ready() async {
-    LogUtil.v("reay");
+    LogMyUtil.v("reay");
     HttpServer.bind(InternetAddress.anyIPv6, 8081).then((server) {
       server.listen((HttpRequest request) {
         request.response.write('Hello, world!');
@@ -28,7 +28,7 @@ class HttpService{
   readyDirServer() async {
     final MY_HTTP_ROOT_PATH  =(await getApplicationDocumentsDirectory()).path;
     // final MY_HTTP_ROOT_PATH = (await getExternalStorageDirectory()).path;
-    LogUtil.v("MY_HTTP_ROOT_PATH:" + MY_HTTP_ROOT_PATH);
+    LogMyUtil.v("MY_HTTP_ROOT_PATH:" + MY_HTTP_ROOT_PATH);
     final virDir = new VirtualDirectory(MY_HTTP_ROOT_PATH)
 
       ..allowDirectoryListing = true;

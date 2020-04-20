@@ -6,7 +6,7 @@ import '../player/video_detail.dart';
 import '../service/http_client.dart';
 import '../model/vod_model.dart';
 import '../data/cache_data.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import 'package:intl/intl.dart';
 import '../utils/string_util.dart';
 import '../common/widget_common.dart';
@@ -268,12 +268,12 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
   }
 
   Future handleRefresh() async {
-    LogUtil.e("_handleRefresh");
+    LogMyUtil.e("_handleRefresh");
     await HttpClient.getHotPrograms().then((list) {
       if (null != list) {
         currentEventProgramlist = list.programModelList;
       }
-      LogUtil.e(
+      LogMyUtil.e(
           "currentEventProgramlist length:${currentEventProgramlist.length}");
       try {
         setState(() {});
@@ -292,7 +292,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
           LocalStorage.saveVod(m, column: type);
         }
       } else {
-        LogUtil.e("fail to get column vod");
+        LogMyUtil.e("fail to get column vod");
 
         ClientLog cl = new ClientLog(
             "program_video_page.dart|handleRefresh()|fail to get column ${type} vod",
@@ -304,6 +304,6 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
   }
 
   Future _getMoreData() async {
-    LogUtil.e("_getMoreData()");
+    LogMyUtil.e("_getMoreData()");
   }
 }

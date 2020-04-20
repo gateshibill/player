@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../global_config.dart';
 import './program_event_page.dart';
 import '../video/svideo_page.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import './program_page.dart';
 import 'package:intl/intl.dart';
 import './sports_page.dart';
@@ -23,7 +23,7 @@ class _findPageState extends State<findPage> {
       mytab = MyTabBarView();
       //mytab.;
     });
-    LogUtil.v("initState setState()");
+    LogMyUtil.v("initState setState()");
   }
 
   @override

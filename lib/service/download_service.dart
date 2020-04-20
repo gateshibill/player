@@ -11,7 +11,7 @@ import '../data/cache_data.dart';
 import './http_client.dart';
 import '../config/config.dart';
 import '../resource/cache_isolate.dart';
-import '../utils/log_util.dart';
+import '../utils/log_my_util.dart';
 import '../utils/network_util.dart';
 
 class DownloadService {
