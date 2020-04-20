@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:player/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/metadata_model.dart';
 import '../model/vod_model.dart';
@@ -18,6 +19,8 @@ import 'package:http_server/http_server.dart' show VirtualDirectory;
  *
  */
 class LocalStorage {
+  static final String TAG = "LocalStorage";
+  static final String login_ = "login_";
   static SharedPreferences sharedPreferences = null;
   static Map<String, MetadataModel> metadataMap =
       new Map<String, MetadataModel>();
@@ -102,7 +105,36 @@ class LocalStorage {
   static SharedPreferences instance() {
     return sharedPreferences;
   }
+  static UserModel getUserMe() {
+    UserModel user = new UserModel();
+    String modelJson = sharedPreferences.getString("me");
+    if (null == modelJson) {
+      LogMyUtil.d("$TAG getUserMe() modelJson is null");
+      return user;
+    }
+    try {
+      final Map parsed = json.decode(modelJson);
+      user = UserModel.fromJson(parsed);
+    } catch (e) {
+      LogMyUtil.d("$TAG ${e.toString()}|${me.detail}");
+      sharedPreferences.remove("me");
+    }
+    return user;
+  }
 
+  static void setUserMe(UserModel user) {
+    LocalStorage._saveString("me", json.encode(user));
+    setLoginUser(user);
+  }
+
+  static void setLogin(bool login) =>
+      _saveString("isLogin", login ? 'true' : '');
+
+  static bool getLogin() => getString("isLogin") == 'true';
+
+  //保存登录用户
+  static void setLoginUser(UserModel user) =>
+      LocalStorage._saveString("$login_${user.userId}", json.encode(user));
   /**
    * 利用SharedPreferences存储数据
    */

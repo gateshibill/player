@@ -46,7 +46,7 @@ class UserModel {
 
   UserModel();
 
-  String toString(){
+  String detail(){
     return
       "vod: ${userId}| ${userName}| ${userPhone}| ${userRandom}";
   }
