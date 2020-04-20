@@ -1,3 +1,5 @@
+import 'package:player/model/user_model.dart';
+
 import '../model/topic_model.dart';
 import '../model/vod_model.dart';
 import '../model/metadata_model.dart';
@@ -17,6 +19,9 @@ bool isReport=false;
 String token="";
 //udp p2p
 StringBuffer pNodeSesionBuffer = new StringBuffer();
+
+UserModel me;
+
 
 //首页
 List<VodModel> homeVodList=[];

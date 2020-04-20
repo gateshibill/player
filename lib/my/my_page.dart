@@ -222,8 +222,8 @@ class _MyPageState extends State<MyPage> {
                           children: <Widget>[
                             new Container(
                               child: new Text(
-    DateFormat('kk:mm')
-        .format(user.v),
+    DateFormat('yyyy:kk:mm')
+        .format(me.vipExpire),
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: GlobalConfig.fontColor),
