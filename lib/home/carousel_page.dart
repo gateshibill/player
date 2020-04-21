@@ -236,7 +236,7 @@ class _HomePageState extends State<CarouselPage> {
               // width: 400,
               child: new Column(
                 children: <Widget>[
-                  new Text(subString(mediaList[index].getName(), 50),
+                  new Text(StrUtils.subString(mediaList[index].getName(), 50),
                       maxLines: 1,
                       textAlign: TextAlign.center,
                       style: new TextStyle(color: GlobalConfig.fontColor)),

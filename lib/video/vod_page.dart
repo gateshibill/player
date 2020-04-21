@@ -98,7 +98,7 @@ class _VodPageState extends State<VodPage> {
               new Container(
                 child: new Row(
                   children: <Widget>[
-                    new Text(subString("${movieList[1][index].vodName}",23),
+                    new Text(StrUtils.subString("${movieList[1][index].vodName}",23),
                         style: new TextStyle(color: GlobalConfig.fontColor)),
                   ],
                 ),

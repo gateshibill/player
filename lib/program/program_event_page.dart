@@ -129,7 +129,7 @@ class _ProgramEventPageState extends State<ProgramEventPage> {
                             fontWeight: FontWeight.normal)),
 //                    new Text("",
 //                        style: new TextStyle(color: GlobalConfig.fontColor)),
-                    new Text(subString("${eventProgramlist[index].name}", 10),
+                    new Text(StrUtils.subString("${eventProgramlist[index].name}", 10),
                         maxLines: 2,
                         textAlign: TextAlign.center,
                         style: new TextStyle(
@@ -168,7 +168,7 @@ class _ProgramEventPageState extends State<ProgramEventPage> {
                               margin: new EdgeInsets.only(
                                   top: 2.0, bottom: 0.0, right: 5.0),
                               alignment: Alignment.topLeft),
-                          new Text(subString("${eventProgramlist[index].homeTeam}", 8),
+                          new Text(StrUtils.subString("${eventProgramlist[index].homeTeam}", 8),
                               style: new TextStyle(color: colorText)),
                         ]),
                     new Row(
@@ -190,7 +190,7 @@ class _ProgramEventPageState extends State<ProgramEventPage> {
                               margin: new EdgeInsets.only(
                                   top: 2.0, bottom: 0.0, right: 5.0),
                               alignment: Alignment.topLeft),
-                          new Text(subString("${eventProgramlist[index].guestTeam}", 8),
+                          new Text(StrUtils.subString("${eventProgramlist[index].guestTeam}", 8),
                               style: new TextStyle(color: colorText)),
                         ]),
                   ],

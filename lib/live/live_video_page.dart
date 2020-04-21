@@ -127,7 +127,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
                   width: picWidth,
                   child: new Row(
                     children: <Widget>[
-                      new Text(subString(anchorList[index * 2].name, 9),
+                      new Text(StrUtils.subString(anchorList[index * 2].name, 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
@@ -183,7 +183,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
                   width: picWidth,
                   child: new Row(
                     children: <Widget>[
-                      new Text(subString(anchorList[index * 2 + 1].name, 9),
+                      new Text(StrUtils.subString(anchorList[index * 2 + 1].name, 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],

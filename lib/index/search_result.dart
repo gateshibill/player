@@ -135,7 +135,7 @@ class _SearchResultState extends State<SearchResult> {
                     width: width,
                     child: new Row(
                       children: <Widget>[
-                        new Text(subString(resultList[index * 2].vodName, 9),
+                        new Text(StrUtils.subString(resultList[index * 2].vodName, 9),
                             style:
                                 new TextStyle(color: GlobalConfig.fontColor)),
                         //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
@@ -184,7 +184,7 @@ class _SearchResultState extends State<SearchResult> {
                     child: new Row(
                       children: <Widget>[
                         new Text(
-                            subString(resultList[index * 2 + 1].vodName, 9),
+                            StrUtils.subString(resultList[index * 2 + 1].vodName, 9),
                             style:
                                 new TextStyle(color: GlobalConfig.fontColor)),
                         //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))

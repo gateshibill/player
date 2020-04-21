@@ -221,9 +221,8 @@ class _MyPageState extends State<MyPage> {
                         child: new Column(
                           children: <Widget>[
                             new Container(
-                              child: new Text(
-    DateFormat('yyyy:kk:mm')
-        .format(me.vipExpire),
+                              child: new Text((null==(me.vipExpire))?"立即充值":
+                                DateFormat('yyyy:kk:mm').format(me.vipExpire),
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: GlobalConfig.fontColor),
@@ -597,7 +596,7 @@ class _MyPageState extends State<MyPage> {
                   width: picWidth,
                   child: new Row(
                     children: <Widget>[
-                      new Text(subString(historyVodList[index].vodName, 9),
+                      new Text(StrUtils.subString(historyVodList[index].vodName, 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
@@ -607,53 +606,6 @@ class _MyPageState extends State<MyPage> {
               ],
             ),
           ),
-//          new GestureDetector(
-//            onTap: () {
-//              if (null == historyVodList[index].vodPlayUrl ||
-//                  "" == historyVodList[index].vodPlayUrl) {
-//                LogUtil.v("playUrl is blank");
-//              } else {
-//                Navigator.of(context)
-//                    .push(new MaterialPageRoute(builder: (context) {
-//                  return new VideoDetail(vod: historyVodList[index]);
-//                }));
-//              }
-//            },
-//            child: new Column(
-//              children: <Widget>[
-//                new Container(
-//                    //Expanded(
-//                    // flex: 1,
-//                    // child: new AspectRatio(
-//                    //aspectRatio: 3.5 / 2,
-//                    width: picWidth,
-//                    //height: 110,
-//                    child: new CachedNetworkImage(
-//                      imageUrl: "${historyVodList[index * 2 + 1].vodPic}",
-//                      placeholder: (context, url) => cachPlaceHolder(),
-//                      errorWidget: (context, url, error) =>
-//                          new Icon(Icons.accessible_forward),
-//                    )
-//
-//                    //),
-//                    // margin: new EdgeInsets.only(top: 6.0, bottom: 14.0),
-//                    // alignment: Alignment.topLeft
-//                    ),
-//                new Container(
-//                  width: picWidth,
-//                  child: new Row(
-//                    children: <Widget>[
-//                      new Text(
-//                          subString(historyVodList[index * 2 + 1].vodName, 9),
-//                          style: new TextStyle(color: GlobalConfig.fontColor)),
-//                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-//                    ],
-//                  ),
-//                  padding: const EdgeInsets.only(bottom: 10.0),
-//                ),
-//              ],
-//            ),
-//          )
         ]
         // )
         );
@@ -702,7 +654,7 @@ class _MyPageState extends State<MyPage> {
                   child: new Row(
                     children: <Widget>[
                       new Text(
-                          subString(historyChannelList[index].getName(), 9),
+                          StrUtils.subString(historyChannelList[index].getName(), 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
@@ -712,53 +664,6 @@ class _MyPageState extends State<MyPage> {
               ],
             ),
           ),
-//          new GestureDetector(
-//            onTap: () {
-//              if (null == historyChannelList[index * 2 + 1].getPlayUrl() ||
-//                  "" == historyChannelList[index * 2 + 1].getPlayUrl()) {
-//                LogUtil.v("playUrl is blank");
-//              } else {
-//                Navigator.of(context)
-//                    .push(new MaterialPageRoute(builder: (context) {
-//                  return new LiveDetail(vod: historyChannelList[index * 2 + 1]);
-//                }));
-//              }
-//            },
-//            child: new Column(
-//              children: <Widget>[
-//                new Container(
-//                  //Expanded(
-//                  // flex: 1,
-//                  // child: new AspectRatio(
-//                  //aspectRatio: 3.5 / 2,
-//                    width: picWidth,
-//                    //height: 110,
-//                    child: new CachedNetworkImage(
-//                      imageUrl: "${historyChannelList[index * 2 + 1].posterUrl}",
-//                      placeholder: (context, url) => cachPlaceHolder(),
-//                      errorWidget: (context, url, error) =>
-//                      new Icon(Icons.accessible_forward),
-//                    )
-//
-//                  //),
-//                  // margin: new EdgeInsets.only(top: 6.0, bottom: 14.0),
-//                  // alignment: Alignment.topLeft
-//                ),
-//                new Container(
-//                  width: picWidth,
-//                  child: new Row(
-//                    children: <Widget>[
-//                      new Text(
-//                          subString(historyChannelList[index * 2 + 1].getName(), 9),
-//                          style: new TextStyle(color: GlobalConfig.fontColor)),
-//                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-//                    ],
-//                  ),
-//                  padding: const EdgeInsets.only(bottom: 5.0),
-//                ),
-//              ],
-//            ),
-//          )
         ]
         // )
         );
@@ -807,7 +712,7 @@ class _MyPageState extends State<MyPage> {
                   child: new Row(
                     children: <Widget>[
                       new Text(
-                          subString(guessChannelList[index].getName(), 9),
+                          StrUtils.subString(guessChannelList[index].getName(), 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
@@ -817,53 +722,6 @@ class _MyPageState extends State<MyPage> {
               ],
             ),
           ),
-//          new GestureDetector(
-//            onTap: () {
-//              if (null == historyChannelList[index * 2 + 1].getPlayUrl() ||
-//                  "" == historyChannelList[index * 2 + 1].getPlayUrl()) {
-//                LogUtil.v("playUrl is blank");
-//              } else {
-//                Navigator.of(context)
-//                    .push(new MaterialPageRoute(builder: (context) {
-//                  return new LiveDetail(vod: historyChannelList[index * 2 + 1]);
-//                }));
-//              }
-//            },
-//            child: new Column(
-//              children: <Widget>[
-//                new Container(
-//                  //Expanded(
-//                  // flex: 1,
-//                  // child: new AspectRatio(
-//                  //aspectRatio: 3.5 / 2,
-//                    width: picWidth,
-//                    //height: 110,
-//                    child: new CachedNetworkImage(
-//                      imageUrl: "${historyChannelList[index * 2 + 1].posterUrl}",
-//                      placeholder: (context, url) => cachPlaceHolder(),
-//                      errorWidget: (context, url, error) =>
-//                      new Icon(Icons.accessible_forward),
-//                    )
-//
-//                  //),
-//                  // margin: new EdgeInsets.only(top: 6.0, bottom: 14.0),
-//                  // alignment: Alignment.topLeft
-//                ),
-//                new Container(
-//                  width: picWidth,
-//                  child: new Row(
-//                    children: <Widget>[
-//                      new Text(
-//                          subString(historyChannelList[index * 2 + 1].getName(), 9),
-//                          style: new TextStyle(color: GlobalConfig.fontColor)),
-//                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-//                    ],
-//                  ),
-//                  padding: const EdgeInsets.only(bottom: 5.0),
-//                ),
-//              ],
-//            ),
-//          )
         ]
       // )
     );

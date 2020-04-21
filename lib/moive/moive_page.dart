@@ -93,7 +93,7 @@ class _TVPageState extends State<TVPage> {
               child: new Row(
                 children: <Widget>[
                   new Text(
-                      subString(
+                      StrUtils.subString(
                           "    " + tvChannelList[column][index].name, 23),
                       style: new TextStyle(color: GlobalConfig.fontColor)),
                   new Expanded(
@@ -174,7 +174,7 @@ class _TVPageState extends State<TVPage> {
               child: new Row(
                 children: <Widget>[
                   new Text(
-                      subString(
+                      StrUtils.subString(
                           "    " + tvChannelList[column][index].name, 23),
                       style: new TextStyle(color: GlobalConfig.fontColor)),
                   new Expanded(

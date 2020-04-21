@@ -179,7 +179,7 @@ class _MoviePageState extends State<MoviePage> {
                   width: width,
                   child: new Row(
                     children: <Widget>[
-                      new Text(subString(movieList[column][index * 2].vodName, 9),
+                      new Text(StrUtils.subString(movieList[column][index * 2].vodName, 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
@@ -226,7 +226,7 @@ class _MoviePageState extends State<MoviePage> {
                   child: new Row(
                     children: <Widget>[
                       new Text(
-                          subString(movieList[column][index * 2 + 1].vodName, 9),
+                          StrUtils.subString(movieList[column][index * 2 + 1].vodName, 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],

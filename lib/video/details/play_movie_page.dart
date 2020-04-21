@@ -215,11 +215,11 @@ class _PlayRcmdPageState extends State<PlayRcmdPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          subString(e.vodName, 17),
+                          StrUtils.subString(e.vodName, 17),
                           maxLines: 1,
                         ),
-                        Text(subString('：${e.vodDirector}', 17), maxLines: 1),
-                        Text(subString("主演：${e.vodActor}", 17), maxLines: 1)
+                        Text(StrUtils.subString('：${e.vodDirector}', 17), maxLines: 1),
+                        Text(StrUtils.subString("主演：${e.vodActor}", 17), maxLines: 1)
                       ],
                     ),
                   )

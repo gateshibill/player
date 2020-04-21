@@ -159,7 +159,7 @@ class _LeaguePageState extends State<LeaguePage> {
 //                    new Text("",
 //                        style: new TextStyle(color: GlobalConfig.fontColor)),
                           new Text(
-                              subString("${leagueProgramList[index].name}", 10),
+                              StrUtils.subString("${leagueProgramList[index].name}", 10),
                               maxLines: 2,
                               textAlign: TextAlign.center,
                               style: new TextStyle(
@@ -208,7 +208,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                         top: 2.0, bottom: 0.0, right: 5.0),
                                     alignment: Alignment.topLeft),
                                 new Text(
-                                    subString(
+                                    StrUtils.subString(
                                         "${leagueProgramList[index].homeTeam}",
                                         8),
                                     style: new TextStyle(color: colorText)),
@@ -234,7 +234,7 @@ class _LeaguePageState extends State<LeaguePage> {
                                         top: 2.0, bottom: 0.0, right: 5.0),
                                     alignment: Alignment.topLeft),
                                 new Text(
-                                    subString(
+                                    StrUtils.subString(
                                         "${leagueProgramList[index].guestTeam}",
                                         8),
                                     style: new TextStyle(color: colorText)),
@@ -242,7 +242,7 @@ class _LeaguePageState extends State<LeaguePage> {
                         ],
                       )
                     : new Text(
-                        subString("${leagueProgramList[index].name}", 10),
+                    StrUtils.subString("${leagueProgramList[index].name}", 10),
                         maxLines: 1,
                         textAlign: TextAlign.center,
                         style: new TextStyle(

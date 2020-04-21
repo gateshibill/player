@@ -197,12 +197,12 @@ class _VideoDescribeState extends State<VideoDescribe> {
               padding: EdgeInsets.only(left: 10.0),
               child: Column(
                 children: <Widget>[
-                  Text(subString('观看次数：${vod.vodHits}',23),
+                  Text(StrUtils.subString('观看次数：${vod.vodHits}',23),
                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: ScreenUtil().setSp(26),
                       )),
-                  Text(subString('比赛时间：${DateFormat('yy-MM-dd kk:mm').format(new DateTime.fromMicrosecondsSinceEpoch(vod.vodTime*1000*1000))}',23),
+                  Text(StrUtils.subString('比赛时间：${DateFormat('yy-MM-dd kk:mm').format(new DateTime.fromMicrosecondsSinceEpoch(vod.vodTime*1000*1000))}',23),
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: ScreenUtil().setSp(25))),
                 ],

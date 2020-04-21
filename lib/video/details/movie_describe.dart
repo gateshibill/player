@@ -198,12 +198,12 @@ class _VideoDescribeState extends State<VideoDescribe> {
               padding: EdgeInsets.only(left: 10.0),
               child: Column(
                 children: <Widget>[
-                  Text(subString('解说：${this.vod.vodDirector}',23),
+                  Text(StrUtils.subString('解说：${this.vod.vodDirector}',23),
                      // textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: ScreenUtil().setSp(26),
                       )),
-                  Text(subString('：${this.vod.vodActor}',30),
+                  Text(StrUtils.subString('：${this.vod.vodActor}',30),
                       style: TextStyle(fontSize: ScreenUtil().setSp(25))),
                 ],
               ),

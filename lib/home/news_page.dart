@@ -236,7 +236,7 @@ class _HomePageState extends State<NewsPage> {
               alignment: Alignment.topLeft,
               child: new Column(
                 children: <Widget>[
-                  new Text(subString(mediaList[index * groupNum].getName(), 50),
+                  new Text(StrUtils.subString(mediaList[index * groupNum].getName(), 50),
                       maxLines: 3,
                       textAlign: TextAlign.left,
                       style: new TextStyle(

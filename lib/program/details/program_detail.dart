@@ -302,7 +302,7 @@ class VideoPageState extends State<VideoPage>
             mediaController: _mediaController,
           ),
         ),
-        new Text(subString("${pm.name}",23),
+        new Text(StrUtils.subString("${pm.name}",23),
             style: new TextStyle(color: GlobalConfig.fontColor), maxLines: 1),
         new Container(
           height: 330,

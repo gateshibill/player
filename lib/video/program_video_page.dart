@@ -211,7 +211,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
               new Container(
                 child: new Row(
                   children: <Widget>[
-                    new Text(subString(vodList[index].vodName, 28),
+                    new Text(StrUtils.subString(vodList[index].vodName, 28),
                         maxLines: 2,
                         // softWrap: true,
                         style: new TextStyle(color: GlobalConfig.fontColor)),

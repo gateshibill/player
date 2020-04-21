@@ -89,12 +89,12 @@ class _PlayRcmdPageState extends State<PlayRcmdPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          subString(e.vodName, 16),
+                          StrUtils.subString(e.vodName, 16),
                           maxLines: 1,
                         ),
-                        Text(subString('观看次数：${e.vodHits}', 17), maxLines: 1),
+                        Text(StrUtils.subString('观看次数：${e.vodHits}', 17), maxLines: 1),
                         Text(
-                            subString(
+                            StrUtils.subString(
                                 " 上影时间：${DateFormat('yyyy-MM-dd kk:mm').format(new DateTime.fromMicrosecondsSinceEpoch(vod.vodTime * 1000 * 1000))}",
                                 22),
                             maxLines: 1)

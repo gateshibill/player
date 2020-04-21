@@ -197,12 +197,12 @@ class _AnchorDescribeState extends State<AnchorDescribe> {
               padding: EdgeInsets.only(left: 10.0),
               child: Column(
                 children: <Widget>[
-                  Text(subString('观看次数：${anchor.online}',23),
+                  Text(StrUtils.subString('观看次数：${anchor.online}',23),
                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: ScreenUtil().setSp(26),
                       )),
-                  Text(subString('上线时间：${DateFormat('yy-MM-dd kk:mm').format(anchor.creatTime)}',23),
+                  Text(StrUtils.subString('上线时间：${DateFormat('yy-MM-dd kk:mm').format(anchor.creatTime)}',23),
                       textAlign: TextAlign.left,
                       style: TextStyle(fontSize: ScreenUtil().setSp(25))),
                 ],

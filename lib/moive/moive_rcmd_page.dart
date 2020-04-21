@@ -86,7 +86,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
               child: new Row(
                 children: <Widget>[
                   new Text(
-                      subString("    " + tvChannelList[0][index].name, 23),
+                      StrUtils.subString("    " + tvChannelList[0][index].name, 23),
                       style: new TextStyle(color: GlobalConfig.fontColor)),
                   new Expanded(
                     child: new Text("       "),
