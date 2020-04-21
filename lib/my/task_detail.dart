@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../model/metadata_model.dart';
 import '../utils/log_my_util.dart';
 import '../global_config.dart';

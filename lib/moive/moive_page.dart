@@ -4,7 +4,7 @@ import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
 import './details/live_detail.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../service/http_client.dart';
 import '../model/channel_model.dart';
 import '../utils/string_util.dart';
@@ -55,7 +55,7 @@ class _TVPageState extends State<TVPage> {
   Widget build(BuildContext context) {
     ClientAction ca = new ClientAction(
         200 + column, "sportChannelPage", 0, "", 0, "", 1, "bowser");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
     return (tvChannelList[column].length < 1)
         ? refreshButton(this)
         : RefreshIndicator(
@@ -245,7 +245,7 @@ class _TVPageState extends State<TVPage> {
 
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    HttpClient.init();
+    HttpClientUtils.init();
   }
 
   Future _getMoreData() async {

@@ -169,7 +169,7 @@ class PnodePageState extends State<PnodePage> {
   void timeCheck() async {
     pNodeSesionBuffer.clear();
     isCheck = true;
-    HttpClient.test_check().then((onValue) {
+    HttpClientUtils.test_check().then((onValue) {
       isCheck = false;
     });
     int count = 0;

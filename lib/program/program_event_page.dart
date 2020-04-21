@@ -3,7 +3,7 @@ import '../service/http_client.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../common/widget_common.dart';
 import '../model/program_model.dart';
 import '../program/details/program_detail.dart';
@@ -52,7 +52,7 @@ class _ProgramEventPageState extends State<ProgramEventPage> {
   Widget build(BuildContext context) {
     ClientAction ca = new ClientAction(
         300 + day, "programListPage", 0, "", 0, "", 1, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return (eventProgramlist.length < 1)
         ? refreshButton(this)
@@ -255,7 +255,7 @@ class _ProgramEventPageState extends State<ProgramEventPage> {
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
     List<ProgramModel> programList = [];
-    await HttpClient.getProgramByEventList(0).then((list) {
+    await HttpClientUtils.getProgramByEventList(0).then((list) {
       if (null != list) {
         programList = list.programModelList;
         if(programList!=null&&programList.length>0){
@@ -282,7 +282,7 @@ class _ProgramEventPageState extends State<ProgramEventPage> {
   Future _getMoreData() async {
     LogMyUtil.e("_getMoreData()");
     List<ProgramModel> programList = [];
-    await HttpClient.getProgramByEventList(this.page).then((list) {
+    await HttpClientUtils.getProgramByEventList(this.page).then((list) {
       if (null != list) {
         programList = list.programModelList;
         if (programList != null && programList.length > 0) {

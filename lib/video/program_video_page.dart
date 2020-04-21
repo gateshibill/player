@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../global_config.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../player/video_detail.dart';
 import '../service/http_client.dart';
 import '../model/vod_model.dart';
@@ -51,7 +51,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(400 + type, "contest", 0, "", 0, "", 1, "bowser");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return (vodList.length < 1)
         ? refreshButton(this)
@@ -269,7 +269,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
 
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    await HttpClient.getHotPrograms().then((list) {
+    await HttpClientUtils.getHotPrograms().then((list) {
       if (null != list) {
         currentEventProgramlist = list.programModelList;
       }
@@ -279,7 +279,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
         setState(() {});
       } catch (e) {}
     });
-    await HttpClient.getSportsVodList(type).then((list) {
+    await HttpClientUtils.getSportsVodList(type).then((list) {
       int index = type % 1000 - 1; //临时方案，这样不好
       if (null != list) {
         sportsPlaybackVodList[index] = list.vodModelList;
@@ -297,7 +297,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
         ClientLog cl = new ClientLog(
             "program_video_page.dart|handleRefresh()|fail to get column ${type} vod",
             "error");
-        HttpClient.logReport(cl);
+        HttpClientUtils.logReport(cl);
       }
     });
     return;

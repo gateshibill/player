@@ -22,7 +22,7 @@ class _ViewPicturePageState extends State<ViewPicturePage> {
   Widget build(BuildContext context) {
     ClientAction ca =
     new ClientAction(203, "ViewPicturePage", 0, "", 0, "", 1, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return Container(
         child: PhotoViewGallery.builder(

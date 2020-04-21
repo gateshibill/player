@@ -77,7 +77,7 @@ class _SearchResultState extends State<SearchResult> {
 
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    await HttpClient.fuzzyQueryVod(keyword).then((list) {
+    await HttpClientUtils.fuzzyQueryVod(keyword).then((list) {
       if (null != list) {
         resultList = list;
         try {

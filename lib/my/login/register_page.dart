@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:player/data/cache_data.dart';
+import 'package:player/service/date_util.dart';
 import '../../model/client_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -42,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     ClientAction ca=new ClientAction(501, "register", 0, "", 0, "", 1, "bowser");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -119,32 +120,20 @@ class _RegisterPageState extends State<RegisterPage> {
     if (Validators.phone(passwordLoginInfo.phone) &&
         Validators.required(passwordLoginInfo.password)) {
       showLoginDialog();
-      HttpClient.register({
+      HttpClientUtils.register({
         "userPhone": passwordLoginInfo.phone,
         "userNickname": passwordLoginInfo.nickname,
         "userPwd": passwordLoginInfo.password
-      }).then((response) {
+      }).then((onValue) {
         pr.hide();
-        if (null == response) {
-          UiUtil.showToast("fail to register,$response");
-          return;
-        }
-        print("response:$response");
-        //String res2Json = json.encode(response);
-        final Map parsed = json.decode(response);
-        String code = parsed["code"].toString();
-        final Map objectJson = parsed["object"];
-        if (code == '200') {
-          print("register success");
+        if (Msg.SUCCESS == onValue.code) {
+          me=onValue.object;
           UiUtil.showToast('恭喜您，注册成功！');
-          UserModel userModel = UserModel.fromJson(objectJson);
-me=userModel;
               passwordLoginInfo.password;//保存原始密码
-
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => LoginPage()));
         } else {
-          UiUtil.showToast("fail to register,$response");
+          UiUtil.showToast("fail to register,$onValue");
         }
       });
     } else if (!Validators.phone(passwordLoginInfo.phone)) {

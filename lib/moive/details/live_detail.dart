@@ -11,7 +11,7 @@ import '../../data/cache_data.dart';
 import './live_rcmd_page.dart';
 import '../../player/comment_detail.dart';
 import '../../common/player_controller.dart';
-import '../../resource/local_storage.dart';
+import '../../service/local_storage.dart';
 
 class LiveDetail extends StatefulWidget {
   LiveDetail({Key key, @required this.vod,this.context});
@@ -114,7 +114,7 @@ class _LiveDetailState extends State<LiveDetail>
   Widget build(BuildContext context) {
     ClientAction ca = new ClientAction(2000, "liveplaydetail", 0, "",
         this.channel.id, this.channel.name, 2, "watch");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     int row = sportsChannelList.length ~/ 2 - 1;
     print("row:$row");

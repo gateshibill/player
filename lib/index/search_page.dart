@@ -58,7 +58,7 @@ class SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(110, "research", 0, "", 0, "", 1, "bowser");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return new MaterialApp(
         theme: GlobalConfig.themeData,

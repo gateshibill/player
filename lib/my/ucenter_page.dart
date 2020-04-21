@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../global_config.dart';
 import '../index/search_page.dart';
 import '../resource/file_manager.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import './task_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/vod_model.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../utils/log_my_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

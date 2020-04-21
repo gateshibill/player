@@ -115,7 +115,7 @@ class _PlayRcmdPageState extends State<PlayRcmdPage> {
 
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    await HttpClient.getRcmdVods(vod).then((list) {
+    await HttpClientUtils.getRcmdVods(vod).then((list) {
       if (null != list) {
         rcmdList = list;
         try {

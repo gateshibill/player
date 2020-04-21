@@ -102,7 +102,7 @@ class _MoviePageState extends State<MoviePage> {
       default:
         break;
     }
-    await HttpClient.getVodList(type).then((list) {
+    await HttpClientUtils.getVodList(type).then((list) {
       if (null != list) {
         movieList[column] = list.vodModelList;
         page=1;
@@ -122,7 +122,7 @@ class _MoviePageState extends State<MoviePage> {
 
   Future _getMoreData() async {
     LogMyUtil.e("_getMoreData()");
-    await HttpClient.getVodList(1).then((list) {
+    await HttpClientUtils.getVodList(1).then((list) {
       if (null != list) {
         List<VodModel> tmpList=list.vodModelList;
         if (tmpList != null && tmpList.length > 0) {

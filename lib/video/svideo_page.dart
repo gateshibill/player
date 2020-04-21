@@ -27,7 +27,7 @@ class _SvideoPageState1 extends State<SvideoPage> {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(203, "svideo", 0, "", 0, "", 1, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return BlocBuilder(

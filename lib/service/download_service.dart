@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
-import '../resource/local_storage.dart';
+import 'local_storage.dart';
 import '../model/source_model.dart';
-import '../resource/local_storage.dart';
+import 'local_storage.dart';
 import '../model/vod_model.dart';
 import '../model/metadata_model.dart';
 import '../data/cache_data.dart';
@@ -108,7 +108,7 @@ class DownloadService {
     if (isExit) {
       LocalStorage.saveMetadataMap(mm);
       LocalStorage.saveMetadata(mm); //防止清除sp而cache还存在的情况；
-     await HttpClient.addHttpSource(mm);
+     await HttpClientUtils.addHttpSource(mm);
     } else {
       print("$filePath is not exist,will download again!");
       CacheIsolate.addTask(mm);
@@ -211,7 +211,7 @@ class DownloadService {
   static Future<SourceModel> getDownloadSource(MetadataModel mm) async {
     print("getDownloadSource start");
     SourceModel sm = null;
-    await HttpClient.getHttpSource(mm).then((mm) {
+    await HttpClientUtils.getHttpSource(mm).then((mm) {
       if (null == mm) {
         print("mm is null");
         return null;

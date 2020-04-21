@@ -70,7 +70,7 @@ class UdpClient {
         case WsClient.LOGIN:
           {
             PeerAction pa = new PeerAction(wsClient.peerMyself.id,mm.toJson().toString(),WsClient.LOGIN,"udp");
-            HttpClient.holeReport(pa);
+            HttpClientUtils.holeReport(pa);
             //先登录UDP或者参数，再登录注册参数；
             print(mm.destPeer);
             wsClient.peerMyself.udpPort = mm.destPeer.udpPort;
@@ -82,7 +82,7 @@ class UdpClient {
         case WsClient.HOLE:// send hole to server;
           {
             PeerAction pa = new PeerAction(wsClient.peerMyself.id,mm.toJson().toString(),WsClient.HOLE,"udp");
-            HttpClient.holeReport(pa);
+            HttpClientUtils.holeReport(pa);
             //这是服务回调命令打洞
             wsClient.peerMyself.udpPort = pm.udpPort;
             wsClient.peerMyself.ip = pm.ip;
@@ -92,7 +92,7 @@ class UdpClient {
         case WsClient.HANDSHAKE:
           {//处理接受A的握手请求
             PeerAction pa = new PeerAction(wsClient.peerMyself.id,mm.toJson().toString(),WsClient.HANDSHAKE,"udp");
-            HttpClient.holeReport(pa);
+            HttpClientUtils.holeReport(pa);
             String time = DateFormat('MM-dd kk:mm:ss').format(DateTime.now());
             MessageModel message =
             new MessageModel(WsClient.KISS, 0, time, wsClient.peerMyself, wsClient.peerB);
@@ -102,7 +102,7 @@ class UdpClient {
         case WsClient.EMBRACE:
           {//处理接受B的握手请求
             PeerAction pa = new PeerAction(wsClient.peerMyself.id,mm.toJson().toString(),WsClient.EMBRACE,"udp");
-            HttpClient.holeReport(pa);
+            HttpClientUtils.holeReport(pa);
 
             String time = DateFormat('MM-dd kk:mm:ss').format(DateTime.now());
             MessageModel message =
@@ -113,7 +113,7 @@ class UdpClient {
         case WsClient.KISS:
           {
             PeerAction pa = new PeerAction(wsClient.peerMyself.id,mm.toJson().toString(),WsClient.KISS,"udp");
-            HttpClient.holeReport(pa);
+            HttpClientUtils.holeReport(pa);
             //结束上报结果;
             _putRcvNodeSesionBuffer(mm.toJson().toString());
             //上报记录数据；

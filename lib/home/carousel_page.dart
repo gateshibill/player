@@ -6,7 +6,7 @@ import '../global_config.dart';
 import '../model/client_log.dart';
 import '../program/details/program_detail.dart';
 import '../service/http_client.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../data/cache_data.dart';
 import '../model/vod_model.dart';
 import '../player/video_detail.dart';
@@ -74,7 +74,7 @@ class _HomePageState extends State<CarouselPage> {
 
   Future handleRefresh() async {
     LogMyUtil.d("_handleRefresh");
-    await HttpClient.getCurrentPrograms(0).then((list) {
+    await HttpClientUtils.getCurrentPrograms(0).then((list) {
       if (null != list) {
         currentProgramlist = list.programModelList;
       }

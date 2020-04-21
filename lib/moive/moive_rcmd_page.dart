@@ -4,7 +4,7 @@ import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
 import './details/live_detail.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../service/http_client.dart';
 import '../model/channel_model.dart';
 import '../utils/string_util.dart';
@@ -50,7 +50,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
   @override
   Widget build(BuildContext context) {
     ClientAction ca=new ClientAction(200+column, "sportChannelPage", 0, "", 0, "", 1, "bowser");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
     return (tvChannelList[0].length<2) ? refreshButton(this):RefreshIndicator(
       onRefresh: handleRefresh,
       child: StreamBuilder(
@@ -198,7 +198,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
         break;
     }
 
-    await HttpClient.getRcmdChannels(0, 50).then((list) {
+    await HttpClientUtils.getRcmdChannels(0, 50).then((list) {
       if (null != list) {
         tvChannelList[0] = list;
         for (ChannelModel cm in tvChannelList[0]) {
@@ -209,7 +209,7 @@ class _TvRcmdPageState extends State<TvRcmdPage> {
         LogMyUtil.e("fail to get channel");
         ClientLog cl = new ClientLog(
             "tv_rcmd_page.dart|handleRefresh()|fail to getRcmdChannels", "error");
-        HttpClient.logReport(cl);
+        HttpClientUtils.logReport(cl);
       }
       this.setState(() {});
     });

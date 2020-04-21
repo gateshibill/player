@@ -46,7 +46,7 @@ class _SportsPageState extends State<SportsPage> {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(300 + day, "sportsPage", 0, "", 0, "", 1, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return (stypeList.length < 1)
         ? refreshButton(this)
@@ -83,7 +83,7 @@ class _SportsPageState extends State<SportsPage> {
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
     //List<ProgramModel> programList = [];
-    await HttpClient.getSportsTypes().then((list) {
+    await HttpClientUtils.getSportsTypes().then((list) {
       if (null != list) {
         stypeList = list;
         if (stypeList != null && stypeList.length > 0) {

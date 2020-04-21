@@ -10,7 +10,7 @@ import '../utils/string_util.dart';
 import '../data/cache_data.dart';
 import '../common/widget_common.dart';
 import '../model/vod_model.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../program/details/program_detail.dart';
 
 class VodPage extends StatefulWidget {
@@ -60,7 +60,7 @@ class _VodPageState extends State<VodPage> {
   }
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    await HttpClient.getVodList(1).then((list) {
+    await HttpClientUtils.getVodList(1).then((list) {
       if (null != list) {
         movieList[1] = list.vodModelList;
         for (VodModel m in movieList[1]) {

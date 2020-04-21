@@ -4,7 +4,7 @@ import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
 import 'package:intl/intl.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../service/http_client.dart';
 import '../player/anchor_player.dart';
 import '../utils/string_util.dart';
@@ -49,7 +49,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(500 + column, "live_video", 0, "", 0, "", 1, "bowser");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
     return (anchorList.length < 1)
         ? refreshButton(this)
         : RefreshIndicator(
@@ -199,7 +199,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
   }
 
   Future handleRefresh() async {
-    await HttpClient.getAnchors(0).then((list) {
+    await HttpClientUtils.getAnchors(0).then((list) {
       if (null != list) {
         anchorList = list;
         if (anchorList != null && anchorList.length > 0) {
@@ -217,7 +217,7 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
 
   Future _getMoreData() async {
     LogMyUtil.e("_getMoreData()");
-    await HttpClient.getAnchors(page).then((list) {
+    await HttpClientUtils.getAnchors(page).then((list) {
       if (null != list) {
         List<AnchorModel> tmpList = list;
         if (tmpList != null && tmpList.length > 0) {

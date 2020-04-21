@@ -21,7 +21,7 @@ class ProgramDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ClientAction ca=new ClientAction(3000, "programPlayPage", 0, "", this.pm.id, this.pm.name, 2, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return BlocBuilder(

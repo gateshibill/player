@@ -4,7 +4,7 @@ import '../global_config.dart';
 import '../model/client_log.dart';
 import '../program/details/program_detail.dart';
 import '../service/http_client.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../data/cache_data.dart';
 import '../model/vod_model.dart';
 import '../player/video_detail.dart';
@@ -67,7 +67,7 @@ class _HomePageState extends State<NewsPage> {
 
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    await HttpClient.getCurrentPrograms(0).then((list) {
+    await HttpClientUtils.getCurrentPrograms(0).then((list) {
       if (null != list) {
         currentProgramlist = list.programModelList;
       }
@@ -76,7 +76,7 @@ class _HomePageState extends State<NewsPage> {
       } catch (e) {}
     });
     mediaList.clear();
-    await HttpClient.getTopics(type, 0, 10).then((list) {
+    await HttpClientUtils.getTopics(type, 0, 10).then((list) {
       if (null != list) {
         mediaList.addAll(list);
       }
@@ -89,7 +89,7 @@ class _HomePageState extends State<NewsPage> {
 //每次刷新体育台，防止过期
   void freshChannel() async{
     int  column=1;
-    await HttpClient.getChannelList(column, 0, 0, 10).then((list) {
+    await HttpClientUtils.getChannelList(column, 0, 0, 10).then((list) {
       if (null != list) {
         sportsChannelList[0] = list.channelModelList;
         for (ChannelModel cm in sportsChannelList[0]) {
@@ -101,7 +101,7 @@ class _HomePageState extends State<NewsPage> {
         ClientLog cl = new ClientLog(
             "live_page.dart|handleRefresh()|fail to get channel ${column}",
             "error");
-        HttpClient.logReport(cl);
+        HttpClientUtils.logReport(cl);
       }
       try {
         setState(() {});

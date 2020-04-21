@@ -8,7 +8,7 @@ import '../model/vod_model.dart';
 import '../data/cache_data.dart';
 import '../model/channel_model.dart';
 import '../model/program_model.dart';
-import '../service/download_service.dart';
+import 'download_service.dart';
 import '../utils/log_my_util.dart';
 import '../model/topic_model.dart';
 
@@ -124,17 +124,17 @@ class LocalStorage {
 
   static void setUserMe(UserModel user) {
     LocalStorage._saveString("me", json.encode(user));
-    setLoginUser(user);
+    //setLoginUser(user);
   }
 
-  static void setLogin(bool login) =>
-      _saveString("isLogin", login ? 'true' : '');
-
-  static bool getLogin() => getString("isLogin") == 'true';
-
-  //保存登录用户
-  static void setLoginUser(UserModel user) =>
-      LocalStorage._saveString("$login_${user.userId}", json.encode(user));
+//  static void setLogin(bool login) =>
+//      _saveString("isLogin", login ? 'true' : '');
+//
+//  static bool getLogin() => getString("isLogin") == 'true';
+//
+//  //保存登录用户
+//  static void setLoginUser(UserModel user) =>
+//      LocalStorage._saveString("$login_${user.userId}", json.encode(user));
   /**
    * 利用SharedPreferences存储数据
    */

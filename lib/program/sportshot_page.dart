@@ -3,7 +3,7 @@ import '../service/http_client.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../common/widget_common.dart';
 import '../model/program_model.dart';
 import '../program/details/program_detail.dart';
@@ -57,7 +57,7 @@ class _SportshotPageState extends State<SportshotPage> {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(300 + day, "leaguePage", 0, "", 0, "", 1, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return new MaterialApp(
         theme: GlobalConfig.themeData,
@@ -315,7 +315,7 @@ class _SportshotPageState extends State<SportshotPage> {
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
     List<ProgramModel> programList = [];
-    await HttpClient.getLeagueProgramList(name, 0, 20).then((list) {
+    await HttpClientUtils.getLeagueProgramList(name, 0, 20).then((list) {
       if (null != list) {
         programList = list.programModelList;
         if (programList != null && programList.length > 0) {
@@ -344,7 +344,7 @@ class _SportshotPageState extends State<SportshotPage> {
   Future _getMoreData() async {
     LogMyUtil.e("_getMoreData()");
     List<ProgramModel> programList = [];
-    await HttpClient.getLeagueProgramList(this.name, page, 20).then((list) {
+    await HttpClientUtils.getLeagueProgramList(this.name, page, 20).then((list) {
       if (null != list) {
         programList = list.programModelList;
         if (programList != null && programList.length > 0) {

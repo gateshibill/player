@@ -4,7 +4,7 @@ import '../service/http_client.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../common/widget_common.dart';
 import '../model/program_model.dart';
 import '../program/details/program_detail.dart';
@@ -51,7 +51,7 @@ class _ProgramPageState extends State<ProgramPage> {
   @override
   Widget build(BuildContext context) {
     ClientAction ca=new ClientAction(300+day, "programListPage", 0, "", 0, "", 1, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
     print("programList.length:${programList.length}");
     return (programList.length<1) ? refreshButton(this):RefreshIndicator(
       onRefresh: handleRefresh,
@@ -170,7 +170,7 @@ class _ProgramPageState extends State<ProgramPage> {
   }
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    await HttpClient.getProgramByDayList(this.day).then((list) {
+    await HttpClientUtils.getProgramByDayList(this.day).then((list) {
       if (null != list) {
         programList = list.programModelList;
         commonProgramlist[day] = programList;
@@ -184,7 +184,7 @@ class _ProgramPageState extends State<ProgramPage> {
 
         ClientLog cl = new ClientLog(
             "program_page.dart|handleRefresh()|fail to getProgramByDayList ${day}", "error");
-        HttpClient.logReport(cl);
+        HttpClientUtils.logReport(cl);
       }
       try {
         setState(() {});

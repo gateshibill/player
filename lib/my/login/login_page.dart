@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:player/data/cache_data.dart';
+import 'package:player/service/date_util.dart';
 import '../../service/http_client.dart';
 import './register_page.dart';
 import '../../utils/ui_util.dart';
@@ -101,24 +103,17 @@ class _LoginPageState extends State<LoginPage> {
     if (Validators.phone(passwordLoginInfo.phone) &&
         Validators.required(passwordLoginInfo.password)) {
       showLoginDialog();
-      HttpClient.login({
-        'userPhone': passwordLoginInfo.phone,
-        'userPwd': passwordLoginInfo.password
-      }).then((response) {
+      me.userPhone=passwordLoginInfo.phone;
+      me.userPwd= passwordLoginInfo.password;
+      HttpClientUtils.login(me).then((onValue) {
         pr.hide();
         //String res2Json = json.encode(response);
-        if(null==response){
-          UiUtil.showToast("fail to login,$response");
+        if(Msg.SUCCESS!=onValue){
+          UiUtil.showToast("fail to login,$onValue");
           return;
-        }
-        final Map parsed = json.decode(response);
-        String code = parsed["code"].toString();
-        final Map objectJson = parsed["object"];
-        if (code == '200') {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Index()));
-        } else {
-          UiUtil.showToast("fail to login,$response");
+        }else{
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Index()));
         }
       });
     } else if (!Validators.phone(passwordLoginInfo.phone)) {

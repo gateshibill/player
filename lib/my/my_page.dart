@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import '../global_config.dart';
 import '../model/client_action.dart';
 import '../resource/file_manager.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import './task_detail.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/vod_model.dart';
@@ -42,7 +42,7 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     ClientAction ca = new ClientAction(5, "mypage", 0, "", 0, "", 1, "bowser");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
     return new MaterialApp(
         theme: GlobalConfig.themeData,
         debugShowCheckedModeBanner: false,

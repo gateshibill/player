@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:isolate';
 import 'dart:io';
 import 'dart:convert';
-import './local_storage.dart';
+import '../service/local_storage.dart';
 import '../model/metadata_model.dart';
 import '../service/download_service.dart';
 import '../config/config.dart';
@@ -57,7 +57,7 @@ class CacheIsolate {
         //描述记录本地
         LocalStorage.saveMetadata(mm);
         //下载成功资源上报
-        await HttpClient.addHttpSource(mm);
+        await HttpClientUtils.addHttpSource(mm);
       }
       counter--;
       if (counter < DOWNLOAD_THREAD_NUM && !normalTaskList.isEmpty) {

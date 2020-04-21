@@ -17,6 +17,7 @@ String downlaodLink;
 String description;
 bool isReport=false;
 String token="";
+String deviceId;
 //udp p2p
 StringBuffer pNodeSesionBuffer = new StringBuffer();
 

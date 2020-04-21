@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
+import 'package:player/service/date_util.dart';
+import 'package:player/service/http_client.dart';
 import './bloc/counter_bloc.dart'; // bloc
 import './service/http_service.dart';
-import './resource/local_storage.dart';
+import 'data/cache_data.dart';
+import 'service/local_storage.dart';
 import './service/http_client.dart';
 import './utils/device_util.dart';
 import './resource/cache_isolate.dart';
@@ -17,25 +20,40 @@ import './config/config.dart';
 import './splash_page.dart';
 import 'package:package_info/package_info.dart';
 
-void saveSystemInfo() async {
-  //user auto login
-//  await LocalDataProvider.getInstance().initData();
-//
-//  if (Platform.isIOS) {
-//    LocalDataProvider.getInstance().setIos();
-//  }
-}
-
 void main() async {
+  //0.自身版本
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   VERSION = packageInfo.version;
   print("version:${VERSION}");
+  //1.设备信息
   getDeviceInfo();
+  //2.获取后台信息
   await startInit();
+  //3.启动页
   await startSplash();
-
+  //4.版本检测
   HttpUpgrade.getVersion();
-  saveSystemInfo();
+  //5.自动登录
+  autoLogin();
+}
+
+void autoLogin() async {
+  //1.读取本地信息，确定登录模式。
+  me=LocalStorage.getUserMe();
+  if(null!=me&&null!=me.userId){
+    HttpClientUtils.login(me).then((onValue){
+      if(Msg.SUCCESS ==onValue.code){
+        me=onValue.object;
+      }
+    });
+  }else{
+    me.deviceId=deviceId;
+    HttpClientUtils.guest(me).then((onValue){
+      if(Msg.SUCCESS ==onValue.code){
+        me=onValue.object;
+      }
+    });
+  }
 }
 
 Future startSplash() async {
@@ -69,14 +87,14 @@ Future init() async {
 
 Future httpConnectServer() async {
   try {
-    await HttpClient.init().then((isReady) {
+    await HttpClientUtils.init().then((isReady) {
       print("HttpClient.init() finished");
     });
   } catch (e) {
     print(e);
 
     ClientLog cl = new ClientLog("main.dart|connectServer()|$e", "error");
-    HttpClient.logReport(cl);
+    HttpClientUtils.logReport(cl);
   }
 }
 
@@ -85,7 +103,7 @@ class APPStartup extends StatelessWidget {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(10, "APPStartup", 0, "", 0, "", 3, "startup");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return BlocBuilder(

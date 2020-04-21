@@ -63,7 +63,7 @@ class WsClient {
           print(mm.destPeer);
           print("success login");
           PeerAction pa = new PeerAction(this.peerMyself.id,mm.toJson().toString(),LOGIN,"ws");
-          HttpClient.holeReport(pa);
+          HttpClientUtils.holeReport(pa);
           break;
         }
       case NOTYFY: //
@@ -71,7 +71,7 @@ class WsClient {
           //发送UDP给服务器，先获取UDP参数，然后回调请求打洞
           print(NOTYFY);
           PeerAction pa = new PeerAction(this.peerMyself.id,mm.toJson().toString(),NOTYFY,"ws");
-          HttpClient.holeReport(pa);
+          HttpClientUtils.holeReport(pa);
 
           String time = DateFormat('MM-dd kk:mm:ss').format(DateTime.now());
           MessageModel message =
@@ -84,7 +84,7 @@ class WsClient {
         {
           //这里UDP只需要给A发，不需要再给Server,正式业务是可能需要发,这里会一直发
           PeerAction pa = new PeerAction(this.peerMyself.id,mm.toJson().toString(),SENDUDP,"ws");
-          HttpClient.holeReport(pa);
+          HttpClientUtils.holeReport(pa);
 
           int requestId = mm.requstId;
           peerA = mm.fromPeer;
@@ -101,7 +101,7 @@ class WsClient {
       case PEERISREADY:
         {
           PeerAction pa = new PeerAction(this.peerMyself.id,mm.toJson().toString(),PEERISREADY,"ws");
-          HttpClient.holeReport(pa);
+          HttpClientUtils.holeReport(pa);
 
           String time = DateFormat('MM-dd kk:mm:ss').format(DateTime.now());
           MessageModel toMessage =
@@ -113,13 +113,13 @@ class WsClient {
         {
           print("RESPONSE:num of clients:${mm.content}");
           PeerAction pa = new PeerAction(this.peerMyself.id,mm.toJson().toString(),RESPONSE,"ws");
-          HttpClient.holeReport(pa);
+          HttpClientUtils.holeReport(pa);
           break;
         }
       default:
         print("unknow:");
         PeerAction pa = new PeerAction(this.peerMyself.id,mm.toJson().toString(),"unknow","ws");
-        HttpClient.holeReport(pa);
+        HttpClientUtils.holeReport(pa);
         break;
     }
   }

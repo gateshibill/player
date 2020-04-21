@@ -10,7 +10,7 @@ import '../model/client_action.dart';
 import '../data/cache_data.dart';
 import 'date_util.dart';
 import 'download_service.dart';
-import '../resource/local_storage.dart';
+import 'local_storage.dart';
 import '../utils/log_my_util.dart';
 import '../model/channel_model.dart';
 import '../model/program_model.dart';
@@ -30,7 +30,7 @@ import '../video/lala_page.dart';
 /**
  * source:get,report,update,del,
  */
-class HttpClient {
+class HttpClientUtils {
   static var sourceMap = new Map();
   static const String TAG = "HttpClient";
 
@@ -179,7 +179,7 @@ class HttpClient {
         }
       });
       //提前加载热门赛事
-      await HttpClient.getLeagueProgramList("热门", 0, 20).then((list) {
+      await HttpClientUtils.getLeagueProgramList("热门", 0, 20).then((list) {
         if (null != list) {
           List<ProgramModel> programList = list.programModelList;
           if (programList != null && programList.length > 0) {
@@ -294,7 +294,7 @@ class HttpClient {
         }
       });
       //提前加载电影
-      await HttpClient.getVodList(0).then((list) {
+      await HttpClientUtils.getVodList(0).then((list) {
         if (null != list) {
           movieList[0] = list.vodModelList;
         } else {
@@ -302,7 +302,7 @@ class HttpClient {
         }
       });
       //提前加载综艺
-      await HttpClient.getVodList(3).then((list) {
+      await HttpClientUtils.getVodList(3).then((list) {
         if (null != list) {
           movieList[1] = list.vodModelList;
         } else {
@@ -851,54 +851,49 @@ class HttpClient {
   }
 
   // 登录
-  static Future<String> login(Map<String, dynamic> params) async {
-    print("LOGIN_URL:$LOGIN_URL|$params");
-    print("userPwd:${params["userPwd"]}");
+  static Future<Msg>  login(UserModel user) async {
+    LogMyUtil.d("$TAG login():url:$LOGIN_URL|me:${me.detail}");
+    Msg msg = new Msg();
     try {
       var dio = new Dio();
-      final response = await dio.post(LOGIN_URL, data: params);
-      print("response:${response.data}");
+      final response = await dio.post(LOGIN_URL,  data: user.toJson());
+      String res = response.data.toString();
+      LogMyUtil.d("$TAG res:" + res);
       String res2Json = json.encode(response.data);
-
       final Map parsed = json.decode(res2Json);
-      String code = parsed["code"].toString();
-      final Map objectJson = parsed["object"];
-      if (code == '200') {
-        print("login success");
-        UserModel userModel = UserModel.fromJson(objectJson);
-        if (null != userModel) me = userModel;
-//        LocalDataProvider.getInstance().saveUserInfo(
-//            userModel.userId.toString(),
-//            userModel.userNickName,
-//            userModel.userPortrait,
-//            userModel.userPhone,
-//            params["userPwd"]);
-//        LocalDataProvider.getInstance()
-//            .setLoginTime(new DateTime.now().millisecondsSinceEpoch);
-//        USER_ID = userModel.userId;
-        token = userModel.userRandom;
+      msg.code = parsed["code"];
+      msg.desc = parsed["msg"];
+      if (msg.code == '0') {
+        msg.object = parsed["object"];
       }
-      return res2Json;
     } catch (e) {
-      print("fail to login|$e");
-      return null;
+      msg.code = Msg.FAILURE;
+      LogMyUtil.d("$TAG fail to login() |$e");
     }
+    return msg;
   }
 
   // 注册
-  static Future<String> register(Map<String, dynamic> params) async {
-    print("REGISTER_URL:$REGISTER_URL|$params");
+  static Future<Msg>  register(Map<String, dynamic> params) async {
+    LogMyUtil.d("$TAG register():url:$REGISTER_URL||$params");
+    Msg msg = new Msg();
     try {
       var dio = new Dio();
       final response = await dio.post(REGISTER_URL, data: params);
-      print("response:${response.data}");
-      //var data = json.decode(response);
+      String res = response.data.toString();
+      LogMyUtil.d("$TAG res:" + res);
       String res2Json = json.encode(response.data);
-      return res2Json;
+      final Map parsed = json.decode(res2Json);
+      msg.code = parsed["code"];
+      msg.desc = parsed["msg"];
+      if (msg.code == '0') {
+        msg.object = parsed["object"];
+      }
     } catch (e) {
-      print("fail to register|$e");
-      return null;
+      msg.code = Msg.FAILURE;
+      LogMyUtil.d("$TAG fail to register() |$e");
     }
+    return msg;
   }
 
   // 访客
@@ -924,7 +919,6 @@ class HttpClient {
     }
     return msg;
   }
-
   //充值
   static Future<Msg> charge(int userId, int cardId) async {
     String url = "${user_charge_URL}userId=$userId&cardId=$cardId";

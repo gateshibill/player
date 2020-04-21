@@ -34,7 +34,7 @@ class _LalaPageState1 extends State<LalaPage> {
   Widget build(BuildContext context) {
     ClientAction ca =
         new ClientAction(203, "lalaPage", 0, "", 0, "", 1, "browse");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return BlocBuilder(
@@ -232,7 +232,7 @@ class _MainVideoState extends State<MainVideo>
     }
     LalaPage.isbusy = true;
     LalaPage.page += 1;
-    await HttpClient.getLalas(LalaPage.page, 6).then((list) {
+    await HttpClientUtils.getLalas(LalaPage.page, 6).then((list) {
       if (null != list && list.length > 0) {
         lalas.addAll(list);
         //LalaPage.page = LalaPage.page + 1;

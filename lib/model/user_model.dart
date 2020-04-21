@@ -40,6 +40,7 @@ class UserModel {
   int userPid;
   int userPid2;
   int userPid3;
+  bool isLogin=false;
 
  // String country="";
  // String language="";

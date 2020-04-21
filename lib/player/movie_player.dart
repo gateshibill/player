@@ -11,7 +11,7 @@ import '../config/config.dart';
 import '../utils/log_my_util.dart';
 import '../data/cache_data.dart';
 import '../resource/cache_isolate.dart';
-import '../resource/local_storage.dart';
+import '../service/local_storage.dart';
 import '../service/http_client.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import '../service/download_service.dart';
@@ -120,7 +120,7 @@ class MoviePlayerPageState extends State<MoviePlayerPage>
   @override
   Widget build(BuildContext context) {
     ClientAction ca=new ClientAction(1000, "videoplaydetail", 0, "", this.vod.vodId, this.vod.vodName, 2, "watch");
-    HttpClient.actionReport(ca);
+    HttpClientUtils.actionReport(ca);
 
     return Column(
       children: <Widget>[

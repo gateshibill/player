@@ -1,4 +1,5 @@
 import 'package:device_info/device_info.dart';
+import 'package:player/data/cache_data.dart';
 import 'dart:io';
 import '../config/config.dart';
 
@@ -18,10 +19,12 @@ void getDeviceInfo() async {
     print(_readAndroidBuildData(androidInfo).toString());
     print("androin device:" + androidInfo.version.toString());
     DEVICE_BRAND=androidInfo.brand;
+    deviceId=androidInfo.androidId;
   } else if (Platform.isIOS) {
     IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
     print("ios device:" +_readIosDeviceInfo(iosInfo).toString());
     DEVICE_BRAND=iosInfo.model;
+    deviceId= iosInfo.identifierForVendor;
   }
 }
 
