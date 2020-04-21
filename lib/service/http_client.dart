@@ -391,16 +391,16 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("res:" + res);
+    //  print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
       List<dynamic> list = parsed["objects"];
       ChannelModelList channelModelList = ChannelModelList.fromJson(list);
       List channelList = channelModelList.channelModelList;
-      channelList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
-      print("getVodList() end");
+//      channelList
+//          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+    //  print("getVodList() end");
       return channelModelList;
     } catch (e) {
       print("dio e:" + e.toString());
@@ -415,18 +415,15 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
       List<dynamic> list = parsed["objects"];
       ProgramModelList programModelList = ProgramModelList.fromJson(list);
-
       List programList = programModelList.programModelList;
-
-      programList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
-
+//      programList
+//          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
       if (isCache) {
         //DownloadService.downloadVodList(vodList);
       }
@@ -442,18 +439,15 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(GET_CURRENT_PROGRAMS_URL);
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
       List<dynamic> list = parsed["objects"];
       ProgramModelList programModelList = ProgramModelList.fromJson(list);
-
       List programList = programModelList.programModelList;
-
-      programList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
-
+//      programList
+//          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
       if (isCache) {
         //DownloadService.downloadVodList(vodList);
       }
@@ -469,7 +463,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(GET_HOT_PROGRAMS_URL);
       String res = response.data.toString();
-      print("res:" + res);
+      //print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -478,8 +472,8 @@ class HttpClientUtils {
 
       List programList = programModelList.programModelList;
 
-      programList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+//      programList
+//          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
 
       if (isCache) {
         //DownloadService.downloadVodList(vodList);
@@ -496,7 +490,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get("${GET_ANCHORS_URL}&page=$page&limit=10");
       String res = response.data.toString();
-      print("res:" + res);
+      //print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -516,7 +510,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("res:" + res);
+    //  print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -525,8 +519,8 @@ class HttpClientUtils {
 
       List programList = programModelList.programModelList;
 
-      programList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+//      programList
+//          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
 
       if (isCache) {
         //DownloadService.downloadVodList(vodList);
@@ -546,15 +540,15 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
       List<dynamic> list = parsed["objects"];
       ProgramModelList programModelList = ProgramModelList.fromJson(list);
       List programList = programModelList.programModelList;
-      programList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+//      programList
+//          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
       return programModelList;
     } catch (e) {
       print("dio e:" + e.toString());
@@ -569,7 +563,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -578,8 +572,8 @@ class HttpClientUtils {
 
       List programList = programModelList.programModelList;
 
-      programList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+//      programList
+//          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
 
       if (isCache) {
         //DownloadService.downloadVodList(vodList);
@@ -599,17 +593,17 @@ class HttpClientUtils {
       // print("it is time to connent server!}");
       await dio.get(url).then((response) async {
         String res = response.data.toString();
-        print("response:" + res);
+      //  print("response:" + res);
         String res2Json = json.encode(response.data);
         final Map parsed = json.decode(res2Json);
         String code = parsed["code"];
         List<dynamic> list = parsed["objects"];
         // print('response parse is $code|$list');
         SourceModelList sourceModelList = SourceModelList.fromJson(list);
-        print(
-            'getHttpSource sourceModelList.sourceModelList.length: ${sourceModelList.sourceModelList.length}');
-        sourceModelList.sourceModelList.forEach(
-            (sourceModel) => print('getHttpSource ${sourceModel.toString()}'));
+//        print(
+//            'getHttpSource sourceModelList.sourceModelList.length: ${sourceModelList.sourceModelList.length}');
+//        sourceModelList.sourceModelList.forEach(
+//            (sourceModel) => print('getHttpSource ${sourceModel.toString()}'));
 
         mm.sourceModelList = sourceModelList.sourceModelList;
         String id = mm.vodId.toString() + "_" + mm.piece;
@@ -631,15 +625,15 @@ class HttpClientUtils {
     int vodId = mm.vodId;
     String vodName = mm.vodName;
     String piece = mm.piece;
-    print("addHttpSource() mm:${mm.toString()}");
+   // print("addHttpSource() mm:${mm.toString()}");
     String url =
         "$BASE_SERVER_URL${ADD_SOURCE_URL}vodId=$vodId&vodName=$vodName&piece=$piece&localIp=$LOCAL_IP&nodeId=$NODE_ID&deviceId=$DEVICE_ID";
     print("addHttpSource url:" + url);
     try {
       var response = await http.get(url);
-      print("${response.statusCode}");
-      print("${response.body}");
-      print("reportHttpSource() end");
+    //  print("${response.statusCode}");
+    //  print("${response.body}");
+    //  print("reportHttpSource() end");
     } catch (e) {
       print("fail to add HttpSource()" + e.toString());
     }
@@ -651,7 +645,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get("${FUZZY_QUERY_URL}condition=$condition");
       String res = response.data.toString();
-      print("res:" + res);
+    //  print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -677,9 +671,9 @@ class HttpClientUtils {
         //const url = 'http://hk2sg.b-cdn.net/live/cctv5hd.m3u8';
         try {
           var response = await http.get(cm.playUrl);
-          print("${response.statusCode}");
-          print("${response.body}");
-          print("reportHttpSource() end");
+      //    print("${response.statusCode}");
+      //    print("${response.body}");
+      //    print("reportHttpSource() end");
           var t2 = DateTime.now().millisecondsSinceEpoch;
           var t = t2 - t1;
           String result = "$num spent:$t|${cm.name}|${response.statusCode}";
@@ -712,7 +706,7 @@ class HttpClientUtils {
       final response =
           await dio.post(tokenUrl(GET_RCMD_VODS_URL), data: vod.toJson());
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -732,7 +726,7 @@ class HttpClientUtils {
       final response =
           await dio.get("${GET_RCMD_CHANNELS_URL}page=$page&&limit=$limit");
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -751,7 +745,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(GET_SPORTS_TYPES_URL);
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -772,7 +766,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("res:" + res);
+     // print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -794,7 +788,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("res:" + res);
+      //print("res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
@@ -834,11 +828,11 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.post(serverUrl, data: data);
       String res = response.data.toString();
-      print("res:" + res);
+    //  print("res:" + res);
       String res2Json = json.encode(response.data);
-      print("1111");
+    //  print("1111");
       final Map parsed = json.decode(response.data);
-      print("2222");
+    //  print("2222");
       final Map parsed1 = parsed["data"];
       print("3333");
       print("parsed1:$parsed1");
@@ -908,9 +902,13 @@ class HttpClientUtils {
       LogMyUtil.d("$TAG res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
-      msg.code = parsed["code"];
+      LogMyUtil.d("$TAG 1111111111");
+      msg.code = parsed["code"].toString();
+      LogMyUtil.d("$TAG 22222222222" );
       msg.desc = parsed["msg"];
+      LogMyUtil.d("$TAG 3333333333333333");
       if (msg.code == '0') {
+        LogMyUtil.d("$TAG 444444444444");
         msg.object = parsed["object"];
       }
     } catch (e) {
@@ -946,6 +944,9 @@ class HttpClientUtils {
 
   //行为上报
   static Future actionReport(ClientAction ca) async {
+    if(LogMyUtil.isDebug){
+      return;
+    }
     print("actionReport:$ACTION_REPORT_URL");
     try {
       var dio = new Dio();
@@ -960,6 +961,9 @@ class HttpClientUtils {
 
   //p2p日志上报
   static Future holeReport(PeerAction pa) async {
+    if(LogMyUtil.isDebug){
+      return;
+    }
     String url = "$HOLE_REPORT_URL}";
     print("holeReport:$url");
     try {
@@ -974,6 +978,9 @@ class HttpClientUtils {
 
   //日志上报
   static Future logReport(ClientLog cl) async {
+    if(LogMyUtil.isDebug){
+      return;
+    }
     print("logReport:$LOG_REPORT_URL");
     try {
       var dio = new Dio();

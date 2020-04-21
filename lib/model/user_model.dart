@@ -9,7 +9,7 @@ part 'user_model.g.dart';
 class UserModel {
   int userId;
   int appId;
-  int groupId;
+  int groupId=0;
   String userName="";
   DateTime vipExpire;
   String deviceId="";
@@ -49,7 +49,7 @@ class UserModel {
 
   String detail(){
     return
-      "vod: ${userId}| ${userName}| ${userPhone}| ${userRandom}";
+      "me: ${userId}| ${userName}| ${userPhone}| ${userRandom}|${deviceId}";
   }
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

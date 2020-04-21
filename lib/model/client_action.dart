@@ -11,7 +11,7 @@ class ClientAction {
    int appId=APP_ID;// 应用ID；
    String deviceId=DEVICE_ID;
    String deviceBrand=DEVICE_BRAND;
-   int userId=me.userId;
+   int userId=me?.userId;
    String version=VERSION;
    int fromId;// 这里记录，用户是自己进来点击的，还是通过分享进来的，这里可以分享客户的主动性
    int fromWay=1;//渠道

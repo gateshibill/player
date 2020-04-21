@@ -2,7 +2,7 @@
 
 
 class LogMyUtil {
-  static bool _isDebug = true; //是否是debug模式,true: log v 不输出.
+  static bool isDebug = true; //是否是debug模式,true: log v 不输出.
 
   static d(Object object) => _printLog("d:"+object.toString());
 
@@ -11,7 +11,7 @@ class LogMyUtil {
   static e(Object object) => _printLog("e:"+object.toString());
 
   static _printLog(String string) {
-    if (_isDebug) print('[player]' + string);
+    if (isDebug) print('[player]' + string);
   }
 }
 
