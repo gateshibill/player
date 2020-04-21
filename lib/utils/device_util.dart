@@ -19,12 +19,12 @@ void getDeviceInfo() async {
     print(_readAndroidBuildData(androidInfo).toString());
     print("androin device:" + androidInfo.version.toString());
     DEVICE_BRAND=androidInfo.brand;
-    deviceId=androidInfo.androidId;
+    DeviceId=androidInfo.androidId;
   } else if (Platform.isIOS) {
     IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
     print("ios device:" +_readIosDeviceInfo(iosInfo).toString());
     DEVICE_BRAND=iosInfo.model;
-    deviceId= iosInfo.identifierForVendor;
+    DeviceId= iosInfo.identifierForVendor;
   }
 }
 

@@ -22,6 +22,7 @@ import '../common/widget_common.dart';
 import '../model/channel_model.dart';
 import '../moive/details/live_detail.dart';
 import '../data/cache_data.dart';
+import 'charge_page.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -37,7 +38,8 @@ class _MyPageState extends State<MyPage> {
   List<ChannelModel> historyChannelList = new List<ChannelModel>();
   List<ChannelModel> guessChannelList = new List<ChannelModel>();
   int _selectDrawItemIndex = -1;
-  bool isLogin;
+
+  //bool isLogin;
 
   @override
   Widget build(BuildContext context) {
@@ -89,20 +91,26 @@ class _MyPageState extends State<MyPage> {
                     historyChannel(),
                     guess(),
                     history(),
-
                   ]))),
           drawer: Drawer(
             child: _onDrawViewPage(),
           ),
         ));
   }
+
   @override
   void initState() {
     super.initState();
-  //  isLogin = LocalDataProvider.getInstance().isLogin();
-    historyVodList = LocalStorage.historyVoMap.values.toList().reversed.toList();
-    historyChannelList = LocalStorage.historyChannelMap.values.toList().reversed.toList();
-    guessChannelList.insertAll(0, sportsChannelList[0].length>0?sportsChannelList[0]:historyChannelList);
+    //  isLogin = LocalDataProvider.getInstance().isLogin();
+    historyVodList =
+        LocalStorage.historyVoMap.values.toList().reversed.toList();
+    historyChannelList =
+        LocalStorage.historyChannelMap.values.toList().reversed.toList();
+    guessChannelList.insertAll(
+        0,
+        sportsChannelList[0].length > 0
+            ? sportsChannelList[0]
+            : historyChannelList);
     guessChannelList.shuffle();
   }
 
@@ -120,7 +128,7 @@ class _MyPageState extends State<MyPage> {
                 borderRadius: new BorderRadius.all(new Radius.circular(6.0))),
             child: new FlatButton(
                 onPressed: () {
-                  if (isLogin) {
+                  if (me.isLogin) {
                     Fluttertoast.showToast(
                         msg: '已经登录', gravity: ToastGravity.TOP);
                     return;
@@ -141,13 +149,12 @@ class _MyPageState extends State<MyPage> {
                     ),
                     title: new Container(
                       margin: const EdgeInsets.only(bottom: 2.0),
-                      child: new Text(isLogin
-                          ? "${me.userNickName}"
-                          : "LVPlayer"),
+                      child: new Text(
+                          me.isLogin ? "${me.userNickName}" : "LVPlayer"),
                     ),
                     subtitle: new Container(
                       margin: const EdgeInsets.only(top: 2.0),
-                      child: new Text(isLogin ? "已登录" : "未登录"),
+                      child: new Text(me.isLogin ? "已登录" : "未登录"),
                     ),
                     trailing: new Container(
                       width: MediaQuery.of(context).size.width / 4,
@@ -215,14 +222,25 @@ class _MyPageState extends State<MyPage> {
                 new Container(
                   width: (MediaQuery.of(context).size.width - 30.0) / 3,
                   child: new FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+//                        if(null==me.userId){
+//
+//                        }
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return ChargePage();
+                        }));
+                      },
                       child: new Container(
                         height: 50.0,
                         child: new Column(
                           children: <Widget>[
                             new Container(
-                              child: new Text((null==(me.vipExpire))?"立即充值":
-                                DateFormat('yyyy:kk:mm').format(me.vipExpire),
+                              child: new Text(
+                                (null == (me.vipExpire))
+                                    ? "立即充值"
+                                    : DateFormat('yyyy:kk:mm')
+                                        .format(me.vipExpire),
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: GlobalConfig.fontColor),
@@ -291,7 +309,7 @@ class _MyPageState extends State<MyPage> {
                               width: 1.0))),
                 ),
                 new Container(
-                  width: (MediaQuery.of(context).size.width -50.0) / 4,
+                  width: (MediaQuery.of(context).size.width - 50.0) / 4,
                   child: new FlatButton(
                       onPressed: () {
                         this.viewMessageCounter++;
@@ -374,35 +392,40 @@ class _MyPageState extends State<MyPage> {
       ),
     );
   }
+
   Widget history() {
     return new Column(
         //mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-      new Text("视频浏览",
-          style: new TextStyle(
-              color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.left),
-      Container(
-        height: 300,
-        padding: const EdgeInsets.only(top: 5.0, bottom: 10.0),
-        child: StreamBuilder(
-          builder: (context, snapshot) {
-            return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return itemBuilder1(context, index);
+          new Text("视频浏览",
+              style: new TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left),
+          Container(
+            height: 300,
+            padding: const EdgeInsets.only(top: 5.0, bottom: 10.0),
+            child: StreamBuilder(
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return itemBuilder1(context, index);
+                  },
+                  itemCount: historyVodList.length,
+                  scrollDirection: Axis.horizontal,
+                );
               },
-              itemCount: historyVodList.length,
-              scrollDirection: Axis.horizontal,
-            );
-          },
-        ),
-      ),
-    ]);
+            ),
+          ),
+        ]);
   }
+
   Widget historyChannel() {
     return new Column(children: <Widget>[
-      new Text("频道历史",style: new TextStyle(
-          color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+      new Text("频道历史",
+          style: new TextStyle(
+              color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
           textAlign: TextAlign.left),
       Container(
         height: 140,
@@ -421,10 +444,12 @@ class _MyPageState extends State<MyPage> {
       ),
     ]);
   }
+
   Widget guess() {
     return new Column(children: <Widget>[
-      new Text("猜你喜欢",style: new TextStyle(
-          color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+      new Text("猜你喜欢",
+          style: new TextStyle(
+              color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
           textAlign: TextAlign.left),
       Container(
         height: 150,
@@ -568,40 +593,41 @@ class _MyPageState extends State<MyPage> {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
                   return new VideoDetail(vod: historyVodList[index]);
-                })
-                );
+                }));
               }
             },
             child: new Column(
               children: <Widget>[
                 new Container(
-                    //Expanded(
-                    // flex: 1,
-                    // child: new AspectRatio(
-                    //aspectRatio: 3.5 / 2,
-                    width: picWidth,
-                    // height: 110,
-                    child: new CachedNetworkImage(
-                      imageUrl: "${historyVodList[index].vodPic}",
-                      placeholder: (context, url) => cachPlaceHolder(),
-                      errorWidget: (context, url, error) =>
-                          new Icon(Icons.autorenew),
-                    ),
+                  //Expanded(
+                  // flex: 1,
+                  // child: new AspectRatio(
+                  //aspectRatio: 3.5 / 2,
+                  width: picWidth,
+                  // height: 110,
+                  child: new CachedNetworkImage(
+                    imageUrl: "${historyVodList[index].vodPic}",
+                    placeholder: (context, url) => cachPlaceHolder(),
+                    errorWidget: (context, url, error) =>
+                        new Icon(Icons.autorenew),
+                  ),
 
-                    //),
-                     margin: new EdgeInsets.only(top: 6.0, bottom: 6.0,left:10,right:10),
-                    // alignment: Alignment.topLeft
-                    ),
+                  //),
+                  margin: new EdgeInsets.only(
+                      top: 6.0, bottom: 6.0, left: 10, right: 10),
+                  // alignment: Alignment.topLeft
+                ),
                 new Container(
                   width: picWidth,
                   child: new Row(
                     children: <Widget>[
-                      new Text(StrUtils.subString(historyVodList[index].vodName, 9),
+                      new Text(
+                          StrUtils.subString(historyVodList[index].vodName, 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
                   ),
-                 // padding: const EdgeInsets.only(bottom: 10.0),
+                  // padding: const EdgeInsets.only(bottom: 10.0),
                 ),
               ],
             ),
@@ -610,6 +636,7 @@ class _MyPageState extends State<MyPage> {
         // )
         );
   }
+
   Widget itemBuilderChannel(BuildContext context, int index) {
     double picWidth = 160;
     return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -654,12 +681,13 @@ class _MyPageState extends State<MyPage> {
                   child: new Row(
                     children: <Widget>[
                       new Text(
-                          StrUtils.subString(historyChannelList[index].getName(), 9),
+                          StrUtils.subString(
+                              historyChannelList[index].getName(), 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
                   ),
-                 // padding: const EdgeInsets.only(bottom: 5.0),
+                  // padding: const EdgeInsets.only(bottom: 5.0),
                 ),
               ],
             ),
@@ -668,6 +696,7 @@ class _MyPageState extends State<MyPage> {
         // )
         );
   }
+
   Widget itemBuilderGuess(BuildContext context, int index) {
     double picWidth = 160;
     return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -699,7 +728,7 @@ class _MyPageState extends State<MyPage> {
                     imageUrl: "${guessChannelList[index].posterUrl}",
                     placeholder: (context, url) => cachPlaceHolder(),
                     errorWidget: (context, url, error) =>
-                    new Icon(Icons.autorenew),
+                        new Icon(Icons.autorenew),
                   ),
 
                   //),
@@ -712,7 +741,8 @@ class _MyPageState extends State<MyPage> {
                   child: new Row(
                     children: <Widget>[
                       new Text(
-                          StrUtils.subString(guessChannelList[index].getName(), 9),
+                          StrUtils.subString(
+                              guessChannelList[index].getName(), 9),
                           style: new TextStyle(color: GlobalConfig.fontColor)),
                       //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
                     ],
@@ -723,7 +753,7 @@ class _MyPageState extends State<MyPage> {
             ),
           ),
         ]
-      // )
-    );
+        // )
+        );
   }
 }

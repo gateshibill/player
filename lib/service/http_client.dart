@@ -920,7 +920,7 @@ class HttpClientUtils {
     return msg;
   }
   //充值
-  static Future<Msg> charge(int userId, int cardId) async {
+  static Future<Msg> charge(int userId, String cardId) async {
     String url = "${user_charge_URL}userId=$userId&cardId=$cardId";
     LogMyUtil.d("$TAG charge():url:$url");
     Msg msg = new Msg();

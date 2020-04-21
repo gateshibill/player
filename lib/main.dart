@@ -41,13 +41,16 @@ void autoLogin() async {
   //1.读取本地信息，确定登录模式。
   me=LocalStorage.getUserMe();
   if(null!=me&&null!=me.userId){
+    me.isLogin=false;
     HttpClientUtils.login(me).then((onValue){
       if(Msg.SUCCESS ==onValue.code){
         me=onValue.object;
+        LocalStorage.setUserMe(me);
+        me.isLogin=true;
       }
     });
   }else{
-    me.deviceId=deviceId;
+    me.deviceId=DeviceId;
     HttpClientUtils.guest(me).then((onValue){
       if(Msg.SUCCESS ==onValue.code){
         me=onValue.object;

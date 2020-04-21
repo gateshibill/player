@@ -17,12 +17,11 @@ String downlaodLink;
 String description;
 bool isReport=false;
 String token="";
-String deviceId;
+String DeviceId;
 //udp p2p
 StringBuffer pNodeSesionBuffer = new StringBuffer();
 
 UserModel me;
-
 
 //首页
 List<VodModel> homeVodList=[];

@@ -4,34 +4,26 @@ import 'package:flutter/widgets.dart';
 import 'package:player/data/cache_data.dart';
 import 'package:player/service/date_util.dart';
 import 'package:player/service/local_storage.dart';
-import '../../service/http_client.dart';
-import './register_page.dart';
-import '../../utils/ui_util.dart';
-import '../../utils/validators.dart';
+import '../service/http_client.dart';
+import './login/register_page.dart';
+import '../utils/ui_util.dart';
+import '../utils/validators.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import '../../index/index.dart';
-import 'login_btn.dart';
-import 'login_input.dart';
+import '../index/index.dart';
+import './login/login_btn.dart';
+import './login/login_input.dart';
 
-
-class PasswordLoginInfo {
-  String phone = "18565826288";
-  String password = "sdad8888";
-}
-
-class LoginPage extends StatefulWidget {
+class ChargePage extends StatefulWidget {
   @override
-  _LoginPageState createState() {
-    return _LoginPageState();
+  _ChargePageState createState() {
+    return _ChargePageState();
   }
 }
 
-class _LoginPageState extends State<LoginPage> {
- // final _apiClient = NetworkProvider();
+class _ChargePageState extends State<ChargePage> {
   ProgressDialog pr;
-
   GlobalKey<FormState> _passwordFormKey = GlobalKey<FormState>();
-  PasswordLoginInfo passwordLoginInfo = PasswordLoginInfo();
+  String cardId="";
 
   @override
   void initState() {
@@ -59,38 +51,31 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Container(
             child: Text(
-              '登录',
+              '充值',
               style: TextStyle(fontSize: 24),
             ),
           ),
           LoginPut(
               save: (val) {
-                passwordLoginInfo.phone = val;
+                cardId = val;
               },
               img: 'assets/phone.png',
-              name: '手机号码'),
-          LoginPut(
-              save: (val) {
-                passwordLoginInfo.password = val;
-              },
-              img: 'assets/lock.png',
-              name: '密码'),
+              name: '充值号码'),
           LoginBtn(
             press: () {
               _loginByPassword();
             },
             bgColor: Color(0xff488aff),
             fontColor: Color(0xffffffff),
-            name: '登录',
+            name: '确定',
           ),
           LoginBtn(
             press: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => RegisterPage()));
+              Navigator.of(context).pop();
             },
             bgColor: Color(0xffEEEEEE),
             fontColor: Color(0xff333333),
-            name: '注册',
+            name: '取消',
           ),
         ],
       ),
@@ -101,12 +86,9 @@ class _LoginPageState extends State<LoginPage> {
     //验证
     final form = _passwordFormKey.currentState;
     form.save();
-    if (Validators.phone(passwordLoginInfo.phone) &&
-        Validators.required(passwordLoginInfo.password)) {
+    if (cardId.isNotEmpty) {
       showLoginDialog();
-      me.userPhone=passwordLoginInfo.phone;
-      me.userPwd= passwordLoginInfo.password;
-      HttpClientUtils.login(me).then((onValue) {
+      HttpClientUtils.charge(me.userId,cardId).then((onValue) {
         pr.hide();
         if(Msg.SUCCESS!=onValue.code){
           UiUtil.showToast("fail to login,$onValue");
@@ -118,17 +100,15 @@ class _LoginPageState extends State<LoginPage> {
                 .push(MaterialPageRoute(builder: (context) => Index()));
         }
       });
-    } else if (!Validators.phone(passwordLoginInfo.phone)) {
-      UiUtil.showToast('请输入正确的手机号码');
     } else {
-      UiUtil.showToast('请输入验证码');
+      UiUtil.showToast('请输入正确卡号');
     }
   }
 
   showLoginDialog() {
- //   pr = new ProgressDialog(context);
+    pr = new ProgressDialog(context);
     //pr.setMessage('正在登录...');
     //pr.update(60,100,'正在登录...');
-    //pr.show();
+    pr.show();
   }
 }
