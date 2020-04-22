@@ -846,7 +846,8 @@ class HttpClientUtils {
 
   // 登录
   static Future<Msg>  login(UserModel user) async {
-    LogMyUtil.d("$TAG login():url:$LOGIN_URL|me:${me.detail}");
+    LogMyUtil.d("$TAG login():url:$LOGIN_URL|me:${me.detail()}");
+    me.vipExpire=null;//java 与 dart时间不一致
     Msg msg = new Msg();
     try {
       var dio = new Dio();
@@ -855,7 +856,7 @@ class HttpClientUtils {
       LogMyUtil.d("$TAG res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
-      msg.code = parsed["code"];
+      msg.code = "${parsed["code"]}";
       msg.desc = parsed["msg"];
       if (msg.code == '0') {
         final Map parsedObject=parsed["object"];
@@ -879,7 +880,7 @@ class HttpClientUtils {
       LogMyUtil.d("$TAG res:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
-      msg.code = parsed["code"];
+      msg.code = "${parsed["code"]}";
       msg.desc = parsed["msg"];
       if (msg.code == '0') {
         final Map parsedObject=parsed["object"];
