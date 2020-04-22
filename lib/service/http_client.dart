@@ -362,7 +362,7 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("r:" + res);
+      //print("r:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];

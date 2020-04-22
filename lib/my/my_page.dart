@@ -496,6 +496,8 @@ class _MyPageState extends State<MyPage> {
         gestureDetectorForItem(Icons.settings, '清理', 3, _selectDrawItemIndex),
         gestureDetectorForItem(
             Icons.settings, '版本($VERSION)', 4, _selectDrawItemIndex),
+        gestureDetectorForItem(
+            Icons.exit_to_app, '注销', 5, _selectDrawItemIndex),
       ],
     );
   }
@@ -565,6 +567,8 @@ class _MyPageState extends State<MyPage> {
           }
         } else if (4 == drawItemIndex) {
           HttpUpgrade.showUpgrade(context);
+        }else if (5== drawItemIndex) {
+          me.isLogin=false;
         }
         _onDrawItemSelect(drawItemIndex);
       },

@@ -38,7 +38,7 @@ class _HomePageState extends State<CarouselPage> {
 
   @override
   void initState() {
-    LogMyUtil.d(me.detail());
+    //LogMyUtil.d(me.detail());
     super.initState();
     String playUrl =
         "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
