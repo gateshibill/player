@@ -38,7 +38,7 @@ class LocalStorage {
       LogMyUtil.v("sharedPreferences keys length:" + keys.length.toString());
       for (var key in keys) {
         String vodJson = sharedPreferences.get(key);
-        LogMyUtil.v("sp:${key}:${vodJson}");
+       // LogMyUtil.v("sp:${key}:${vodJson}");
         try {
           if (key.startsWith("rcmdChannel_")) {
             final Map parsed = json.decode(vodJson);
