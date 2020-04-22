@@ -42,9 +42,8 @@ class _HomePageState extends State<CarouselPage> {
     super.initState();
     String playUrl =
         "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
-
-    homeMediaController.setNetworkDataSource(
-        tvChannelList[0][0]?.getPlayUrl() ?? playUrl,
+    homeMediaController.setNetworkDataSource(tvChannelList!=null&&tvChannelList[0]!=null&&tvChannelList[0].length>0&&tvChannelList[0][0]!=null?
+        tvChannelList[0][0]?.getPlayUrl() :playUrl,
         autoPlay: true);
     LogMyUtil.d("$TAG initState():playUrling:${playUrl}");
     if (tvChannelList[0].length > 0) {
