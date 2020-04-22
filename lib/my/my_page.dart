@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:player/service/date_util.dart';
 import '../global_config.dart';
 import '../model/client_action.dart';
 import '../resource/file_manager.dart';
@@ -131,6 +132,16 @@ class _MyPageState extends State<MyPage> {
                         msg: '已经登录', gravity: ToastGravity.TOP);
                     return;
                   } else {
+                    if(null!=me.userId||!StrUtils.isEmptyStr(me.userPhone)) {
+                      HttpClientUtils.login(me).then((onValue){
+                        if(Msg.SUCCESS==onValue.code){
+                          me=onValue.object;
+                          LocalStorage.setUserMe(me);
+                          me.isLogin=true;
+                          return;
+                        }
+                    });
+                    }
                     Navigator.of(context)
                         .push(new MaterialPageRoute(builder: (context) {
                       return new LoginPage();
