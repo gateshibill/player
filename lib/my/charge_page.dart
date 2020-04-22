@@ -63,7 +63,7 @@ class _ChargePageState extends State<ChargePage> {
               name: '充值号码'),
           LoginBtn(
             press: () {
-              _loginByPassword();
+              _charge();
             },
             bgColor: Color(0xff488aff),
             fontColor: Color(0xffffffff),
@@ -82,7 +82,7 @@ class _ChargePageState extends State<ChargePage> {
     );
   }
 
-  _loginByPassword() async {
+  _charge() async {
     //验证
     final form = _passwordFormKey.currentState;
     form.save();
@@ -91,7 +91,7 @@ class _ChargePageState extends State<ChargePage> {
       HttpClientUtils.charge(me.userId,cardId).then((onValue) {
         pr.hide();
         if(Msg.SUCCESS!=onValue.code){
-          UiUtil.showToast("fail to login,$onValue");
+          UiUtil.showToast("充值失败,${onValue.desc}");
           return;
         }else{
           LocalStorage.setUserMe(me);
