@@ -54,6 +54,7 @@ void autoLogin() async {
     HttpClientUtils.guest(me).then((onValue){
       if(Msg.SUCCESS ==onValue.code){
         me=onValue.object;
+        me.isLogin=true;
       }
     });
   }

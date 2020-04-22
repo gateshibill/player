@@ -57,7 +57,7 @@ class VodModel extends MediaModel {
     return vodPlayUrl;
   }
 
-  String toString() {
+  String detail() {
     return "vod: ${vodId}| ${vodName}| ${vodPlayUrl}| ${vodPic}|$vodCopyright|$progress|$duration|$vodTime";
   }
 

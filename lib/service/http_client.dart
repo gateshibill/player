@@ -329,15 +329,15 @@ class HttpClientUtils {
       var dio = new Dio();
       final response = await dio.get(url);
       String res = response.data.toString();
-      print("r:" + res);
+      //print("r:" + res);
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       String code = parsed["code"];
       List<dynamic> list = parsed["objects"];
       VodModelList vodModelList = VodModelList.fromJson(list);
       List vodList = vodModelList.vodModelList;
-      vodModelList.vodModelList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+//      vodModelList.vodModelList
+//          .forEach((vodModel) => print('vodModel ${vodModel.detail()}'));
       if (isCache) {
         DownloadService.downloadVodList(vodList);
       }
@@ -369,8 +369,8 @@ class HttpClientUtils {
       List<dynamic> list = parsed["objects"];
       VodModelList vodModelList = VodModelList.fromJson(list);
       List vodList = vodModelList.vodModelList;
-      vodModelList.vodModelList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+//      vodModelList.vodModelList
+//          .forEach((vodModel) => print('vodModel ${vodModel.detail()}'));
       if (isCache) {
         DownloadService.downloadVodList(vodList);
       }
@@ -651,8 +651,8 @@ class HttpClientUtils {
       String code = parsed["code"];
       List<dynamic> list = parsed["objects"];
       VodModelList modelList = VodModelList.fromJson(list);
-      modelList.vodModelList
-          .forEach((vodModel) => print('vodModel ${vodModel.toString()}'));
+//      modelList.vodModelList
+//          .forEach((vodModel) => print('vodModel ${vodModel.detail()}'));
       return modelList.vodModelList;
     } catch (e) {
       print("dio e:" + e.toString());
@@ -772,8 +772,8 @@ class HttpClientUtils {
       String code = parsed["code"];
       List<dynamic> list = parsed["objects"];
       TopicModelList modelList = TopicModelList.fromJson(list);
-      modelList.topicModelList.forEach(
-          (sourceModel) => print('getTopics ${sourceModel.toString()}'));
+//      modelList.topicModelList.forEach(
+//          (sourceModel) => print('getTopics ${sourceModel.toString()}'));
       return modelList.topicModelList;
     } catch (e) {
       print("fail to getTopics|$e");
@@ -858,7 +858,8 @@ class HttpClientUtils {
       msg.code = parsed["code"];
       msg.desc = parsed["msg"];
       if (msg.code == '0') {
-        msg.object = parsed["object"];
+        final Map parsedObject=parsed["object"];
+        msg.object = UserModel.fromJson(parsedObject);
       }
     } catch (e) {
       msg.code = Msg.FAILURE;
@@ -881,7 +882,8 @@ class HttpClientUtils {
       msg.code = parsed["code"];
       msg.desc = parsed["msg"];
       if (msg.code == '0') {
-        msg.object = parsed["object"];
+        final Map parsedObject=parsed["object"];
+        msg.object = UserModel.fromJson(parsedObject);
       }
     } catch (e) {
       msg.code = Msg.FAILURE;
@@ -903,13 +905,14 @@ class HttpClientUtils {
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       LogMyUtil.d("$TAG 1111111111");
-      int code = parsed["code"];
-      LogMyUtil.d("$TAG 22222222222：$code" );
+      msg.code  = "${parsed["code"]}";
+      LogMyUtil.d("$TAG 22222222222：${msg.code}" );
       msg.desc = parsed["msg"];
       LogMyUtil.d("$TAG 3333333333333333");
       if (msg.code == '0') {
         LogMyUtil.d("$TAG 444444444444");
-        msg.object = parsed["object"];
+        final Map parsedObject=parsed["object"];
+        msg.object = UserModel.fromJson(parsedObject);
       }
     } catch (e) {
       msg.code = Msg.FAILURE;
@@ -932,7 +935,8 @@ class HttpClientUtils {
         msg.code = parsed["code"];
         msg.desc = parsed["msg"];
         if (msg.code == '0') {
-          msg.object = parsed["object"];
+          final Map parsedObject=parsed["object"];
+          msg.object = UserModel.fromJson(parsedObject);
         }
       });
     } catch (e) {

@@ -34,9 +34,7 @@ class _MyPageState extends State<MyPage> {
   int viewFileCounter = 0;
   int viewCleanCounter = 0;
   int viewMessageCounter = 0;
-  List<VodModel> historyVodList = new List<VodModel>();
-  List<ChannelModel> historyChannelList = new List<ChannelModel>();
-  List<ChannelModel> guessChannelList = new List<ChannelModel>();
+
   int _selectDrawItemIndex = -1;
 
   //bool isLogin;
@@ -150,11 +148,11 @@ class _MyPageState extends State<MyPage> {
                     title: new Container(
                       margin: const EdgeInsets.only(bottom: 2.0),
                       child: new Text(
-                          me.isLogin ? "${me.userNickName}" : "LVPlayer"),
+                          me?.isLogin??false ? "${StrUtils.isEmptyStr(me.userNickName)?me.userId:me.userNickName}" : "LVPlayer"),
                     ),
                     subtitle: new Container(
                       margin: const EdgeInsets.only(top: 2.0),
-                      child: new Text(me.isLogin ? "已登录" : "未登录"),
+                      child: new Text(me?.isLogin??false? "已登录" : "未登录"),
                     ),
                     trailing: new Container(
                       width: MediaQuery.of(context).size.width / 4,
@@ -239,7 +237,7 @@ class _MyPageState extends State<MyPage> {
                               child: new Text(
                                 (null == (me.vipExpire))
                                     ? "立即充值"
-                                    : DateFormat('yyyy:kk:mm')
+                                    : DateFormat('yyyy.MM.dd')
                                         .format(me.vipExpire),
                                 style: new TextStyle(
                                     fontSize: 16.0,
@@ -279,7 +277,7 @@ class _MyPageState extends State<MyPage> {
                           children: <Widget>[
                             new Container(
                               child: new Text(
-                                "210",
+                                "${favoritesList.length}",
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: GlobalConfig.fontColor),
@@ -368,7 +366,7 @@ class _MyPageState extends State<MyPage> {
                             children: <Widget>[
                               new Container(
                                 child: new Text(
-                                  '${historyVodList.length - 1}',
+                                  '${historyVodList.length}',
                                   style: new TextStyle(
                                       fontSize: 16.0,
                                       color: GlobalConfig.fontColor),

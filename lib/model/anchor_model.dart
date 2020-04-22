@@ -26,7 +26,7 @@ class AnchorModel {
   AnchorModel();
 
   String toString() {
-    return "vod: ${id}| ${name}| ${playUrl}| ${posterUrl}";
+    return "anchor: ${id}| ${name}| ${playUrl}| ${posterUrl}";
   }
 
   factory AnchorModel.fromJson(Map<String, dynamic> json) =>

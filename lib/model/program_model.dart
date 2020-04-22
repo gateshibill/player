@@ -36,9 +36,9 @@ class ProgramModel {
 
   ProgramModel(this.name, this.content);
 
-  String toString(){
+  String detail(){
     return
-      "vod: ${channelId}| ${name}| ${playUrl}| ${posterUrl}";
+      "program: ${channelId}| ${name}| ${playUrl}| ${posterUrl}";
   }
   factory ProgramModel.fromJson(Map<String, dynamic> json) =>
       _$ProgramModelFromJson(json);

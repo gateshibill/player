@@ -46,8 +46,8 @@ class ChannelModel extends MediaModel {
     return playUrl;
   }
 
-  String toString() {
-    return "vod: ${id}| ${name}| ${playUrl}| ${posterUrl}|${reserveUrls}";
+  String detail() {
+    return "channel: ${id}| ${name}| ${playUrl}| ${posterUrl}|${reserveUrls}";
   }
 
   factory ChannelModel.fromJson(Map<String, dynamic> json) =>

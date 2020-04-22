@@ -32,9 +32,9 @@ class TopicModel extends MediaModel{
     return playUrl;
   }
 
-  String toString(){
+  String detail(){
     return
-      "vod: ${topicId}| ${topicName}| ${topicHits}| ${topicPic}|${topicContent}";
+      "topic: ${topicId}| ${topicName}| ${topicHits}| ${topicPic}|${topicContent}";
 
   }
   factory TopicModel.fromJson(Map<String, dynamic> json) =>

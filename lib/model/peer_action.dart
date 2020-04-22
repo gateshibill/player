@@ -25,8 +25,8 @@ class PeerAction {
   // peer:id,voidId,subvodId,pierceId,from,status(null,downing,watched),outOfDate,date,last;
   PeerAction(this.pnodeId,this.log,this.stage,this.protocol);
 
-  String toString() {
-    return "vod: ${userId}|  ${deviceId}|$clientIp|$pnodeId|$fromIp|$vodName|$piece";
+  String detail() {
+    return "peer: ${userId}|  ${deviceId}|$clientIp|$pnodeId|$fromIp|$vodName|$piece";
   }
 
   factory PeerAction.fromJson(Map<String, dynamic> json) =>

@@ -1,3 +1,4 @@
+import 'package:player/model/media_model.dart';
 import 'package:player/model/user_model.dart';
 
 import '../model/topic_model.dart';
@@ -22,6 +23,14 @@ String DeviceId;
 StringBuffer pNodeSesionBuffer = new StringBuffer();
 
 UserModel me;
+//浏览历史视频
+List<VodModel> historyVodList = new List<VodModel>();
+//浏览历史频道
+List<ChannelModel> historyChannelList = new List<ChannelModel>();
+//猜用户喜欢
+List<ChannelModel> guessChannelList = new List<ChannelModel>();
+//用户收藏
+List<MediaModel> favoritesList = new List<MediaModel>();
 
 //首页
 List<VodModel> homeVodList=[];

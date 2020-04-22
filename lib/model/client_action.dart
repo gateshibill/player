@@ -31,9 +31,9 @@ class ClientAction {
 
   //client:id,voidId,subvodId,pierceId,from,status(null,downing,watched),outOfDate,date,last;
   ClientAction(this.pageId, this.pageName,this.columnId,this.columnName,this.objectId,this.objectName,this.actionId,this.actionName);
-  String toString(){
+  String detail(){
     return
-      "vod: ${userId}|  ${pageName}|$columnName|$columnName|$objectName|$actionName|$subActionName";
+      "client: ${userId}|  ${pageName}|$columnName|$columnName|$objectName|$actionName|$subActionName";
   }
   factory ClientAction.fromJson(Map<String, dynamic> json) =>
       _$ClientActionFromJson(json);

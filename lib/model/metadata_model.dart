@@ -29,9 +29,9 @@ class MetadataModel {
   //metadata:id,voidId,subvodId,pierceId,from,status(null,downing,watched),outOfDate,date,last;
   MetadataModel(this.vodName, this.piece);
 
-  String toString(){
+  String detail(){
     return
-      "vod: ${vodName}| ${vodId}| ${piece}|$status|$fromIp|$time";
+      "meta: ${vodName}| ${vodId}| ${piece}|$status|$fromIp|$time";
   }
   factory MetadataModel.fromJson(Map<String, dynamic> json) =>
       _$MetadataModelFromJson(json);
