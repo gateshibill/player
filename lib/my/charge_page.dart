@@ -94,10 +94,12 @@ class _ChargePageState extends State<ChargePage> {
           UiUtil.showToast("充值失败,${onValue.desc}");
           return;
         }else{
+          me=onValue.object;
           LocalStorage.setUserMe(me);
+          UiUtil.showToast("充值成功,有效期:${me.vipExpire}");
           me.isLogin=true;
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Index()));
+                .pop();
         }
       });
     } else {
