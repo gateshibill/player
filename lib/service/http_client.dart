@@ -903,8 +903,8 @@ class HttpClientUtils {
       String res2Json = json.encode(response.data);
       final Map parsed = json.decode(res2Json);
       LogMyUtil.d("$TAG 1111111111");
-      msg.code = parsed["code"].toString();
-      LogMyUtil.d("$TAG 22222222222" );
+      int code = parsed["code"];
+      LogMyUtil.d("$TAG 22222222222：$code" );
       msg.desc = parsed["msg"];
       LogMyUtil.d("$TAG 3333333333333333");
       if (msg.code == '0') {
