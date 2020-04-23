@@ -14,7 +14,7 @@ import '../model/client_action.dart';
 import '../common/widget_common.dart';
 import '../player/video_detail.dart';
 import '../data/cache_data.dart';
-import '../common/view_picture_page1.dart';
+import '../common/view_picture_page.dart';
 import '../service/http_client.dart';
 import '../model/picture_model.dart';
 import 'dart:math';
@@ -145,7 +145,7 @@ class _MainVideoState extends State<MainVideo>
 //            }
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new ViewPicturePage1(networkImages: networkImagesTmp);
+              return new ViewPicturePage(networkImages: networkImagesTmp,context: this.context,);
             })
             );
 
