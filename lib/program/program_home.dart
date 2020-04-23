@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:player/video/lala_page.dart';
 import '../global_config.dart';
-import './program_event_page.dart';
-import '../video/svideo_page.dart';
 import '../utils/log_my_util.dart';
 import './program_page.dart';
 import 'package:intl/intl.dart';
@@ -73,7 +72,7 @@ class _findPageState extends State<findPage> {
      // new SportshotPage(day: 0, name: "热门"),
       // new NewsWebPage("http://sportslive.hongxiuba.com","积分榜"),
       new ProgramPage(day: 0), //普通节目单
-      new SvideoPage(),
+      new LalaPage(),
       new SportsPage(), //总赛事
 
     ]);

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import '../moive/moive_page.dart';
-import '../moive/moive_rcmd_page.dart';
 import '../global_config.dart';
-import '../moive/moive_page.dart';
 import '../utils/log_my_util.dart';
-import '../data/cache_data.dart';
-import '../video/program_video_page.dart';
 import './carousel_page.dart';
 import '../index/search_page.dart';
-import '../video/svideo_page.dart';
 
 class HomePage extends StatefulWidget {
   @override

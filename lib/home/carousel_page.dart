@@ -90,12 +90,7 @@ class _HomePageState extends State<CarouselPage> {
         alignment: Alignment.center,
         decoration: new BoxDecoration(
           border: new Border.all(color: Colors.grey, width: 0.5), // 边色与边宽度
-          //color: Color(0xFF9E9E9E), // 底色
-          //        borderRadius: new BorderRadius.circular((20.0)), // 圆角度
-          //borderRadius: new BorderRadius.vertical(top: Radius.elliptical(20, 50)), // 也可控件一边圆角大小
         ),
-        //margin: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-        //color: GlobalConfig.cardBackgroundColor,
         child: currentProgramlist.length == 0
             ? new Container(
                 // mainAxisAlignment:MainAxisAlignment.spaceEvenly,
@@ -106,11 +101,6 @@ class _HomePageState extends State<CarouselPage> {
   }
 
   Widget scrollHot() {
-//    return new ListView(
-//      // This next line does the trick.
-//      scrollDirection: Axis.horizontal,
-//      children: <Widget>[hotProgram(), hotProgram(), hotProgram()],
-//    );
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
@@ -161,12 +151,6 @@ class _HomePageState extends State<CarouselPage> {
                     children: <Widget>[
                       new Text(currentProgramlist[index].name,
                           maxLines: 3, style: new TextStyle(color: Colors.red)),
-//                      new Text("",
-////                            null != programList[index].guestTeamScore &&
-////                                programList[index].guestTeamScore > -1)
-////                            ? programList[index].guestTeamScore.toString()
-////                            : "",
-//                          style: new TextStyle(color: Colors.red))
                     ],
                   ),
                   //padding: const EdgeInsets.only(top: 10.0),
@@ -199,7 +183,7 @@ class _HomePageState extends State<CarouselPage> {
             LogMyUtil.v("playUrl is blank");
           } else {
             if(null==me.vipExpire||!me.vipExpire.isAfter(DateTime.now())){
-              UiUtil.showToast('您的VIP已到期');
+              UiUtil.showToast('您的VIP已到期,请到个人中心充值！');
               return;
             }
             homeMediaController.reset();

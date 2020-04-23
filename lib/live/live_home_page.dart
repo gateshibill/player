@@ -8,11 +8,7 @@ import '../bloc/counter_bloc.dart'; // bloc
 import '../data/cache_data.dart';
 import '../global_config.dart';
 import '../utils/log_my_util.dart';
-import '../video/program_video_page.dart';
-import './live_video_page.dart';
-import '../video/moive_page.dart';
-import '../video/svideo_page.dart';
-import '../video/lala_page.dart';
+
 
 
 class videoPage extends StatefulWidget {
