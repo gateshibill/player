@@ -33,7 +33,8 @@ class _HomePageState extends State<CarouselPage> {
 
   @override
   Widget build(BuildContext context) {
-    return cardList();
+    return (mediaList.length < 1)
+        ? refreshButton(this):cardList();
   }
 
   @override
@@ -47,6 +48,7 @@ class _HomePageState extends State<CarouselPage> {
         autoPlay: true);
     LogMyUtil.d("$TAG initState():playUrling:${playUrl}");
     if (tvChannelList[0].length > 0) {
+      mediaList.clear();
       mediaList = tvChannelList[0].sublist(1, tvChannelList[0].length - 1);
     }
     //mediaList.shuffle();
@@ -74,15 +76,11 @@ class _HomePageState extends State<CarouselPage> {
 
   Future handleRefresh() async {
     LogMyUtil.d("_handleRefresh");
-    await HttpClientUtils.getCurrentPrograms(0).then((list) {
-      if (null != list) {
-        currentProgramlist = list.programModelList;
-      }
+    await HttpClientUtils.init().then((onValue) {
       try {
         setState(() {});
       } catch (e) {}
     });
-    mediaList.clear();
     return;
   }
 

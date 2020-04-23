@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:player/service/date_util.dart';
+//import 'package:player/service/date_util.dart';
 import '../global_config.dart';
 import '../model/client_action.dart';
 import '../resource/file_manager.dart';
@@ -24,6 +25,7 @@ import '../model/channel_model.dart';
 import '../moive/details/live_detail.dart';
 import '../data/cache_data.dart';
 import 'charge_page.dart';
+import 'login/register_page.dart';
 
 class MyPage extends StatefulWidget {
   @override
@@ -49,13 +51,6 @@ class _MyPageState extends State<MyPage> {
         debugShowCheckedModeBanner: false,
         home: new Scaffold(
           appBar: new AppBar(
-//            leading: new IconButton(
-//              padding: EdgeInsets.all(2.0),
-//              icon: new Icon(Icons.brightness_7, color: Colors.white),
-//              onPressed: () {
-//                //Navigator.of(context).pop();
-//              },
-//            ),
             centerTitle: true,
             title: new Text("个人中心"),
             actions: <Widget>[
@@ -138,9 +133,19 @@ class _MyPageState extends State<MyPage> {
                           me=onValue.object;
                           LocalStorage.setUserMe(me);
                           me.isLogin=true;
+                          setState(() {});
                           return;
                         }
                     });
+                    }else if (!StrUtils.isEmptyStr(me.deviceId)){
+                      HttpClientUtils.guest(me).then((onValue){
+                        if(Msg.SUCCESS ==onValue.code){
+                          me=onValue.object;
+                          me.isLogin=true;
+                          setState(() {});
+                          return;
+                        }
+                      });
                     }
                     Navigator.of(context)
                         .push(new MaterialPageRoute(builder: (context) {
@@ -248,8 +253,7 @@ class _MyPageState extends State<MyPage> {
                               child: new Text(
                                 (null == (me.vipExpire))
                                     ? "立即充值"
-                                    : DateFormat('yyyy.MM.dd')
-                                        .format(me.vipExpire),
+                                    : DateFormat('yyyy.MM.dd').format(me.vipExpire),
                                 style: new TextStyle(
                                     fontSize: 16.0,
                                     color: GlobalConfig.fontColor),
@@ -477,7 +481,186 @@ class _MyPageState extends State<MyPage> {
       ),
     ]);
   }
+  Widget itemBuilder1(BuildContext context, int index) {
+    String url = historyVodList[index].vodPlayUrl;
+    double picWidth = 160;
+    return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new GestureDetector(
+            onTap: () {
+              if (null == historyVodList[index].vodPlayUrl ||
+                  "" == historyVodList[index].vodPlayUrl) {
+                LogMyUtil.v("playUrl is blank");
+              } else {
+                Navigator.of(context)
+                    .push(new MaterialPageRoute(builder: (context) {
+                  return new VideoDetail(vod: historyVodList[index]);
+                }));
+              }
+            },
+            child: new Column(
+              children: <Widget>[
+                new Container(
+                  //Expanded(
+                  // flex: 1,
+                  // child: new AspectRatio(
+                  //aspectRatio: 3.5 / 2,
+                  width: picWidth,
+                  // height: 110,
+                  child: new CachedNetworkImage(
+                    imageUrl: "${historyVodList[index].vodPic}",
+                    placeholder: (context, url) => cachPlaceHolder(),
+                    errorWidget: (context, url, error) =>
+                    new Icon(Icons.autorenew),
+                  ),
 
+                  //),
+                  margin: new EdgeInsets.only(
+                      top: 6.0, bottom: 6.0, left: 10, right: 10),
+                  // alignment: Alignment.topLeft
+                ),
+                new Container(
+                  width: picWidth,
+                  child: new Row(
+                    children: <Widget>[
+                      new Text(
+                          StrUtils.subString(historyVodList[index].vodName, 9),
+                          style: new TextStyle(color: GlobalConfig.fontColor)),
+                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
+                    ],
+                  ),
+                  // padding: const EdgeInsets.only(bottom: 10.0),
+                ),
+              ],
+            ),
+          ),
+        ]
+      // )
+    );
+  }
+
+  Widget itemBuilderChannel(BuildContext context, int index) {
+    double picWidth = 160;
+    return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // mainAxisAlignment: MainAxisAlignment.center,
+
+        children: <Widget>[
+          new GestureDetector(
+            onTap: () {
+              if (null == historyChannelList[index].getPlayUrl() ||
+                  "" == historyChannelList[index].getPlayUrl()) {
+                LogMyUtil.v("playUrl is blank");
+              } else {
+                Navigator.of(context)
+                    .push(new MaterialPageRoute(builder: (context) {
+                  return new LiveDetail(vod: historyChannelList[index]);
+                }));
+              }
+            },
+            child: new Column(
+              children: <Widget>[
+                new Container(
+                  //Expanded(
+                  // flex: 1,
+                  // child: new AspectRatio(
+                  //aspectRatio: 3.5 / 2,
+                  width: picWidth,
+                  // height: 110,
+                  child: new CachedNetworkImage(
+                    imageUrl: "${historyChannelList[index].posterUrl}",
+                    placeholder: (context, url) => cachPlaceHolder(),
+                    errorWidget: (context, url, error) =>
+                    new Icon(Icons.autorenew),
+                  ),
+
+                  //),
+                  margin: new EdgeInsets.only(
+                      top: 6.0, bottom: 6.0, left: 10, right: 10),
+                  // alignment: Alignment.topLeft
+                ),
+                new Container(
+                  width: picWidth,
+                  child: new Row(
+                    children: <Widget>[
+                      new Text(
+                          StrUtils.subString(
+                              historyChannelList[index].getName(), 9),
+                          style: new TextStyle(color: GlobalConfig.fontColor)),
+                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
+                    ],
+                  ),
+                  // padding: const EdgeInsets.only(bottom: 5.0),
+                ),
+              ],
+            ),
+          ),
+        ]
+      // )
+    );
+  }
+
+  Widget itemBuilderGuess(BuildContext context, int index) {
+    double picWidth = 160;
+    return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        // mainAxisAlignment: MainAxisAlignment.center,
+
+        children: <Widget>[
+          new GestureDetector(
+            onTap: () {
+              if (null == guessChannelList[index].getPlayUrl() ||
+                  "" == guessChannelList[index].getPlayUrl()) {
+                LogMyUtil.v("playUrl is blank");
+              } else {
+                Navigator.of(context)
+                    .push(new MaterialPageRoute(builder: (context) {
+                  return new LiveDetail(vod: guessChannelList[index]);
+                }));
+              }
+            },
+            child: new Column(
+              children: <Widget>[
+                new Container(
+                  //Expanded(
+                  // flex: 1,
+                  // child: new AspectRatio(
+                  //aspectRatio: 3.5 / 2,
+                  width: picWidth,
+                  // height: 110,
+                  child: new CachedNetworkImage(
+                    imageUrl: "${guessChannelList[index].posterUrl}",
+                    placeholder: (context, url) => cachPlaceHolder(),
+                    errorWidget: (context, url, error) =>
+                    new Icon(Icons.autorenew),
+                  ),
+
+                  //),
+                  margin: new EdgeInsets.only(
+                      top: 6.0, bottom: 6.0, left: 10, right: 10),
+                  // alignment: Alignment.topLeft
+                ),
+                new Container(
+                  width: picWidth,
+                  child: new Row(
+                    children: <Widget>[
+                      new Text(
+                          StrUtils.subString(
+                              guessChannelList[index].getName(), 9),
+                          style: new TextStyle(color: GlobalConfig.fontColor)),
+                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
+                    ],
+                  ),
+                  // padding: const EdgeInsets.only(bottom: 5.0),
+                ),
+              ],
+            ),
+          ),
+        ]
+      // )
+    );
+  }
+
+  //以下为设置的内容
   Widget _onDrawViewPage() {
     return Column(
       children: <Widget>[
@@ -502,9 +685,9 @@ class _MyPageState extends State<MyPage> {
         ),
         gestureDetectorForItem(
             Icons.library_books, '设置', 0, _selectDrawItemIndex),
-        gestureDetectorForItem(Icons.image, '任务', 1, _selectDrawItemIndex),
-        gestureDetectorForItem(Icons.live_tv, '缓存', 2, _selectDrawItemIndex),
-        gestureDetectorForItem(Icons.settings, '清理', 3, _selectDrawItemIndex),
+        gestureDetectorForItem(Icons.image, '手机登录', 1, _selectDrawItemIndex),
+        gestureDetectorForItem(Icons.live_tv, '绑定手机', 2, _selectDrawItemIndex),
+        gestureDetectorForItem(Icons.settings, '缓存清理', 3, _selectDrawItemIndex),
         gestureDetectorForItem(
             Icons.settings, '版本($VERSION)', 4, _selectDrawItemIndex),
         gestureDetectorForItem(
@@ -545,28 +728,16 @@ class _MyPageState extends State<MyPage> {
         ),
       ),
       onTap: () {
-        if (drawItemIndex == 1) {
-          this.viewTaskCounter++;
-          if (this.viewTaskCounter < 3) {
-            return;
-          } else {
+        if (drawItemIndex == 1) {//手机登录
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new TaskDetail();
+              return new LoginPage();
             }));
-            this.viewTaskCounter = 0;
-          }
-        } else if (drawItemIndex == 2) {
-          this.viewFileCounter++;
-          if (this.viewFileCounter < 3) {
-            return;
-          } else {
+        } else if (drawItemIndex == 2) {//手机绑定
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new FileManager(sDCardDir: sDCardDir);
+              return new RegisterPage();
             }));
-            this.viewFileCounter = 0;
-          }
         } else if (drawItemIndex == 3) {
           viewCleanCounter++;
           if (this.viewCleanCounter < 3) {
@@ -591,182 +762,5 @@ class _MyPageState extends State<MyPage> {
     setState(() {});
   }
 
-  Widget itemBuilder1(BuildContext context, int index) {
-    String url = historyVodList[index].vodPlayUrl;
-    double picWidth = 160;
-    return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        // mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new GestureDetector(
-            onTap: () {
-              if (null == historyVodList[index].vodPlayUrl ||
-                  "" == historyVodList[index].vodPlayUrl) {
-                LogMyUtil.v("playUrl is blank");
-              } else {
-                Navigator.of(context)
-                    .push(new MaterialPageRoute(builder: (context) {
-                  return new VideoDetail(vod: historyVodList[index]);
-                }));
-              }
-            },
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  //Expanded(
-                  // flex: 1,
-                  // child: new AspectRatio(
-                  //aspectRatio: 3.5 / 2,
-                  width: picWidth,
-                  // height: 110,
-                  child: new CachedNetworkImage(
-                    imageUrl: "${historyVodList[index].vodPic}",
-                    placeholder: (context, url) => cachPlaceHolder(),
-                    errorWidget: (context, url, error) =>
-                        new Icon(Icons.autorenew),
-                  ),
 
-                  //),
-                  margin: new EdgeInsets.only(
-                      top: 6.0, bottom: 6.0, left: 10, right: 10),
-                  // alignment: Alignment.topLeft
-                ),
-                new Container(
-                  width: picWidth,
-                  child: new Row(
-                    children: <Widget>[
-                      new Text(
-                          StrUtils.subString(historyVodList[index].vodName, 9),
-                          style: new TextStyle(color: GlobalConfig.fontColor)),
-                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-                    ],
-                  ),
-                  // padding: const EdgeInsets.only(bottom: 10.0),
-                ),
-              ],
-            ),
-          ),
-        ]
-        // )
-        );
-  }
-
-  Widget itemBuilderChannel(BuildContext context, int index) {
-    double picWidth = 160;
-    return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        // mainAxisAlignment: MainAxisAlignment.center,
-
-        children: <Widget>[
-          new GestureDetector(
-            onTap: () {
-              if (null == historyChannelList[index].getPlayUrl() ||
-                  "" == historyChannelList[index].getPlayUrl()) {
-                LogMyUtil.v("playUrl is blank");
-              } else {
-                Navigator.of(context)
-                    .push(new MaterialPageRoute(builder: (context) {
-                  return new LiveDetail(vod: historyChannelList[index]);
-                }));
-              }
-            },
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  //Expanded(
-                  // flex: 1,
-                  // child: new AspectRatio(
-                  //aspectRatio: 3.5 / 2,
-                  width: picWidth,
-                  // height: 110,
-                  child: new CachedNetworkImage(
-                    imageUrl: "${historyChannelList[index].posterUrl}",
-                    placeholder: (context, url) => cachPlaceHolder(),
-                    errorWidget: (context, url, error) =>
-                        new Icon(Icons.autorenew),
-                  ),
-
-                  //),
-                  margin: new EdgeInsets.only(
-                      top: 6.0, bottom: 6.0, left: 10, right: 10),
-                  // alignment: Alignment.topLeft
-                ),
-                new Container(
-                  width: picWidth,
-                  child: new Row(
-                    children: <Widget>[
-                      new Text(
-                          StrUtils.subString(
-                              historyChannelList[index].getName(), 9),
-                          style: new TextStyle(color: GlobalConfig.fontColor)),
-                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-                    ],
-                  ),
-                  // padding: const EdgeInsets.only(bottom: 5.0),
-                ),
-              ],
-            ),
-          ),
-        ]
-        // )
-        );
-  }
-
-  Widget itemBuilderGuess(BuildContext context, int index) {
-    double picWidth = 160;
-    return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        // mainAxisAlignment: MainAxisAlignment.center,
-
-        children: <Widget>[
-          new GestureDetector(
-            onTap: () {
-              if (null == guessChannelList[index].getPlayUrl() ||
-                  "" == guessChannelList[index].getPlayUrl()) {
-                LogMyUtil.v("playUrl is blank");
-              } else {
-                Navigator.of(context)
-                    .push(new MaterialPageRoute(builder: (context) {
-                  return new LiveDetail(vod: guessChannelList[index]);
-                }));
-              }
-            },
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  //Expanded(
-                  // flex: 1,
-                  // child: new AspectRatio(
-                  //aspectRatio: 3.5 / 2,
-                  width: picWidth,
-                  // height: 110,
-                  child: new CachedNetworkImage(
-                    imageUrl: "${guessChannelList[index].posterUrl}",
-                    placeholder: (context, url) => cachPlaceHolder(),
-                    errorWidget: (context, url, error) =>
-                        new Icon(Icons.autorenew),
-                  ),
-
-                  //),
-                  margin: new EdgeInsets.only(
-                      top: 6.0, bottom: 6.0, left: 10, right: 10),
-                  // alignment: Alignment.topLeft
-                ),
-                new Container(
-                  width: picWidth,
-                  child: new Row(
-                    children: <Widget>[
-                      new Text(
-                          StrUtils.subString(
-                              guessChannelList[index].getName(), 9),
-                          style: new TextStyle(color: GlobalConfig.fontColor)),
-                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-                    ],
-                  ),
-                  // padding: const EdgeInsets.only(bottom: 5.0),
-                ),
-              ],
-            ),
-          ),
-        ]
-        // )
-        );
-  }
 }
