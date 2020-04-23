@@ -23,24 +23,49 @@ class _ViewPicturePage1State extends State<ViewPicturePage1> {
     ClientAction ca =
     new ClientAction(203, "ViewPicturePage", 0, "", 0, "", 1, "browse");
     HttpClientUtils.actionReport(ca);
-
-    return Container(
-        child: PhotoViewGallery.builder(
-          scrollPhysics: const BouncingScrollPhysics(),
-          builder: (BuildContext context, int index) {
-            return PhotoViewGalleryPageOptions(
-              imageProvider: NetworkImage(networkImages[index]),
-              initialScale: PhotoViewComputedScale.contained * 0.8,
-              heroAttributes: PhotoViewHeroAttributes(tag: index),
-            );
-          },
-          itemCount: networkImages.length,
-          //loadingChild: this.,
-         // backgroundDecoration: this.backgroundDecoration,
-         // pageController: widget.pageController,
-         // onPageChanged: onPageChanged,
-        )
+    return Scaffold(
+      appBar: new AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(this.context).pop(),
+        ),
+     //   title: new Text(this.vod.getName()),
+      ),
+      body: Container(
+    child: PhotoViewGallery.builder(
+    scrollPhysics: const BouncingScrollPhysics(),
+    builder: (BuildContext context, int index) {
+    return PhotoViewGalleryPageOptions(
+    imageProvider: NetworkImage(networkImages[index]),
+    initialScale: PhotoViewComputedScale.contained * 0.8,
+    heroAttributes: PhotoViewHeroAttributes(tag: index),
     );
+    },
+    itemCount: networkImages.length,
+    //loadingChild: this.,
+    // backgroundDecoration: this.backgroundDecoration,
+    // pageController: widget.pageController,
+    // onPageChanged: onPageChanged,
+    )
+    ),
+    );
+//    return Container(
+//        child: PhotoViewGallery.builder(
+//          scrollPhysics: const BouncingScrollPhysics(),
+//          builder: (BuildContext context, int index) {
+//            return PhotoViewGalleryPageOptions(
+//              imageProvider: NetworkImage(networkImages[index]),
+//              initialScale: PhotoViewComputedScale.contained * 0.8,
+//              heroAttributes: PhotoViewHeroAttributes(tag: index),
+//            );
+//          },
+//          itemCount: networkImages.length,
+//          //loadingChild: this.,
+//         // backgroundDecoration: this.backgroundDecoration,
+//         // pageController: widget.pageController,
+//         // onPageChanged: onPageChanged,
+//        )
+//    );
   }
 
 
