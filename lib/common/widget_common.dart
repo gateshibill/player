@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
-import 'package:player/data/cache_data.dart';
-import 'package:player/utils/ui_util.dart';
 import 'media_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
@@ -18,13 +16,6 @@ Widget refreshButton(var myselsf) {
     ),
   );
 }
-
-Widget vipValidate() {
-if(!me.vipExpire.isAfter(DateTime.now())){
-  UiUtil.showToast('您的VIP已到期');
-}
-}
-
 
 Widget cachPlaceHolder() {
   return new Container(
@@ -118,3 +109,4 @@ Widget _buildStatusWidget(
     );
   }
 }
+
