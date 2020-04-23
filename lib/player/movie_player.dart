@@ -20,19 +20,24 @@ import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
 class MoviePlayer extends StatelessWidget {
-  MoviePlayer({Key key, @required this.vod});
-
+  MoviePlayer({Key key, @required this.vod,this.context});
+  BuildContext context;
   VodModel vod;
 
   @override
   Widget build(BuildContext context) {
-
-
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return BlocBuilder(
       bloc: _counterBloc,
       builder: (BuildContext context, Map theme) {
         return Scaffold(
+        appBar: new AppBar(
+        leading: new IconButton(
+        icon: new Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () => Navigator.of(this.context).pop(),
+        ),
+        title: new Text(this.vod.getName()),
+        ),
           body: MoviePlayerPage(vod: this.vod),
         );
       },
@@ -180,82 +185,6 @@ class _VideoContainerState extends State<VideoContainer> {
   IjkMediaController _mediaController = IjkMediaController();
   VodModel vod;
   PlayerController  pc;
-
-//  Future<void> cache() async {
-//    //LogUtil.v("cache():${this.vod.toString()}");
-//    await this._mediaController.getVideoInfo().then((videoInfo) {
-//      vod.progress = videoInfo.progress;
-//      vod.duration = videoInfo.duration;
-//    });
-//    LogUtil.v("cache():${this.vod.toString()}");
-//    List<MetadataModel> mmList = vod.metadataList;
-//    int currentProgress = 0;
-//    if (vod.duration != null && vod.duration > 1 && mmList.length > 0) {
-//      currentProgress = (vod.progress / vod.duration * mmList.length).toInt();
-//    }
-//    LogUtil.v("${vod.vodName} current play index: :$currentProgress");
-//    //播放到当前的TS流顺序
-//    int currentCacheIndex = 0;
-//    if (null != vod.cacheIndex) {
-//      currentCacheIndex = vod.cacheIndex;
-//    } else {
-//      vod.cacheIndex = 0;
-//    }
-//    //用户拖动后，缓存和当前播放进度都前移
-//    if (currentCacheIndex < currentProgress) {
-//      currentCacheIndex = currentProgress;
-//      vod.cacheIndex = currentProgress;
-//    }
-//    int surplusPoolsNum =
-//        currentCacheIndex - currentProgress; //max=60,play for 10 mins;
-//    if (surplusPoolsNum > MOVIE_CACHE_NUM_MAX) {
-//      //单部最大缓存
-//      LogUtil.v("reach the max cache pool of ${vod.vodName}:$surplusPoolsNum");
-//      return;
-//    } else if (currentCacheIndex > mmList.length) {
-//      //是否结束
-//      LogUtil.v("cache end ${vod.vodName}");
-//      return;
-//    } else if (TOTAL_CACHE_NUM_MAX > TOTAL_CACHE_NUM_MAX) {
-//      //总缓存reach max;
-//      LogUtil.v("reach the total of app: $TOTAL_CACHE_NUM_MAX");
-//      //这里需要增加代码，启动系统清除缓存策略；
-//      //return;
-//    }
-//    MetadataModel mm = mmList.elementAt(currentCacheIndex);
-//    CacheIsolate.startNormalThread(mm).then((onValue) {
-//      //继续缓存
-//      LogUtil.v("vod: ${this.vod.toString()}");
-//      LocalStorage.saveVod(vod);
-//      LocalStorage.saveMetadata(mm);
-//      vod.cacheIndex++;
-//      cache();
-//    });
-//  }
-//缓存视频
-
-//  Future initVOD() async {
-//    if(false==vod.vodCopyright){
-//      LogUtil.v("${vod.vodName} doesn't need cache!");
-//      return;
-//    }
-//    String fileName = "playlist.m3u8"; //临时，有可能不妥
-//    //        playUrl.substring(playUrl.lastIndexOf("/") + 1, playUrl.length);
-//    vod.playlistFileName = fileName;
-//    String dir = "$BASE_DIR/${vod.vodId.toString()}";
-//    await DownloadService.download(vod.vodPlayUrl, dir, fileName)
-//        .then((isSucess) async {
-//      //1.解析m3u8, 2.下载电影前面三个ts
-//      await DownloadService.parseM3u8(vod).then((vm) async {
-//        vod.metadataList = vm.metadataList; //主要是获取ts列表
-//        if (vm.metadataList.isEmpty) {
-//          LogUtil.v("vm.metadataList.isEmpty");
-//        } else {
-//          await cache();
-//        }
-//      });
-//    });
-//  }
 
   @override
   void initState() {

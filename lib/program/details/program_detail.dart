@@ -15,11 +15,13 @@ import '../../utils/string_util.dart';
 import 'bet_detail.dart';
 
 class ProgramDetail extends StatelessWidget {
+  ProgramDetail({Key key, @required this.pm,this.context});
+  BuildContext context;
   ProgramModel pm;
-  ProgramDetail({Key key, @required this.pm});
 
   @override
   Widget build(BuildContext context) {
+
     ClientAction ca=new ClientAction(3000, "programPlayPage", 0, "", this.pm.id, this.pm.name, 2, "browse");
     HttpClientUtils.actionReport(ca);
 
@@ -28,6 +30,13 @@ class ProgramDetail extends StatelessWidget {
       bloc: _counterBloc,
       builder: (BuildContext context, Map theme) {
         return Scaffold(
+          appBar: new AppBar(
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(this.context).pop(),
+            ),
+            title: new Text(this.pm.name),
+          ),
           body: VideoPage(pm: this.pm),
         );
       },

@@ -152,7 +152,7 @@ class _HomePageState extends State<NewsPage> {
             onPressed: () {
               Navigator.of(context)
                   .push(new MaterialPageRoute(builder: (context) {
-                return new ProgramDetail(pm: currentProgramlist[index]);
+                return new ProgramDetail(pm: currentProgramlist[index],context:this.context);
               }));
             },
             child: new Row(

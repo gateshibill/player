@@ -128,7 +128,7 @@ class _HomePageState extends State<CarouselPage> {
             onPressed: () {
               Navigator.of(context)
                   .push(new MaterialPageRoute(builder: (context) {
-                return new ProgramDetail(pm: currentProgramlist[index]);
+                return new ProgramDetail(pm: currentProgramlist[index],context:this.context);
               }));
             },
             child: new Row(

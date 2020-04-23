@@ -138,7 +138,7 @@ class _SportshotPageState extends State<SportshotPage> {
             }
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new ProgramDetail(pm: leagueProgramList[index]);
+              return new ProgramDetail(pm: leagueProgramList[index],context:this.context);
             }));
           },
           child: new Row(

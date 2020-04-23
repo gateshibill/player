@@ -177,14 +177,14 @@ class _MainVideoState extends State<MainVideo>
     );
   }
 
-  Widget imageCacheContainer(String url) {
-    CachedNetworkImage cni=new CachedNetworkImage(
-      imageUrl: url,
-      fit: BoxFit.fill,
-      placeholder: (context, url) => cachPlaceHolder(),
-      errorWidget: (context, url, error) => new Icon(Icons.error),
-    );
-    //cni.
-    return cni;
-  }
+//  Widget imageCacheContainer(String url) {
+//    CachedNetworkImage cni=new CachedNetworkImage(
+//      imageUrl: url,
+//      fit: BoxFit.fill,
+//      placeholder: (context, url) => cachPlaceHolder(),
+//      errorWidget: (context, url, error) => new Icon(Icons.error),
+//    );
+//    //cni.
+//    return cni;
+//  }
 }

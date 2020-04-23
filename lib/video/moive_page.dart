@@ -152,7 +152,7 @@ class _MoviePageState extends State<MoviePage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new MoviePlayer(vod: movieList[column][index]);
+                  return new MoviePlayer(vod: movieList[column][index],context:this.context);
                 }));
               }
             },
@@ -197,7 +197,7 @@ class _MoviePageState extends State<MoviePage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new MoviePlayer(vod: movieList[column][index * 2 + 1]);
+                  return new MoviePlayer(vod: movieList[column][index * 2 + 1],context:this.context);
                 }));
               }
             },

@@ -118,7 +118,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
             onPressed: () {
               Navigator.of(context)
                   .push(new MaterialPageRoute(builder: (context) {
-                return new ProgramDetail(pm: currentEventProgramlist[index]);
+                return new ProgramDetail(pm: currentEventProgramlist[index],context:this.context);
               }));
             },
             child: new Row(

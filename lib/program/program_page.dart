@@ -108,7 +108,7 @@ class _ProgramPageState extends State<ProgramPage> {
           onPressed: () {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
-              return new ProgramDetail(pm: programList[index]);
+              return new ProgramDetail(pm: programList[index],context:this.context);
             }));
           },
           child: new Row(
