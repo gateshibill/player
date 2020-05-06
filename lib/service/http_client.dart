@@ -132,7 +132,14 @@ class HttpClientUtils {
           print("fail to getTopics");
         }
       });
-
+      //提前加载电视剧
+      await getTvSerials(0,30).then((list) {
+        if (null != list) {
+          tvSerialVodList = list.vodModelList;
+        } else {
+          print("fail to getTvSerials");
+        }
+      });
       //央视体育
 //      await getChannelList(1, 5, 0, 50).then((channelModelList) {
 //        if (null != channelModelList) {
@@ -347,6 +354,52 @@ class HttpClientUtils {
       print("dio e:" + e.toString());
     }
     return null;
+  }
+
+  static Future<VodModelList> getTvSerials([int page = 0, int limit = 30]) async {
+    String url = "$GET_SERIALS_URL$page=$page&limit=$limit";
+    LogMyUtil.e("getTvSerials() url:${url}");
+    try {
+      var dio = new Dio();
+      final response = await dio.get(url);
+      String res = response.data.toString();
+      //print("r:" + res);
+      String res2Json = json.encode(response.data);
+      final Map parsed = json.decode(res2Json);
+      String code = parsed["code"];
+      List<dynamic> list = parsed["objects"];
+      VodModelList vodModelList = VodModelList.fromJson(list);
+     // List vodList = vodModelList.vodModelList;
+      return vodModelList;
+    } catch (e) {
+      print("dio e:" + e.toString());
+    }
+    return null;
+  }
+
+  static Future<Msg>  getTvSerial(String vodTv,int tvSerialNumber) async {
+    String url = "$GET_SERIAL_URL$vodTv=$vodTv&tvSerialNumber=$tvSerialNumber";
+    LogMyUtil.d("$TAG getTvSerial():url:$LOGIN_URL|me:${me.detail()}");
+    me.vipExpire=null;//java 与 dart时间不一致
+    Msg msg = new Msg();
+    try {
+      var dio = new Dio();
+      final response = await dio.get(url);
+      String res = response.data.toString();
+      LogMyUtil.d("$TAG res:" + res);
+      String res2Json = json.encode(response.data);
+      final Map parsed = json.decode(res2Json);
+      msg.code = "${parsed["code"]}";
+      msg.desc = parsed["msg"];
+      if (msg.code == '0') {
+        final Map parsedObject=parsed["object"];
+        msg.object = UserModel.fromJson(parsedObject);
+      }
+    } catch (e) {
+      msg.code = Msg.FAILURE;
+      LogMyUtil.d("$TAG fail to getTvSerial() |$e");
+    }
+    return msg;
   }
 
   static Future<VodModelList> getSportsVodList(int columnId,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:player/video/serial_page.dart';
 import '../live/live_video_page.dart';
 import '../video/moive_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // bloc
@@ -25,7 +26,7 @@ class _moivePageState extends State<moivePage> {
   Widget build(BuildContext context) {
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return new DefaultTabController(
-      length: 6,
+      length: 7,
       child: new Scaffold(
         appBar: new AppBar(
           //title: barSearch(),
@@ -38,11 +39,12 @@ class _moivePageState extends State<moivePage> {
               : Colors.black,
           tabs: [
             new Tab(text: "电影"),
+            new Tab(text: "电视剧"),
             new Tab(text: "综艺"),
             new Tab(text: "动作片"),
             new Tab(text: "爱情片"),
             new Tab(text: "喜剧片"),
-            new Tab(text: "18+直播"),
+            new Tab(text: "18+"),
 
 
           ],
@@ -51,6 +53,7 @@ class _moivePageState extends State<moivePage> {
       body: new TabBarView(
           children: [
             new MoviePage(column: 0),
+            new SerialPage(column: 1),
             new MoviePage(column: 1),
             new MoviePage(column: 2),
             new MoviePage(column: 3),

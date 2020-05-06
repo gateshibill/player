@@ -38,7 +38,9 @@ List<VodModel> homeVodList=[];
 List<List<VodModel>> videoVodList=[[],[],[]];
 
 List<MetadataModel> metadataList=[];
-//List<VodModel> rcmdVodList=[];
+
+//电视剧列表
+List<VodModel> tvSerialVodList = new List<VodModel>();
 
 //首页推荐频道
 List<ChannelModel> rcmdChannellist=[];
