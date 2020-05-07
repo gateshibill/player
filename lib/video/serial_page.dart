@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
+import 'package:player/player/serial_player.dart';
 import '../global_config.dart';
 import '../service/http_client.dart';
 import '../player/video_detail.dart';
@@ -77,31 +78,6 @@ class _SerialPageState extends State<SerialPage> {
 
   Future handleRefresh() async {
     LogMyUtil.e("_handleRefresh");
-    int type = 0;
-    //int groupId=0;
-    switch (column) {
-      case 0:
-        type = 0;
-        break;
-      case 1://variety
-        type = 3;
-       // groupId=2;
-        break;
-      case 2://actoion
-        type = 6;
-        //groupId=3;
-        break;
-      case 3://love
-        type = 8;
-       // groupId=4;
-        break;
-      case 4://7 happy
-        type = 7;
-        // groupId=4;
-        break;
-      default:
-        break;
-    }
     await HttpClientUtils.getTvSerials(0,30).then((list) {
       if (null != list) {
         tvSerialVodList = list.vodModelList;
@@ -117,7 +93,7 @@ class _SerialPageState extends State<SerialPage> {
 
   Future _getMoreData() async {
     LogMyUtil.e("_getMoreData()");
-    await HttpClientUtils.getVodList(1).then((list) {
+    await HttpClientUtils.getTvSerials(page,30).then((list) {
       if (null != list) {
         List<VodModel> tmpList=list.vodModelList;
         if (tmpList != null && tmpList.length > 0) {
@@ -147,7 +123,7 @@ class _SerialPageState extends State<SerialPage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new MoviePlayer(vod: tvSerialVodList[index],context:this.context);
+                  return new SerialPlayer(vod: tvSerialVodList[index],context:this.context);
                 }));
               }
             },
@@ -234,7 +210,7 @@ class _SerialPageState extends State<SerialPage> {
         ]
         );
   }
-
+  //搜索
   Widget barSearch() {
     return new Container(
         height: 38,

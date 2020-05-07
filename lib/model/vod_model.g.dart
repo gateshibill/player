@@ -16,6 +16,8 @@ VodModel _$VodModelFromJson(Map<String, dynamic> json) {
     ..subName = json['subName'] as String
     ..baseDir = json['baseDir'] as String
     ..vodPic = json['vodPic'] as String
+    ..vodTv = json['vodTv'] as String
+    ..tvSerialNumber = json['tvSerialNumber'] as int
     ..vodPlayUrl = json['vodPlayUrl'] as String
     ..piece = json['piece'] as String
     ..vodCopyright = json['vodCopyright'] as bool
@@ -49,6 +51,8 @@ Map<String, dynamic> _$VodModelToJson(VodModel instance) => <String, dynamic>{
       'subName': instance.subName,
       'baseDir': instance.baseDir,
       'vodPic': instance.vodPic,
+      'vodTv': instance.vodTv,
+      'tvSerialNumber': instance.tvSerialNumber,
       'vodPlayUrl': instance.vodPlayUrl,
       'piece': instance.piece,
       'vodCopyright': instance.vodCopyright,

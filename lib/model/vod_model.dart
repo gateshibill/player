@@ -18,8 +18,8 @@ class VodModel extends MediaModel {
   String subName = "";
   String baseDir = BASE_DIR;
   String vodPic = "";
-
-  //String desc = "";
+  String vodTv= "";
+  int tvSerialNumber;
   String vodPlayUrl = "";
   String piece = "";
   bool vodCopyright = false;

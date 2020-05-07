@@ -355,9 +355,9 @@ class HttpClientUtils {
     }
     return null;
   }
-
+  //获取电视剧列表
   static Future<VodModelList> getTvSerials([int page = 0, int limit = 30]) async {
-    String url = "$GET_SERIALS_URL$page=$page&limit=$limit";
+    String url = "${GET_SERIALS_URL}page=$page&limit=$limit";
     LogMyUtil.e("getTvSerials() url:${url}");
     try {
       var dio = new Dio();
@@ -370,6 +370,27 @@ class HttpClientUtils {
       List<dynamic> list = parsed["objects"];
       VodModelList vodModelList = VodModelList.fromJson(list);
      // List vodList = vodModelList.vodModelList;
+      return vodModelList;
+    } catch (e) {
+      print("dio e:" + e.toString());
+    }
+    return null;
+  }
+  //获取一部电视剧子集列表
+  static Future<VodModelList> getTvSequels(String vodTv,[int page = 0, int limit = 30]) async {
+    String url = "${GET_SEQUELS_URL}vodTv=$vodTv&page=$page&limit=$limit";
+    LogMyUtil.e("getTvSequels() url:${url}");
+    try {
+      var dio = new Dio();
+      final response = await dio.get(url);
+      String res = response.data.toString();
+      //print("r:" + res);
+      String res2Json = json.encode(response.data);
+      final Map parsed = json.decode(res2Json);
+      String code = parsed["code"];
+      List<dynamic> list = parsed["objects"];
+      VodModelList vodModelList = VodModelList.fromJson(list);
+      // List vodList = vodModelList.vodModelList;
       return vodModelList;
     } catch (e) {
       print("dio e:" + e.toString());

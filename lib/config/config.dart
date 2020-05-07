@@ -40,6 +40,7 @@ const String BASE_VIDEO_URL="http://$VIDEO_SERVER_IP";
 const String LOCAL_VIDEO_URL="http://127.0.0.1:$HTTP_SERVER_PORT";
 const String GET_MOVIES_URL="/video/getMovies.do?columnId=";
 const String GET_SERIALS_URL="$BASE_SERVER_URL/video/getTvSerials.do?";
+const String GET_SEQUELS_URL="$BASE_SERVER_URL/video/getTvSequels.do?";
 const String GET_SERIAL_URL="$BASE_SERVER_URL/video/getTvSerial.do?";
 const String GET_VODS_URL="$BASE_SERVER_URL/video/getVods.do?typeId=";
 const String GET_SPORTSVODS_URL="$BASE_SERVER_URL/video/getSportsVods.do?typeId=";
