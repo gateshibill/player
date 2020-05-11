@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:player/data/cache_data.dart';
 import 'package:player/player/serial_detail.dart';
 import 'package:player/video/serial_page.dart';
 import '../model/media_model.dart';
@@ -29,6 +30,7 @@ import '../moive/details/live_detail.dart';
      case MediaType.Program:
        break;
      case MediaType.Serial:
+       currentPlayMedia=mediaModel;//为了显示标题
        return SerialDetail(vod:mediaModel, context:this.context);
        break;
    }

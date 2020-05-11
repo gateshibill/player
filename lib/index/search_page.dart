@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:player/service/local_storage.dart';
 import '../global_config.dart';
 import '../model/client_action.dart';
 import '../service/http_client.dart';
@@ -39,6 +40,7 @@ class SearchPageState extends State<SearchPage> {
                 // 点击确定按钮时候会调用
                 String keyword = _editController.value.text.trim();
                 searchVodKeyWordSet.add(keyword);
+                LocalStorage.saveHistorySearch(searchVodKeyWordSet.toList());
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
                   return new SearchResult(keyword: keyword);
@@ -76,130 +78,130 @@ class SearchPageState extends State<SearchPage> {
                     margin: const EdgeInsets.only(left: 16.0, bottom: 16.0),
                     alignment: Alignment.topLeft,
                   ),
-//                  new Container(
-//                    child: new GestureDetector(
-//                      onTap: () {
-//                        Navigator.of(context)
-//                            .push(new MaterialPageRoute(builder: (context) {
-//                          return new SearchResult(keyword: searchHistoryList[0]);
-//                        }));
-//                      },
-//                      child: new Row(
-//                        children: <Widget>[
-//                          new Container(
-//                            child: new Icon(Icons.access_time,
-//                                color: GlobalConfig.fontColor, size: 16.0),
-//                            margin: const EdgeInsets.only(right: 12.0),
-//                          ),
-//                          new Expanded(
-//                            child: new Container(
-//                              child: new Text(
-//                                searchHistoryList[0],
-//                                style: new TextStyle(
-//                                    color: GlobalConfig.fontColor,
-//                                    fontSize: 14.0),
-//                              ),
-//                            ),
-//                          ),
-////                      new Container(
-////                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
-////                      )
-//                        ],
-//                      ),
-//                    ),
-//                    margin: const EdgeInsets.only(
-//                        left: 16.0, right: 16.0, bottom: 10.0),
-//                    padding: const EdgeInsets.only(bottom: 10.0),
-//                    decoration: new BoxDecoration(
-//                        border: new BorderDirectional(
-//                            bottom: new BorderSide(
-//                                color: GlobalConfig.dark == true
-//                                    ? Colors.white12
-//                                    : Colors.black12))),
-//                  ),
-//                  new Container(
-//                    child: new GestureDetector(
-//                      onTap: () {
-//                        Navigator.of(context)
-//                            .push(new MaterialPageRoute(builder: (context) {
-//                          return new SearchResult(keyword: "权力");
-//                        }));
-//                      },
-//                      child: new Row(
-//                        children: <Widget>[
-//                          new Container(
-//                            child: new Icon(Icons.access_time,
-//                                color: GlobalConfig.fontColor, size: 16.0),
-//                            margin: const EdgeInsets.only(right: 12.0),
-//                          ),
-//                          new Expanded(
-//                            child: new Container(
-//                              child: new Text(
-//                                "权力",
-//                                style: new TextStyle(
-//                                    color: GlobalConfig.fontColor,
-//                                    fontSize: 14.0),
-//                              ),
-//                            ),
-//                          ),
-////                      new Container(
-////                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
-////                      )
-//                        ],
-//                      ),
-//                    ),
-//                    margin: const EdgeInsets.only(
-//                        left: 16.0, right: 16.0, bottom: 10.0),
-//                    padding: const EdgeInsets.only(bottom: 10.0),
-//                    decoration: new BoxDecoration(
-//                        border: new BorderDirectional(
-//                            bottom: new BorderSide(
-//                                color: GlobalConfig.dark == true
-//                                    ? Colors.white12
-//                                    : Colors.black12))),
-//                  ),
-//                  new Container(
-//                    child: new GestureDetector(
-//                      onTap: () {
-//                        Navigator.of(context)
-//                            .push(new MaterialPageRoute(builder: (context) {
-//                          return new SearchResult(keyword: "玉女");
-//                        }));
-//                      },
-//                      child: new Row(
-//                        children: <Widget>[
-//                          new Container(
-//                            child: new Icon(Icons.access_time,
-//                                color: GlobalConfig.fontColor, size: 16.0),
-//                            margin: const EdgeInsets.only(right: 12.0),
-//                          ),
-//                          new Expanded(
-//                            child: new Container(
-//                              child: new Text(
-//                                "玉女",
-//                                style: new TextStyle(
-//                                    color: GlobalConfig.fontColor,
-//                                    fontSize: 14.0),
-//                              ),
-//                            ),
-//                          ),
-////                      new Container(
-////                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
-////                      )
-//                        ],
-//                      ),
-//                    ),
-//                    margin: const EdgeInsets.only(
-//                        left: 16.0, right: 16.0, bottom: 10.0),
-//                    padding: const EdgeInsets.only(bottom: 10.0),
-//                    decoration: new BoxDecoration(
-//                        border: new BorderDirectional(
-//                            bottom: new BorderSide(
-//                                color: GlobalConfig.dark == true
-//                                    ? Colors.white12
-//                                    : Colors.black12))),
-//                  ),
-                  cardList()
+                  new Container(
+                    child: new GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[0]);
+                        }));
+                      },
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            child: new Icon(Icons.access_time,
+                                color: GlobalConfig.fontColor, size: 16.0),
+                            margin: const EdgeInsets.only(right: 12.0),
+                          ),
+                          new Expanded(
+                            child: new Container(
+                              child: new Text(
+                                searchVodKeyWordSet.toList().reversed.toList()[0],
+                                style: new TextStyle(
+                                    color: GlobalConfig.fontColor,
+                                    fontSize: 14.0),
+                              ),
+                            ),
+                          ),
+//                      new Container(
+//                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
+//                      )
+                        ],
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(
+                        left: 16.0, right: 16.0, bottom: 10.0),
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    decoration: new BoxDecoration(
+                        border: new BorderDirectional(
+                            bottom: new BorderSide(
+                                color: GlobalConfig.dark == true
+                                    ? Colors.white12
+                                    : Colors.black12))),
+                  ),
+                  new Container(
+                    child: new GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[1]);
+                        }));
+                      },
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            child: new Icon(Icons.access_time,
+                                color: GlobalConfig.fontColor, size: 16.0),
+                            margin: const EdgeInsets.only(right: 12.0),
+                          ),
+                          new Expanded(
+                            child: new Container(
+                              child: new Text(
+                                searchVodKeyWordSet.toList().reversed.toList()[1],
+                                style: new TextStyle(
+                                    color: GlobalConfig.fontColor,
+                                    fontSize: 14.0),
+                              ),
+                            ),
+                          ),
+//                      new Container(
+//                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
+//                      )
+                        ],
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(
+                        left: 16.0, right: 16.0, bottom: 10.0),
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    decoration: new BoxDecoration(
+                        border: new BorderDirectional(
+                            bottom: new BorderSide(
+                                color: GlobalConfig.dark == true
+                                    ? Colors.white12
+                                    : Colors.black12))),
+                  ),
+                  new Container(
+                    child: new GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[2]);
+                        }));
+                      },
+                      child: new Row(
+                        children: <Widget>[
+                          new Container(
+                            child: new Icon(Icons.access_time,
+                                color: GlobalConfig.fontColor, size: 16.0),
+                            margin: const EdgeInsets.only(right: 12.0),
+                          ),
+                          new Expanded(
+                            child: new Container(
+                              child: new Text(
+                                searchVodKeyWordSet.toList().reversed.toList()[2],
+                                style: new TextStyle(
+                                    color: GlobalConfig.fontColor,
+                                    fontSize: 14.0),
+                              ),
+                            ),
+                          ),
+//                      new Container(
+//                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
+//                      )
+                        ],
+                      ),
+                    ),
+                    margin: const EdgeInsets.only(
+                        left: 16.0, right: 16.0, bottom: 10.0),
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    decoration: new BoxDecoration(
+                        border: new BorderDirectional(
+                            bottom: new BorderSide(
+                                color: GlobalConfig.dark == true
+                                    ? Colors.white12
+                                    : Colors.black12))),
+                  ),
+                  //cardList()
                 ],
               ),
             )));
@@ -208,7 +210,7 @@ class SearchPageState extends State<SearchPage> {
   Widget cardList() {
     //int index = homeVodList.length ~/ 2+1;
     return RefreshIndicator(
-      //onRefresh: handleRefresh,
+      onRefresh: handleRefresh,
       child: StreamBuilder(
         builder: (context, snapshot) {
           return ListView.builder(
@@ -241,7 +243,7 @@ class SearchPageState extends State<SearchPage> {
             new Expanded(
               child: new Container(
                 child: new Text(
-                  searchVodKeyWordSet.toList().reversed.toList().[index],
+                  searchVodKeyWordSet.toList().reversed.toList()[index],
                   style: new TextStyle(
                       color: GlobalConfig.fontColor,
                       fontSize: 14.0),
@@ -265,5 +267,13 @@ class SearchPageState extends State<SearchPage> {
                       : Colors.black12))),
     );
   }
-
+  Future handleRefresh() async {
+    await HttpClientUtils.init().then((onValue) {
+    try {
+      setState(() {});
+    } catch (e) {}
+  });
+  return;
 }
+}
+

@@ -59,6 +59,8 @@ class _LiveDetailState extends State<LiveDetail>
     LogMyUtil.v(channel.toString());
     playUrl = channel.playUrl;
     channel.reserveUrlList = new List();
+
+    //备选播放串
     if (null != channel.reserveUrls) {
       channel.reserveUrlList = channel.reserveUrls.split(',');
     }
@@ -66,6 +68,9 @@ class _LiveDetailState extends State<LiveDetail>
     LogMyUtil.v("channel.reserveUrlList:${channel.reserveUrlList.length}");
     channelName = channel.name;
     startPlay(playUrl.trim());
+
+    currentPlayMedia= channel;
+    LocalStorage.savaCurrentMedia(currentPlayMedia);
     initTabData();
   }
 

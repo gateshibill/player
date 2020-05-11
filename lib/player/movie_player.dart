@@ -202,6 +202,9 @@ class _VideoContainerState extends State<VideoContainer> {
       vod.progress = videoInfo.progress;
       vod..duration = videoInfo.duration;
       _mediaController.seekTo(vod.progress);
+
+      currentPlayMedia= this.vod;
+      LocalStorage.savaCurrentMedia(currentPlayMedia);
     });
 
     //initVOD();

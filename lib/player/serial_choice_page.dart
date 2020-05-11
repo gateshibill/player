@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // UI适配库
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:player/data/cache_data.dart';
+import 'package:player/service/local_storage.dart';
 import '../model/vod_model.dart';
 import 'package:intl/intl.dart';
 import '../global_config.dart';
@@ -12,21 +14,23 @@ import '../utils/string_util.dart';
 import '../utils/log_my_util.dart';
 
 class SerialChoicePage extends StatefulWidget {
-  SerialChoicePage({Key key, @required this.vod, this.pc});
+  SerialChoicePage({Key key, @required this.vod, this.pc,this.callback});
 
   VodModel vod;
   PlayerController pc;
+  var callback;
 
   @override
   _SerialChoicePageState createState() =>
-      _SerialChoicePageState(vod: this.vod, pc: this.pc);
+      _SerialChoicePageState(vod: this.vod, pc: this.pc,callback:this.callback);
 }
 
 class _SerialChoicePageState extends State<SerialChoicePage> {
-  _SerialChoicePageState({Key key, @required this.vod, this.pc});
+  _SerialChoicePageState({Key key, @required this.vod, this.pc,this.callback});
 
   VodModel vod;
   PlayerController pc;
+  var callback;
   List<VodModel> sequelList = [];
 
   @override
@@ -58,6 +62,11 @@ class _SerialChoicePageState extends State<SerialChoicePage> {
             onTap: () {
               this.pc.play(e.vodPlayUrl, e.vodName);
               this.vod = e;
+              currentPlayMedia=e;
+              LocalStorage.savaCurrentMedia(currentPlayMedia);
+              if(null!=callback){
+                callback;
+              }
             },
             child: Container(
               padding: EdgeInsets.all(2.0),
@@ -92,7 +101,7 @@ class _SerialChoicePageState extends State<SerialChoicePage> {
                           StrUtils.subString(e.vodName, 16),
                           maxLines: 1,
                         ),
-                        Text(StrUtils.subString('观看次数：${e.vodHits}', 17), maxLines: 1),
+                        Text(StrUtils.subString('第${e.tvSerialNumber}集', 17), maxLines: 1),
                         Text(
                             StrUtils.subString(
                                 " 上影时间：${DateFormat('yyyy-MM-dd kk:mm').format(new DateTime.fromMicrosecondsSinceEpoch(vod.vodTime * 1000 * 1000))}",

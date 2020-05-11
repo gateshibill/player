@@ -29,6 +29,7 @@ class SerialDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
+    String title= currentPlayMedia.getName();
     return BlocBuilder(
       bloc: _counterBloc,
       builder: (BuildContext context, Map theme) {
@@ -38,7 +39,7 @@ class SerialDetail extends StatelessWidget {
         icon: new Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () => Navigator.of(this.context).pop(),
         ),
-        title: new Text(this.vod.getName()),
+        title: new Text(title)
         ),
           body: SerialDetailPage(vod: this.vod),
         );
@@ -86,10 +87,16 @@ class SerialDetailPageState extends State<SerialDetailPage>
     initTabData();
   }
 
+  void fresh(){
+    try {
+      setState(() {});
+    } catch (e) {}
+  }
+
   initTabData() {
     print("VideoPageState:" + vod.toString());
     tabList = [
-      new TabTitle('详细续集', SerialChoicePage(vod: this.vod, pc: this.pc)),
+      new TabTitle('详细续集', SerialChoicePage(vod: this.vod, pc: this.pc,callback: this.fresh)),
       new TabTitle('猜你喜欢', PlayRcmdPage(vod: this.vod, pc: this.pc)),
     ];
     mTabController = TabController(
@@ -205,6 +212,8 @@ class _VideoContainerState extends State<VideoContainer> {
       vod.progress = videoInfo.progress;
       vod..duration = videoInfo.duration;
       _mediaController.seekTo(vod.progress);
+      currentPlayMedia= this.vod;
+      LocalStorage.savaCurrentMedia(currentPlayMedia);
     });
 
     //initVOD();

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:player/model/media_model.dart';
 import 'package:player/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/metadata_model.dart';
@@ -44,7 +45,12 @@ class LocalStorage {
             final Map parsed = json.decode(vodJson);
             ChannelModel m = ChannelModel.fromJson(parsed);
             tvChannelList[0].add(m);
-          } else if (key.startsWith("vod_1_")) {
+          } else if (key.startsWith("current_media")) {
+            final Map parsed = json.decode(vodJson);
+            VodModel vm = VodModel.fromJson(parsed);
+            currentPlayMedia=vm;
+          }
+            else if (key.startsWith("vod_1_")) {
             final Map parsed = json.decode(vodJson);
             VodModel vm = VodModel.fromJson(parsed);
             //vodMap[vm.vodId] = vm;
@@ -62,6 +68,14 @@ class LocalStorage {
             final Map parsed = json.decode(vodJson);
             ChannelModel m = ChannelModel.fromJson(parsed);
             historyChannelMap[m.id] = m;
+          } else if (key.startsWith("historySearch_")) {
+            final List<String> list = json.decode(vodJson);
+            searchVodKeyWordSet.addAll(searchHistoryList);
+            if(null==list||list.length<1){
+              LogMyUtil.v("没有历史搜索记录:");
+            }else {
+              searchVodKeyWordSet.addAll(list);
+            }
           }else if (key.startsWith("program_")) {
             final Map parsed = json.decode(vodJson);
             ProgramModel pm = ProgramModel.fromJson(parsed);
@@ -156,6 +170,17 @@ class LocalStorage {
   static void saveRcmdChannel(ChannelModel m) async {
     LocalStorage._saveString("rcmdChannel_${m.id.toString()}_" ,json.encode(m));
   }
+  //未限制长度，待完善
+  static void saveHistorySearch(List searchList) async {
+    String modelJson = json.encode(searchList);
+    sharedPreferences.setString("historySearch_", modelJson);
+  }
+
+  //用户当前观看的
+  static void savaCurrentMedia(MediaModel model) async {
+    String modelJson = json.encode(model);
+    sharedPreferences.setString("current_media", modelJson);
+  }
 
   //未限制长度，待完善
   static void saveHistoryVod(VodModel vm) async {
@@ -165,7 +190,6 @@ class LocalStorage {
   static void saveHistoryChannel(ChannelModel m) async {
     LocalStorage._saveString("historyChannel_${m.id.toString()}_" ,json.encode(m));
   }
-
   static void saveChannel(ChannelModel cm) async {
     LocalStorage._saveString("channel_${cm.id.toString()}_" , json.encode(cm));
   }

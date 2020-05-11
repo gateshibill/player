@@ -123,6 +123,7 @@ class _SerialPageState extends State<SerialPage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
+                      currentPlayMedia=tvSerialVodList[index];//为了显示标题
                   return new SerialDetail(vod: tvSerialVodList[index],context:this.context);
                 }));
               }
@@ -168,7 +169,8 @@ class _SerialPageState extends State<SerialPage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new MoviePlayer(vod: tvSerialVodList[index * 2 + 1],context:this.context);
+                  currentPlayMedia=tvSerialVodList[index * 2 + 1];//为了显示标题
+                  return new SerialDetail(vod: tvSerialVodList[index * 2 + 1],context:this.context);
                 }));
               }
             },

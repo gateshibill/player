@@ -43,10 +43,11 @@ class _HomePageState extends State<CarouselPage> {
     super.initState();
     String playUrl =
         "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
-    homeMediaController.setNetworkDataSource(tvChannelList!=null&&tvChannelList[0]!=null&&tvChannelList[0].length>0&&tvChannelList[0][0]!=null?
-        tvChannelList[0][0]?.getPlayUrl() :playUrl,
-        autoPlay: true);
-    LogMyUtil.d("$TAG initState():playUrling:${playUrl}");
+    if (null == currentPlayMedia){
+      currentPlayMedia = tvChannelList[0][0];
+    }
+    homeMediaController.setNetworkDataSource(currentPlayMedia.getPlayUrl(), autoPlay: true);
+
     if (tvChannelList[0].length > 0) {
       mediaList.clear();
       currentPlayMedia??mediaList.insert(0, currentPlayMedia);
@@ -66,11 +67,30 @@ class _HomePageState extends State<CarouselPage> {
         builder: (context, snapshot) {
           return ListView.builder(
             itemBuilder: (BuildContext context, int index) {
-              return itemBuilder1(context, index);
+              return itemBuilder(context, index);
             },
             itemCount: mediaList.length,
           );
         },
+      ),
+    );
+  }
+  Widget carouselPlay() {
+    return new Container(
+      color: GlobalConfig.cardBackgroundColor,
+      child: new GestureDetector(
+        onTap: () {
+            Navigator.of(context)
+                .push(new MaterialPageRoute(builder: (context) {
+              return new MediaPage(
+                  mediaModel: currentPlayMedia, context: context);
+            }));
+        },
+        child:play(
+            context,
+            homeMediaController,
+            'https://4kkan.com/pic/carousel/ad4.png',
+            "assets/images/" + 'ad6.png'),
       ),
     );
   }
@@ -242,18 +262,14 @@ class _HomePageState extends State<CarouselPage> {
     );
   }
 
-  Widget itemBuilder1(BuildContext context, int index) {
+  Widget itemBuilder(BuildContext context, int index) {
 //    int index2 = index - 1;
     return (index < 1
         ? new Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-                play(
-                    context,
-                    homeMediaController,
-                    'https://4kkan.com/pic/carousel/ad4.png',
-                    "assets/images/" + 'ad6.png'),
-                hot(),
+              carouselPlay(),
+              hot(),
                 newRecommend(context, index)
               ])
         : (mediaList.length < 1)
