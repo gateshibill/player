@@ -21,40 +21,40 @@ import '../model/client_action.dart';
 import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
-class SerialDetail extends StatelessWidget {
-  SerialDetail({Key key, @required this.vod,this.context});
+//class SerialDetail extends StatelessWidget {
+//  SerialDetail({Key key, @required this.vod,this.context});
+//  BuildContext context;
+//  VodModel vod;
+//  String title;
+//  @override
+//  Widget build(BuildContext context) {
+//    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
+//    title= currentPlayMedia.getName();
+//    return BlocBuilder(
+//      bloc: _counterBloc,
+//      builder: (BuildContext context, Map theme) {
+//        return Scaffold(
+//        appBar: new AppBar(
+//        leading: new IconButton(
+//        icon: new Icon(Icons.arrow_back, color: Colors.black),
+//        onPressed: () => Navigator.of(this.context).pop(),
+//        ),
+//        title: new Text(title)
+//        ),
+//          body: SerialDetailPage(vod: this.vod),
+//        );
+//      },
+//    );
+//  }
+//}
+
+class SerialDetail extends StatefulWidget {
+  VodModel vod;
   BuildContext context;
-  VodModel vod;
+  SerialDetail({Key key, @required this.vod,this.context});
 
   @override
-  Widget build(BuildContext context) {
-    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
-    String title= currentPlayMedia.getName();
-    return BlocBuilder(
-      bloc: _counterBloc,
-      builder: (BuildContext context, Map theme) {
-        return Scaffold(
-        appBar: new AppBar(
-        leading: new IconButton(
-        icon: new Icon(Icons.arrow_back, color: Colors.black),
-        onPressed: () => Navigator.of(this.context).pop(),
-        ),
-        title: new Text(title)
-        ),
-          body: SerialDetailPage(vod: this.vod),
-        );
-      },
-    );
-  }
-}
-
-class SerialDetailPage extends StatefulWidget {
-  VodModel vod;
-  PlayerController   pc;
-  SerialDetailPage({Key key, @required this.vod});
-
-  @override
-  State<StatefulWidget> createState() => SerialDetailPageState(vod: this.vod,pc:this.pc);
+  State<StatefulWidget> createState() => SerialDetailState(vod: this.vod,context:this.context);
 }
 
 class TabTitle {
@@ -65,10 +65,10 @@ class TabTitle {
 }
 
 
-class SerialDetailPageState extends State<SerialDetailPage>
+class SerialDetailState extends State<SerialDetail>
     with SingleTickerProviderStateMixin {
-  SerialDetailPageState({Key key, @required this.vod,this.pc});
-
+  SerialDetailState({Key key, @required this.vod,this.pc,this.context});
+  BuildContext context;
   TabController mTabController;
   PageController mPageController = PageController(initialPage: 0);
   List<TabTitle> tabList;
@@ -77,6 +77,7 @@ class SerialDetailPageState extends State<SerialDetailPage>
   VodModel vod;
   PlayerController   pc;
   VideoContainer videoContainer;
+  String title;
 
   @override
   void initState() {
@@ -89,7 +90,10 @@ class SerialDetailPageState extends State<SerialDetailPage>
 
   void fresh(){
     try {
-      setState(() {});
+      setState(() {
+        print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + currentPlayMedia.getName());
+        this.title=currentPlayMedia.getName();
+      });
     } catch (e) {}
   }
 
@@ -137,7 +141,27 @@ class SerialDetailPageState extends State<SerialDetailPage>
     ClientAction ca=new ClientAction(1000, "videoplaydetail", 0, "", this.vod.vodId, this.vod.vodName, 2, "watch");
     HttpClientUtils.actionReport(ca);
 
-    return Column(
+    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
+    title= currentPlayMedia.getName();
+    return BlocBuilder(
+      bloc: _counterBloc,
+      builder: (BuildContext context, Map theme) {
+        return Scaffold(
+          appBar: new AppBar(
+              leading: new IconButton(
+                icon: new Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () => Navigator.of(this.context).pop(),
+              ),
+              title: new Text(title)
+          ),
+          body: mybody(),
+        );
+      },
+    );
+  }
+
+  Column mybody() {
+     return Column(
       children: <Widget>[
         videoContainer,
         Container(

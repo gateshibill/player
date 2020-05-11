@@ -65,7 +65,8 @@ class _SerialChoicePageState extends State<SerialChoicePage> {
               currentPlayMedia=e;
               LocalStorage.savaCurrentMedia(currentPlayMedia);
               if(null!=callback){
-                callback;
+                callback();
+                print("xyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyxxxxxxxxxxxxxxxxxxxxxxx" + currentPlayMedia.getName());
               }
             },
             child: Container(
