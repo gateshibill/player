@@ -75,9 +75,13 @@ List<ProgramModel> leagueProgramList = [];
 //新闻列表
 List<TopicModel> topicList=[];
 
-//搜索VOD列表
+//搜索历史
+List<String> searchHistoryList = ["三国","复仇","人民"];
 Set <String> searchVodKeyWordSet=Set<String>();
+
 //全局播放器
 IjkMediaController homeMediaController = IjkMediaController();
+
+MediaModel currentPlayMedia;
 
 

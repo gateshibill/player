@@ -69,51 +69,6 @@ class SearchPageState extends State<SearchPage> {
             body: new SingleChildScrollView(
               child: new Column(
                 children: <Widget>[
-//                new Container(
-//                  child: new Text("hot", style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-//                  margin: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 16.0),
-//                  alignment: Alignment.topLeft,
-//                ),
-//                new Row(
-//                  children: <Widget>[
-//                    new Container(
-//                      child: new Chip(
-//                        label: new FlatButton(onPressed: (){}, child: new Text("live",style: new TextStyle(color: GlobalConfig.fontColor),)),
-//                        backgroundColor: GlobalConfig.dark == true ? Colors.white10 : Colors.black12,
-//                      ),
-//                      margin: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-//                      alignment: Alignment.topLeft,
-//                    ),
-//                    new Container(
-//                      child: new Chip(
-//                        label: new FlatButton(onPressed: (){}, child: new Text("video",style: new TextStyle(color: GlobalConfig.fontColor))),
-//                        backgroundColor: GlobalConfig.dark == true ? Colors.white10 : Colors.black12,
-//                      ),
-//                      margin: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-//                      alignment: Alignment.topLeft,
-//                    ),
-//                  ],
-//                ),
-//                new Row(
-//                  children: <Widget>[
-//                    new Container(
-//                      child: new Chip(
-//                        label: new FlatButton(onPressed: (){}, child: new Text("basketball",style: new TextStyle(color: GlobalConfig.fontColor))),
-//                        backgroundColor: GlobalConfig.dark == true ? Colors.white10 : Colors.black12,
-//                      ),
-//                      margin: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-//                      alignment: Alignment.topLeft,
-//                    ),
-//                    new Container(
-//                      child: new Chip(
-//                        label: new FlatButton(onPressed: (){}, child: new Text("football",style: new TextStyle(color: GlobalConfig.fontColor))),
-//                        backgroundColor: GlobalConfig.dark == true ? Colors.white10 : Colors.black12,
-//                      ),
-//                      margin: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-//                      alignment: Alignment.topLeft,
-//                    ),
-//                  ],
-//                ),
                   new Container(
                     child: new Text("",
                         style: new TextStyle(
@@ -121,131 +76,194 @@ class SearchPageState extends State<SearchPage> {
                     margin: const EdgeInsets.only(left: 16.0, bottom: 16.0),
                     alignment: Alignment.topLeft,
                   ),
-                  new Container(
-                    child: new GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(new MaterialPageRoute(builder: (context) {
-                          return new SearchResult(keyword: "复仇");
-                        }));
-                      },
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                            child: new Icon(Icons.access_time,
-                                color: GlobalConfig.fontColor, size: 16.0),
-                            margin: const EdgeInsets.only(right: 12.0),
-                          ),
-                          new Expanded(
-                            child: new Container(
-                              child: new Text(
-                                "复仇",
-                                style: new TextStyle(
-                                    color: GlobalConfig.fontColor,
-                                    fontSize: 14.0),
-                              ),
-                            ),
-                          ),
-//                      new Container(
-//                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
-//                      )
-                        ],
-                      ),
-                    ),
-                    margin: const EdgeInsets.only(
-                        left: 16.0, right: 16.0, bottom: 10.0),
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    decoration: new BoxDecoration(
-                        border: new BorderDirectional(
-                            bottom: new BorderSide(
-                                color: GlobalConfig.dark == true
-                                    ? Colors.white12
-                                    : Colors.black12))),
-                  ),
-                  new Container(
-                    child: new GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(new MaterialPageRoute(builder: (context) {
-                          return new SearchResult(keyword: "权力");
-                        }));
-                      },
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                            child: new Icon(Icons.access_time,
-                                color: GlobalConfig.fontColor, size: 16.0),
-                            margin: const EdgeInsets.only(right: 12.0),
-                          ),
-                          new Expanded(
-                            child: new Container(
-                              child: new Text(
-                                "权力",
-                                style: new TextStyle(
-                                    color: GlobalConfig.fontColor,
-                                    fontSize: 14.0),
-                              ),
-                            ),
-                          ),
-//                      new Container(
-//                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
-//                      )
-                        ],
-                      ),
-                    ),
-                    margin: const EdgeInsets.only(
-                        left: 16.0, right: 16.0, bottom: 10.0),
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    decoration: new BoxDecoration(
-                        border: new BorderDirectional(
-                            bottom: new BorderSide(
-                                color: GlobalConfig.dark == true
-                                    ? Colors.white12
-                                    : Colors.black12))),
-                  ),
-                  new Container(
-                    child: new GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(new MaterialPageRoute(builder: (context) {
-                          return new SearchResult(keyword: "玉女");
-                        }));
-                      },
-                      child: new Row(
-                        children: <Widget>[
-                          new Container(
-                            child: new Icon(Icons.access_time,
-                                color: GlobalConfig.fontColor, size: 16.0),
-                            margin: const EdgeInsets.only(right: 12.0),
-                          ),
-                          new Expanded(
-                            child: new Container(
-                              child: new Text(
-                                "玉女",
-                                style: new TextStyle(
-                                    color: GlobalConfig.fontColor,
-                                    fontSize: 14.0),
-                              ),
-                            ),
-                          ),
-//                      new Container(
-//                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
-//                      )
-                        ],
-                      ),
-                    ),
-                    margin: const EdgeInsets.only(
-                        left: 16.0, right: 16.0, bottom: 10.0),
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    decoration: new BoxDecoration(
-                        border: new BorderDirectional(
-                            bottom: new BorderSide(
-                                color: GlobalConfig.dark == true
-                                    ? Colors.white12
-                                    : Colors.black12))),
-                  ),
+//                  new Container(
+//                    child: new GestureDetector(
+//                      onTap: () {
+//                        Navigator.of(context)
+//                            .push(new MaterialPageRoute(builder: (context) {
+//                          return new SearchResult(keyword: searchHistoryList[0]);
+//                        }));
+//                      },
+//                      child: new Row(
+//                        children: <Widget>[
+//                          new Container(
+//                            child: new Icon(Icons.access_time,
+//                                color: GlobalConfig.fontColor, size: 16.0),
+//                            margin: const EdgeInsets.only(right: 12.0),
+//                          ),
+//                          new Expanded(
+//                            child: new Container(
+//                              child: new Text(
+//                                searchHistoryList[0],
+//                                style: new TextStyle(
+//                                    color: GlobalConfig.fontColor,
+//                                    fontSize: 14.0),
+//                              ),
+//                            ),
+//                          ),
+////                      new Container(
+////                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
+////                      )
+//                        ],
+//                      ),
+//                    ),
+//                    margin: const EdgeInsets.only(
+//                        left: 16.0, right: 16.0, bottom: 10.0),
+//                    padding: const EdgeInsets.only(bottom: 10.0),
+//                    decoration: new BoxDecoration(
+//                        border: new BorderDirectional(
+//                            bottom: new BorderSide(
+//                                color: GlobalConfig.dark == true
+//                                    ? Colors.white12
+//                                    : Colors.black12))),
+//                  ),
+//                  new Container(
+//                    child: new GestureDetector(
+//                      onTap: () {
+//                        Navigator.of(context)
+//                            .push(new MaterialPageRoute(builder: (context) {
+//                          return new SearchResult(keyword: "权力");
+//                        }));
+//                      },
+//                      child: new Row(
+//                        children: <Widget>[
+//                          new Container(
+//                            child: new Icon(Icons.access_time,
+//                                color: GlobalConfig.fontColor, size: 16.0),
+//                            margin: const EdgeInsets.only(right: 12.0),
+//                          ),
+//                          new Expanded(
+//                            child: new Container(
+//                              child: new Text(
+//                                "权力",
+//                                style: new TextStyle(
+//                                    color: GlobalConfig.fontColor,
+//                                    fontSize: 14.0),
+//                              ),
+//                            ),
+//                          ),
+////                      new Container(
+////                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
+////                      )
+//                        ],
+//                      ),
+//                    ),
+//                    margin: const EdgeInsets.only(
+//                        left: 16.0, right: 16.0, bottom: 10.0),
+//                    padding: const EdgeInsets.only(bottom: 10.0),
+//                    decoration: new BoxDecoration(
+//                        border: new BorderDirectional(
+//                            bottom: new BorderSide(
+//                                color: GlobalConfig.dark == true
+//                                    ? Colors.white12
+//                                    : Colors.black12))),
+//                  ),
+//                  new Container(
+//                    child: new GestureDetector(
+//                      onTap: () {
+//                        Navigator.of(context)
+//                            .push(new MaterialPageRoute(builder: (context) {
+//                          return new SearchResult(keyword: "玉女");
+//                        }));
+//                      },
+//                      child: new Row(
+//                        children: <Widget>[
+//                          new Container(
+//                            child: new Icon(Icons.access_time,
+//                                color: GlobalConfig.fontColor, size: 16.0),
+//                            margin: const EdgeInsets.only(right: 12.0),
+//                          ),
+//                          new Expanded(
+//                            child: new Container(
+//                              child: new Text(
+//                                "玉女",
+//                                style: new TextStyle(
+//                                    color: GlobalConfig.fontColor,
+//                                    fontSize: 14.0),
+//                              ),
+//                            ),
+//                          ),
+////                      new Container(
+////                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
+////                      )
+//                        ],
+//                      ),
+//                    ),
+//                    margin: const EdgeInsets.only(
+//                        left: 16.0, right: 16.0, bottom: 10.0),
+//                    padding: const EdgeInsets.only(bottom: 10.0),
+//                    decoration: new BoxDecoration(
+//                        border: new BorderDirectional(
+//                            bottom: new BorderSide(
+//                                color: GlobalConfig.dark == true
+//                                    ? Colors.white12
+//                                    : Colors.black12))),
+//                  ),
+                  cardList()
                 ],
               ),
             )));
   }
+
+  Widget cardList() {
+    //int index = homeVodList.length ~/ 2+1;
+    return RefreshIndicator(
+      //onRefresh: handleRefresh,
+      child: StreamBuilder(
+        builder: (context, snapshot) {
+          return ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return itemBuilder1(context, index);
+            },
+            itemCount: searchVodKeyWordSet.length,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget itemBuilder1(BuildContext context, int index) {
+   return new Container(
+      child: new GestureDetector(
+        onTap: () {
+          Navigator.of(context)
+              .push(new MaterialPageRoute(builder: (context) {
+            return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[index]);
+          }));
+        },
+        child: new Row(
+          children: <Widget>[
+            new Container(
+              child: new Icon(Icons.access_time,
+                  color: GlobalConfig.fontColor, size: 16.0),
+              margin: const EdgeInsets.only(right: 12.0),
+            ),
+            new Expanded(
+              child: new Container(
+                child: new Text(
+                  searchVodKeyWordSet.toList().reversed.toList().[index],
+                  style: new TextStyle(
+                      color: GlobalConfig.fontColor,
+                      fontSize: 14.0),
+                ),
+              ),
+            ),
+//                      new Container(
+//                        child: new Icon(Icons.clear, color: GlobalConfig.fontColor, size: 16.0),
+//                      )
+          ],
+        ),
+      ),
+      margin: const EdgeInsets.only(
+          left: 16.0, right: 16.0, bottom: 10.0),
+      padding: const EdgeInsets.only(bottom: 10.0),
+      decoration: new BoxDecoration(
+          border: new BorderDirectional(
+              bottom: new BorderSide(
+                  color: GlobalConfig.dark == true
+                      ? Colors.white12
+                      : Colors.black12))),
+    );
+  }
+
 }

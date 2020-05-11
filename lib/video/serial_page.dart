@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
-import 'package:player/player/serial_player.dart';
+import 'package:player/player/serial_detail.dart';
 import '../global_config.dart';
 import '../service/http_client.dart';
 import '../player/video_detail.dart';
@@ -123,7 +123,7 @@ class _SerialPageState extends State<SerialPage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new SerialPlayer(vod: tvSerialVodList[index],context:this.context);
+                  return new SerialDetail(vod: tvSerialVodList[index],context:this.context);
                 }));
               }
             },

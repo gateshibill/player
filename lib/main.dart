@@ -75,6 +75,8 @@ Future startInit() async {
     //3.启动worker线程；P2P只用
   //  const period = const Duration(seconds: 3);
   //  CacheIsolate.init();
+
+    searchVodKeyWordSet.addAll(searchHistoryList);
   });
 }
 

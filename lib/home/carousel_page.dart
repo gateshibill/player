@@ -49,6 +49,7 @@ class _HomePageState extends State<CarouselPage> {
     LogMyUtil.d("$TAG initState():playUrling:${playUrl}");
     if (tvChannelList[0].length > 0) {
       mediaList.clear();
+      currentPlayMedia??mediaList.insert(0, currentPlayMedia);
       mediaList = tvChannelList[0].sublist(1, tvChannelList[0].length - 1);
     }
     //mediaList.shuffle();

@@ -10,6 +10,7 @@ enum MediaType {
   Channel,
   Program,
   Anchor,
+  Serial,//连续剧
 }
 
 abstract  class MediaModel {

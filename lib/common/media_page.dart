@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:player/player/serial_detail.dart';
+import 'package:player/video/serial_page.dart';
 import '../model/media_model.dart';
 import '../player/video_detail.dart';
 import '../player/movie_player.dart';
@@ -25,6 +27,9 @@ import '../moive/details/live_detail.dart';
        //return LiveDetail(mediaModel:mediaModel);
        break;
      case MediaType.Program:
+       break;
+     case MediaType.Serial:
+       return SerialDetail(vod:mediaModel, context:this.context);
        break;
    }
   }

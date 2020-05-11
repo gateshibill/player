@@ -20,6 +20,7 @@ class VodModel extends MediaModel {
   String vodPic = "";
   String vodTv= "";
   int tvSerialNumber;
+  String vodSerial="";//1为电视剧
   String vodPlayUrl = "";
   String piece = "";
   bool vodCopyright = false;
@@ -44,7 +45,7 @@ class VodModel extends MediaModel {
   }
 
   MediaType getMediaType() {
-    return MediaType.Video;
+    return "1"==this.vodSerial?MediaType.Serial:MediaType.Video;
   }
 
   List<String> getPics() {

@@ -21,8 +21,8 @@ import '../model/client_action.dart';
 import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
-class SerialPlayer extends StatelessWidget {
-  SerialPlayer({Key key, @required this.vod,this.context});
+class SerialDetail extends StatelessWidget {
+  SerialDetail({Key key, @required this.vod,this.context});
   BuildContext context;
   VodModel vod;
 
@@ -40,20 +40,20 @@ class SerialPlayer extends StatelessWidget {
         ),
         title: new Text(this.vod.getName()),
         ),
-          body: SerialPlayerPage(vod: this.vod),
+          body: SerialDetailPage(vod: this.vod),
         );
       },
     );
   }
 }
 
-class SerialPlayerPage extends StatefulWidget {
+class SerialDetailPage extends StatefulWidget {
   VodModel vod;
   PlayerController   pc;
-  SerialPlayerPage({Key key, @required this.vod});
+  SerialDetailPage({Key key, @required this.vod});
 
   @override
-  State<StatefulWidget> createState() => SerialPlayerPageState(vod: this.vod,pc:this.pc);
+  State<StatefulWidget> createState() => SerialDetailPageState(vod: this.vod,pc:this.pc);
 }
 
 class TabTitle {
@@ -64,9 +64,9 @@ class TabTitle {
 }
 
 
-class SerialPlayerPageState extends State<SerialPlayerPage>
+class SerialDetailPageState extends State<SerialDetailPage>
     with SingleTickerProviderStateMixin {
-  SerialPlayerPageState({Key key, @required this.vod,this.pc});
+  SerialDetailPageState({Key key, @required this.vod,this.pc});
 
   TabController mTabController;
   PageController mPageController = PageController(initialPage: 0);
@@ -82,6 +82,7 @@ class SerialPlayerPageState extends State<SerialPlayerPage>
     super.initState();
     pc=   PlayerController();
     videoContainer = new VideoContainer(vod:this.vod,pc:this.pc);
+    this.vod.getMediaType();
     initTabData();
   }
 
