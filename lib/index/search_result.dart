@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
+import 'package:player/common/media_page.dart';
 import '../global_config.dart';
 import '../service/http_client.dart';
 import '../player/video_detail.dart';
@@ -100,13 +101,13 @@ class _SearchResultState extends State<SearchResult> {
                 Widget>[
             new GestureDetector(
               onTap: () {
-                if (null == resultList[index].vodPlayUrl ||
-                    "" == resultList[index].vodPlayUrl) {
+                if (null == resultList[index * 2].vodPlayUrl ||
+                    "" == resultList[index * 2].vodPlayUrl) {
                   LogMyUtil.v("playUrl is blank");
                 } else {
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (context) {
-                    return new VideoDetail(vod: resultList[index]);
+                    return new MediaPage(mediaModel: resultList[index * 2],context:this.context);
                   }));
                 }
               },
@@ -148,13 +149,13 @@ class _SearchResultState extends State<SearchResult> {
             ),
             new GestureDetector(
               onTap: () {
-                if (null == resultList[index].vodPlayUrl ||
-                    "" == resultList[index].vodPlayUrl) {
+                if (null == resultList[index * 2+1].vodPlayUrl ||
+                    "" == resultList[index * 2+1].vodPlayUrl) {
                   LogMyUtil.v("playUrl is blank");
                 } else {
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (context) {
-                    return new VideoDetail(vod: resultList[index]);
+                    return new MediaPage(mediaModel: resultList[index * 2+1],context:this.context);
                   }));
                 }
               },
@@ -195,54 +196,6 @@ class _SearchResultState extends State<SearchResult> {
                 ],
               ),
             ),
-//          new FlatButton(
-//            onPressed: () {
-//              if (null == girlLiveList[1][index].vodPlayUrl ||
-//                  "" == girlLiveList[1][index].vodPlayUrl) {
-//                LogUtil.v("playUrl is blank");
-//              } else {
-//                Navigator.of(context)
-//                    .push(new MaterialPageRoute(builder: (context) {
-//                  return new VideoDetail(vod: girlLiveList[1][index]);
-//                }));
-//              }
-//            },
-//            child: new Column(
-//              children: <Widget>[
-//                new Container(
-//                    //Expanded(
-//                    // flex: 1,
-//                    // child: new AspectRatio(
-//                    //aspectRatio: 3.5 / 2,
-//                    width: width,
-//                    //height: 110,
-//                    child: new CachedNetworkImage(
-//                      imageUrl: "${girlLiveList[1][index * 2 + 1].vodPic}",
-//                      placeholder: (context, url) =>
-//                          new CircularProgressIndicator(),
-//                      errorWidget: (context, url, error) =>
-//                          new Icon(Icons.error),
-//                    )
-//
-//                    //),
-//                    // margin: new EdgeInsets.only(top: 6.0, bottom: 14.0),
-//                    // alignment: Alignment.topLeft
-//                    ),
-//                new Container(
-//                  width: width,
-//                  child: new Row(
-//                    children: <Widget>[
-//                      new Text(
-//                          subString(girlLiveList[1][index * 2 + 1].vodName, 9),
-//                          style: new TextStyle(color: GlobalConfig.fontColor)),
-//                      //new Text("演员: ${widgets[index].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
-//                    ],
-//                  ),
-//                  padding: const EdgeInsets.only(bottom: 10.0),
-//                ),
-//              ],
-//            ),
-//          )
           ]
             // )
             );
