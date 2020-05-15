@@ -146,13 +146,14 @@ class _MoviePageState extends State<MoviePage> {
         children: <Widget>[
           new GestureDetector(
             onTap: () {
-              if (null == movieList[column][index].vodPlayUrl ||
-                  "" == movieList[column][index].vodPlayUrl) {
+              if (null == movieList[column][index*2].vodPlayUrl ||
+                  "" == movieList[column][index*2].vodPlayUrl) {
                 LogMyUtil.v("playUrl is blank");
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new MoviePlayer(vod: movieList[column][index],context:this.context);
+                      currentPlayMedia=movieList[column][index*2];
+                  return new MoviePlayer(vod: movieList[column][index*2],context:this.context);
                 }));
               }
             },
@@ -197,6 +198,7 @@ class _MoviePageState extends State<MoviePage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
+                  currentPlayMedia=movieList[column][index * 2 + 1];
                   return new MoviePlayer(vod: movieList[column][index * 2 + 1],context:this.context);
                 }));
               }
