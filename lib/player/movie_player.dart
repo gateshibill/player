@@ -19,39 +19,21 @@ import '../model/client_action.dart';
 import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
-class MoviePlayer extends StatelessWidget {
+//class MoviePlayer extends StatelessWidget {
+//  MoviePlayer({Key key, @required this.vod,this.context});
+//  BuildContext context;
+//  VodModel vod;
+//
+//
+//}
+
+class MoviePlayer extends StatefulWidget {
   MoviePlayer({Key key, @required this.vod,this.context});
   BuildContext context;
   VodModel vod;
 
   @override
-  Widget build(BuildContext context) {
-    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
-    return BlocBuilder(
-      bloc: _counterBloc,
-      builder: (BuildContext context, Map theme) {
-        return Scaffold(
-        appBar: new AppBar(
-        leading: new IconButton(
-        icon: new Icon(Icons.arrow_back, color: Colors.black),
-        onPressed: () => Navigator.of(this.context).pop(),
-        ),
-        title: new Text(this.vod.getName()),
-        ),
-          body: MoviePlayerPage(vod: this.vod),
-        );
-      },
-    );
-  }
-}
-
-class MoviePlayerPage extends StatefulWidget {
-  VodModel vod;
-  PlayerController   pc;
-  MoviePlayerPage({Key key, @required this.vod});
-
-  @override
-  State<StatefulWidget> createState() => MoviePlayerPageState(vod: this.vod,pc:this.pc);
+  State<StatefulWidget> createState() => MoviePlayerState(vod: this.vod,context:this.context);
 }
 
 class TabTitle {
@@ -62,9 +44,9 @@ class TabTitle {
 }
 
 
-class MoviePlayerPageState extends State<MoviePlayerPage>
+class MoviePlayerState extends State<MoviePlayer>
     with SingleTickerProviderStateMixin {
-  MoviePlayerPageState({Key key, @required this.vod,this.pc});
+  MoviePlayerState({Key key, @required this.vod,this.context});
 
   TabController mTabController;
   PageController mPageController = PageController(initialPage: 0);
@@ -72,8 +54,10 @@ class MoviePlayerPageState extends State<MoviePlayerPage>
   var currentPage = 0;
   var isPageCanChanged = true;
   VodModel vod;
-  PlayerController   pc;
+  BuildContext context;
+  PlayerController pc;
   VideoContainer videoContainer;
+  String title;
 
   @override
   void initState() {
@@ -86,7 +70,7 @@ class MoviePlayerPageState extends State<MoviePlayerPage>
   initTabData() {
     print("VideoPageState:" + vod.toString());
     tabList = [
-      new TabTitle('猜你喜欢', PlayRcmdPage(vod: this.vod, pc: this.pc)),
+      new TabTitle('猜你喜欢', PlayRcmdPage(vod: this.vod, pc: this.pc,callback: this.fresh)),
       new TabTitle('详情', MovieDescribe(vod: this.vod)),
     ];
     mTabController = TabController(
@@ -101,6 +85,15 @@ class MoviePlayerPageState extends State<MoviePlayerPage>
         onPageChange(mTabController.index, p: mPageController);
       }
     });
+  }
+
+  void fresh(){
+    print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv:${currentPlayMedia.getName()}");
+    try {
+      setState(() {
+        this.title=currentPlayMedia.getName();
+      });
+    } catch (e) {}
   }
 
   onPageChange(int index, {PageController p, TabController t}) async {
@@ -121,9 +114,28 @@ class MoviePlayerPageState extends State<MoviePlayerPage>
     super.dispose();
     mTabController.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
+    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
+    title= currentPlayMedia.getName();
+    return BlocBuilder(
+      bloc: _counterBloc,
+      builder: (BuildContext context, Map theme) {
+        return Scaffold(
+          appBar: new AppBar(
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(this.context).pop(),
+            ),
+            title: new Text(title),
+          ),
+          body:myBody(),
+        );
+      },
+    );
+  }
+
+  Widget myBody() {
     ClientAction ca=new ClientAction(1000, "videoplaydetail", 0, "", this.vod.vodId, this.vod.vodName, 2, "watch");
     HttpClientUtils.actionReport(ca);
 
@@ -166,6 +178,7 @@ class MoviePlayerPageState extends State<MoviePlayerPage>
       ],
     );
   }
+
 }
 
 // 视频播放

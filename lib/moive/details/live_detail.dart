@@ -46,6 +46,7 @@ class _LiveDetailState extends State<LiveDetail>
   List<TabTitle> tabList;
   var isPageCanChanged = true;
   PlayerController pc;
+  String title;
 
   @override
   void initState() {
@@ -74,10 +75,19 @@ class _LiveDetailState extends State<LiveDetail>
     initTabData();
   }
 
+  void fresh(){
+    print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv:${currentPlayMedia.getName()}");
+    try {
+      setState(() {
+        this.title=currentPlayMedia.getName();
+      });
+    } catch (e) {}
+  }
+
   initTabData() {
     print("VideoPageState:" + channel.toString());
     tabList = [
-      new TabTitle('猜你喜欢', LiveRcmdPage(vod: this.channel, pc: this.pc)),
+      new TabTitle('猜你喜欢', LiveRcmdPage(vod: this.channel, pc: this.pc,callback: this.fresh)),
       new TabTitle('讨论区', CommentDetail()),
     ];
     mTabController = TabController(
@@ -120,7 +130,7 @@ class _LiveDetailState extends State<LiveDetail>
     ClientAction ca = new ClientAction(2000, "liveplaydetail", 0, "",
         this.channel.id, this.channel.name, 2, "watch");
     HttpClientUtils.actionReport(ca);
-
+    title= currentPlayMedia.getName();
     int row = sportsChannelList.length ~/ 2 - 1;
     print("row:$row");
     return Scaffold(
@@ -129,7 +139,7 @@ class _LiveDetailState extends State<LiveDetail>
           icon: new Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(this.context).pop(),
         ),
-        title: new Text(this.channel.getName()),
+        title: new Text(title),
       ),
       body: Column(
 //        padding:

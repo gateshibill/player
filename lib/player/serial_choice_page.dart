@@ -60,13 +60,10 @@ class _SerialChoicePageState extends State<SerialChoicePage> {
         list.add(
           InkWell(
             onTap: () {
-              this.pc.play(e.vodPlayUrl, e.vodName);
+              this.pc.play(e);
               this.vod = e;
-              currentPlayMedia=e;
-              LocalStorage.savaCurrentMedia(currentPlayMedia);
               if(null!=callback){
                 callback();
-                print("xyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyxxxxxxxxxxxxxxxxxxxxxxx" + currentPlayMedia.getName());
               }
             },
             child: Container(

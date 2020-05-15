@@ -16,12 +16,14 @@ import '../moive/details/live_detail.dart';
   Widget build(BuildContext context) {
    switch (mediaModel.getMediaType()){
      case MediaType.Video:
+       currentPlayMedia=mediaModel;//为了显示标题
        return VideoDetail(vod:mediaModel, context:this.context);
        break;
      case MediaType.Topic:
        return HtmlPage(mediaModel:mediaModel, context:this.context);
        break;
      case MediaType.Channel:
+       currentPlayMedia=mediaModel;//为了显示标题
        return LiveDetail(vod:mediaModel, context:this.context);
        break;
      case MediaType.Anchor:

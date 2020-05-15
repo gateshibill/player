@@ -19,40 +19,14 @@ import '../model/client_action.dart';
 import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
-class VideoDetail extends StatelessWidget {
-  VideoDetail({Key key, @required this.vod,this.context});
+class VideoDetail extends StatefulWidget {
+  VodModel vod;
+  //PlayerController   pc;
   BuildContext context;
-  VodModel vod;
-
+  VideoDetail({Key key, @required this.vod,this.context});
   @override
-  Widget build(BuildContext context) {
+  State<StatefulWidget> createState() => VideoDetailState(vod: this.vod,context:this.context);
 
-    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
-    return BlocBuilder(
-      bloc: _counterBloc,
-      builder: (BuildContext context, Map theme) {
-        return Scaffold(
-          appBar: new AppBar(
-            leading: new IconButton(
-              icon: new Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () => Navigator.of(this.context).pop(),
-            ),
-            title: new Text(this.vod.getName()),
-          ),
-          body: VideoDetailPage(vod: this.vod),
-        );
-      },
-    );
-  }
-}
-
-class VideoDetailPage extends StatefulWidget {
-  VodModel vod;
-  PlayerController   pc;
-  VideoDetailPage({Key key, @required this.vod});
-
-  @override
-  State<StatefulWidget> createState() => VideoDetailPageState(vod: this.vod,pc:this.pc);
 }
 
 class TabTitle {
@@ -63,10 +37,10 @@ class TabTitle {
 }
 
 
-class VideoDetailPageState extends State<VideoDetailPage>
+class VideoDetailState extends State<VideoDetail>
     with SingleTickerProviderStateMixin {
-  VideoDetailPageState({Key key, @required this.vod,this.pc});
-
+  VideoDetailState({Key key, @required this.vod,this.context});
+  BuildContext context;
   TabController mTabController;
   PageController mPageController = PageController(initialPage: 0);
   List<TabTitle> tabList;
@@ -75,6 +49,7 @@ class VideoDetailPageState extends State<VideoDetailPage>
   VodModel vod;
   PlayerController   pc;
   VideoContainer videoContainer;
+  String title;
 
   @override
   void initState() {
@@ -84,10 +59,19 @@ class VideoDetailPageState extends State<VideoDetailPage>
     initTabData();
   }
 
+   void fresh(){
+    print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv:${currentPlayMedia.getName()}");
+    try {
+      setState(() {
+        this.title=currentPlayMedia.getName();
+      });
+    } catch (e) {}
+  }
+
   initTabData() {
     print("VideoPageState:" + vod.toString());
     tabList = [
-      new TabTitle('猜你喜欢', PlayRcmdPage(vod: this.vod, pc: this.pc)),
+      new TabTitle('猜你喜欢', PlayRcmdPage(vod: this.vod, pc: this.pc,callback: this.fresh)),
       new TabTitle('比赛详情', VideoDescribe(vod: this.vod)),
     ];
     mTabController = TabController(
@@ -125,9 +109,27 @@ class VideoDetailPageState extends State<VideoDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    ClientAction ca=new ClientAction(1000, "videoplaydetail", 0, "", this.vod.vodId, this.vod.vodName, 2, "watch");
-    HttpClientUtils.actionReport(ca);
+    title= currentPlayMedia.getName();
+    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
+    return BlocBuilder(
+      bloc: _counterBloc,
+      builder: (BuildContext context, Map theme) {
+        return Scaffold(
+          appBar: new AppBar(
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.of(this.context).pop(),
+            ),
+            title: new Text(title),
+          ),
+          body: myBody(),
+        );
+      },
+    );
+  }
 
+
+  Widget myBody() {
     return Column(
       children: <Widget>[
         videoContainer,

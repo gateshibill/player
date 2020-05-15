@@ -182,7 +182,7 @@ class _PlayRcmdPageState extends State<PlayRcmdPage> {
         list.add(
           InkWell(
             onTap: () {
-              this.pc.play(e.vodPlayUrl,e.vodName);
+              this.pc.play(e);
               this.vod = e;
             },
             child: Container(

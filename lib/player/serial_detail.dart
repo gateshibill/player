@@ -21,33 +21,6 @@ import '../model/client_action.dart';
 import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
-//class SerialDetail extends StatelessWidget {
-//  SerialDetail({Key key, @required this.vod,this.context});
-//  BuildContext context;
-//  VodModel vod;
-//  String title;
-//  @override
-//  Widget build(BuildContext context) {
-//    final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
-//    title= currentPlayMedia.getName();
-//    return BlocBuilder(
-//      bloc: _counterBloc,
-//      builder: (BuildContext context, Map theme) {
-//        return Scaffold(
-//        appBar: new AppBar(
-//        leading: new IconButton(
-//        icon: new Icon(Icons.arrow_back, color: Colors.black),
-//        onPressed: () => Navigator.of(this.context).pop(),
-//        ),
-//        title: new Text(title)
-//        ),
-//          body: SerialDetailPage(vod: this.vod),
-//        );
-//      },
-//    );
-//  }
-//}
-
 class SerialDetail extends StatefulWidget {
   VodModel vod;
   BuildContext context;
@@ -91,7 +64,6 @@ class SerialDetailState extends State<SerialDetail>
   void fresh(){
     try {
       setState(() {
-        print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + currentPlayMedia.getName());
         this.title=currentPlayMedia.getName();
       });
     } catch (e) {}

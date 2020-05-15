@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // UI适配库
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:player/data/cache_data.dart';
 import '../model/vod_model.dart';
 import 'package:intl/intl.dart';
 import '../global_config.dart';
@@ -12,22 +13,23 @@ import '../utils/string_util.dart';
 import '../utils/log_my_util.dart';
 
 class PlayRcmdPage extends StatefulWidget {
-  PlayRcmdPage({Key key, @required this.vod, this.pc});
-
+  PlayRcmdPage({Key key, @required this.vod, this.pc,this.callback});
   VodModel vod;
   PlayerController pc;
+  var callback;
 
   @override
   _PlayRcmdPageState createState() =>
-      _PlayRcmdPageState(vod: this.vod, pc: this.pc);
+      _PlayRcmdPageState(vod: this.vod, pc: this.pc,callback: this.callback);
 }
 
 class _PlayRcmdPageState extends State<PlayRcmdPage> {
-  _PlayRcmdPageState({Key key, @required this.vod, this.pc});
+  _PlayRcmdPageState({Key key, @required this.vod, this.pc,this.callback});
 
   VodModel vod;
   PlayerController pc;
   List<VodModel> rcmdList = [];
+  var callback;
 
   @override
   void initState() {
@@ -56,8 +58,14 @@ class _PlayRcmdPageState extends State<PlayRcmdPage> {
         list.add(
           InkWell(
             onTap: () {
-              this.pc.play(e.vodPlayUrl, e.vodName);
+              this.pc.play(e);
               this.vod = e;
+              if(null!=callback){
+                print("ddddddddddddddddddddddddddddddddddddddd:${currentPlayMedia.getName()}");
+                callback();
+              }else{
+                print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:${currentPlayMedia.getName()}");
+              }
             },
             child: Container(
               padding: EdgeInsets.all(2.0),
