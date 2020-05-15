@@ -203,6 +203,7 @@ class _ProgramVideoPageState extends State<ProgramVideoPage> {
           onTap: () {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
+                  currentPlayMedia=vodList[index];
               return new VideoDetail(vod: vodList[index],context: context);
             }));
           },
