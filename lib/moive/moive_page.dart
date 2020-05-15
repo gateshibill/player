@@ -207,6 +207,7 @@ class _TVPageState extends State<TVPage> {
                 onTap: () {
                   Navigator.of(context)
                       .push(new MaterialPageRoute(builder: (context) {
+                        currentPlayMedia=tvChannelList[column][index];
                     return new LiveDetail(
                         vod: tvChannelList[column][index],context: context);
                   }));

@@ -37,7 +37,10 @@ class _LiveRcmdPageState extends State<LiveRcmdPage> {
   Widget moreVideo() {
     if (tvChannelList[0].length != 0) {
       List<Widget> list = [];
-      tvChannelList[0].forEach((e) {
+      List tmpList=[];
+      tmpList.addAll(tvChannelList[0]);
+      tmpList.shuffle();
+      tmpList.forEach((e) {
         list.add(
           InkWell(
             onTap: () {
