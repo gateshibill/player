@@ -21,7 +21,8 @@ class _I18nZh extends I18n {
   String get bottonNavigateTricks=>"花絮";
   @override
   String get bottonNavigateVideo=>"视频";
-
+  @override
+  String get bottonNavigateFind=>"发现";
 
 
 

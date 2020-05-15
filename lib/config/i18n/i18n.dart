@@ -22,7 +22,7 @@ abstract class I18n {
   String get bottonNavigateSports;
   String get bottonNavigateMy;
   String get bottonNavigateVideo;
-
+  String get bottonNavigateFind;
 
   String get indexTitle;
   String get networkButton;

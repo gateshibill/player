@@ -63,7 +63,7 @@ class MainPageState extends State<MainPageWidget>
       ),
       new NavigationIconView(
         icon: new Icon(Icons.date_range),
-        title: new Text(currentI18n.bottonNavigateSchedule),
+        title: new Text(currentI18n.bottonNavigateFind),
         vsync: this,
       ),
       new NavigationIconView(

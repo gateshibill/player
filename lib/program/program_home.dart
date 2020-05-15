@@ -55,8 +55,9 @@ class _findPageState extends State<findPage> {
             tabs: [
 
             //  new Tab(text: "热门赛事"),
-              new Tab(text: "CCTV节目"),
               new Tab(text: "美图美女"),
+              new Tab(text: "CCTV节目"),
+            //  new Tab(text: "美图美女"),
               new Tab(text: "综合赛事"),
             ],
           ),
@@ -71,8 +72,9 @@ class _findPageState extends State<findPage> {
 
      // new SportshotPage(day: 0, name: "热门"),
       // new NewsWebPage("http://sportslive.hongxiuba.com","积分榜"),
-      new ProgramPage(day: 0), //普通节目单
       new LalaPage(),
+      new ProgramPage(day: 0), //普通节目单
+    //  new LalaPage(),
       new SportsPage(), //总赛事
 
     ]);

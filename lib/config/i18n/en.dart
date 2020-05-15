@@ -21,6 +21,8 @@ class _I18nEn extends I18n {
   String get bottonNavigateTricks=>"Tricks";
   @override
   String get bottonNavigateVideo=>"Video";
+  @override
+  String get bottonNavigateFind=>"find";
 
   @override
   String get indexTitle => "index";
