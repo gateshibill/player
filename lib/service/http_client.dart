@@ -1002,18 +1002,22 @@ class HttpClientUtils {
     Msg msg = new Msg();
     try {
       var dio = new Dio();
-      await dio.get(url).then((response) {
+      final response =await dio.get(url);
+        print("0000000000000000000");
         String res = response.data.toString();
         LogMyUtil.d("$TAG res:" + res);
         String res2Json = json.encode(response.data);
+        print("1111111111111111111111");
         final Map parsed = json.decode(res2Json);
+        print("222222222222222222222222");
         msg.code = "${parsed["code"]}";
         msg.desc = parsed["msg"];
         if (msg.code == '0') {
+          print("333333333333333333");
           final Map parsedObject=parsed["object"];
           msg.object = UserModel.fromJson(parsedObject);
         }
-      });
+      ;
     } catch (e) {
       msg.code = Msg.FAILURE;
       LogMyUtil.d("$TAG fail to charge() |$e");

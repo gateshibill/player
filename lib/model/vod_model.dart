@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:player/utils/string_util.dart';
 import 'source_model.dart';
 import 'metadata_model.dart';
 import '../data/cache_data.dart';
@@ -41,6 +42,9 @@ class VodModel extends MediaModel {
   VodModel(this.vodName, this.vodContent);
 
   String getName() {
+    if(null==this.tvSerialNumber){
+      return vodName;
+    }
     return this.tvSerialNumber>0?"${vodName} 第${tvSerialNumber}集":vodName;
   }
 

@@ -86,11 +86,51 @@ class _HomePageState extends State<CarouselPage> {
                   mediaModel: currentPlayMedia, context: context);
             }));
         },
-        child:play(
+//        child:play(
+//            context,
+//            homeMediaController,
+//            'https://4kkan.com/pic/carousel/ad4.png',
+//            "assets/images/" + 'ad6.png'),
+        child: new Column(
+          children: <Widget>[
+            new Stack(alignment: Alignment.center, children: <Widget>[
+              new Container(
+                  child: play(
             context,
             homeMediaController,
             'https://4kkan.com/pic/carousel/ad4.png',
-            "assets/images/" + 'ad6.png'),
+            "assets/images/" + 'ad6.png')),
+              Positioned(
+                // child: Icon(Icons.play_circle_outline),
+                  child: Offstage(
+                      offstage: false,
+                      child:
+                      new Text(StrUtils.subString(currentPlayMedia?.getName(), 50),
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(color: Colors.white24,fontSize:26)
+                      ),
+                  )
+              ),
+            ]),
+//            new Container(
+//              // width: 400,
+//              child: new Column(
+//                children: <Widget>[
+//                  new Text(StrUtils.subString(currentPlayMedia.getName(), 50),
+//                      maxLines: 1,
+//                      textAlign: TextAlign.center,
+//                      style: new TextStyle(color: GlobalConfig.fontColor)
+//                  ),
+//                  //new Text("演员: ${widgets[index2].describes}", style: new TextStyle(color: GlobalConfig.fontColor))
+//                ],
+//              ),
+//              //  padding: const EdgeInsets.only(bottom: 10.0),
+//              alignment: Alignment.center,
+//              margin: new EdgeInsets.only(top: 0.0, bottom: 6.0),
+//            ),
+          ],
+        ),
       ),
     );
   }
