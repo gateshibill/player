@@ -70,7 +70,8 @@ class LocalStorage {
             historyChannelMap[m.id] = m;
           } else if (key.startsWith("historySearch_")) {
             final List<String> list = json.decode(vodJson);
-            searchVodKeyWordSet.addAll(searchHistoryList);
+            searchHistoryList.addAll(list);
+          //  searchVodKeyWordSet.addAll(searchHistoryList);
             if(null==list||list.length<1){
               LogMyUtil.v("没有历史搜索记录:");
             }else {

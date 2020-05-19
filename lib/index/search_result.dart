@@ -208,7 +208,7 @@ class _SearchResultState extends State<SearchResult> {
             onPressed: () {
               Navigator.of(context)
                   .push(new MaterialPageRoute(builder: (context) {
-                return new SearchPage();
+                return new SearchPage(keyword: this.keyword);
               }));
             },
             child: new Row(

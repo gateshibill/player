@@ -8,14 +8,19 @@ import './search_result.dart';
 import '../data/cache_data.dart';
 
 class SearchPage extends StatefulWidget {
+  SearchPage({Key key, @required this.keyword});
+  String keyword;
   @override
-  SearchPageState createState() => new SearchPageState();
+  SearchPageState createState() => new SearchPageState(keyword: this.keyword);
 }
 
 class SearchPageState extends State<SearchPage> {
+  SearchPageState({Key key, @required this.keyword});
   TextEditingController _editController = TextEditingController();
+  String keyword="";
 
   Widget searchInput() {
+    _editController.text=keyword;
     return new Container(
       child: new Row(
         children: <Widget>[
@@ -38,7 +43,7 @@ class SearchPageState extends State<SearchPage> {
                   hintStyle: new TextStyle(color: GlobalConfig.fontColor)),
               onSubmitted: (s) {
                 // 点击确定按钮时候会调用
-                String keyword = _editController.value.text.trim();
+                keyword = _editController.value.text.trim();
                 searchVodKeyWordSet.add(keyword);
                 LocalStorage.saveHistorySearch(searchVodKeyWordSet.toList());
                 Navigator.of(context)
@@ -83,7 +88,11 @@ class SearchPageState extends State<SearchPage> {
                       onTap: () {
                         Navigator.of(context)
                             .push(new MaterialPageRoute(builder: (context) {
-                          return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[0]);
+                          return new SearchResult(
+                              keyword: searchVodKeyWordSet
+                                  .toList()
+                                  .reversed
+                                  .toList()[0]);
                         }));
                       },
                       child: new Row(
@@ -96,7 +105,10 @@ class SearchPageState extends State<SearchPage> {
                           new Expanded(
                             child: new Container(
                               child: new Text(
-                                searchVodKeyWordSet.toList().reversed.toList()[0],
+                                searchVodKeyWordSet
+                                    .toList()
+                                    .reversed
+                                    .toList()[0],
                                 style: new TextStyle(
                                     color: GlobalConfig.fontColor,
                                     fontSize: 14.0),
@@ -124,7 +136,11 @@ class SearchPageState extends State<SearchPage> {
                       onTap: () {
                         Navigator.of(context)
                             .push(new MaterialPageRoute(builder: (context) {
-                          return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[1]);
+                          return new SearchResult(
+                              keyword: searchVodKeyWordSet
+                                  .toList()
+                                  .reversed
+                                  .toList()[1]);
                         }));
                       },
                       child: new Row(
@@ -137,7 +153,10 @@ class SearchPageState extends State<SearchPage> {
                           new Expanded(
                             child: new Container(
                               child: new Text(
-                                searchVodKeyWordSet.toList().reversed.toList()[1],
+                                searchVodKeyWordSet
+                                    .toList()
+                                    .reversed
+                                    .toList()[1],
                                 style: new TextStyle(
                                     color: GlobalConfig.fontColor,
                                     fontSize: 14.0),
@@ -165,7 +184,11 @@ class SearchPageState extends State<SearchPage> {
                       onTap: () {
                         Navigator.of(context)
                             .push(new MaterialPageRoute(builder: (context) {
-                          return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[2]);
+                          return new SearchResult(
+                              keyword: searchVodKeyWordSet
+                                  .toList()
+                                  .reversed
+                                  .toList()[2]);
                         }));
                       },
                       child: new Row(
@@ -178,7 +201,10 @@ class SearchPageState extends State<SearchPage> {
                           new Expanded(
                             child: new Container(
                               child: new Text(
-                                searchVodKeyWordSet.toList().reversed.toList()[2],
+                                searchVodKeyWordSet
+                                    .toList()
+                                    .reversed
+                                    .toList()[2],
                                 style: new TextStyle(
                                     color: GlobalConfig.fontColor,
                                     fontSize: 14.0),
@@ -225,12 +251,12 @@ class SearchPageState extends State<SearchPage> {
   }
 
   Widget itemBuilder1(BuildContext context, int index) {
-   return new Container(
+    return new Container(
       child: new GestureDetector(
         onTap: () {
-          Navigator.of(context)
-              .push(new MaterialPageRoute(builder: (context) {
-            return new SearchResult(keyword: searchVodKeyWordSet.toList().reversed.toList()[index]);
+          Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+            return new SearchResult(
+                keyword: searchVodKeyWordSet.toList().reversed.toList()[index]);
           }));
         },
         child: new Row(
@@ -245,8 +271,7 @@ class SearchPageState extends State<SearchPage> {
                 child: new Text(
                   searchVodKeyWordSet.toList().reversed.toList()[index],
                   style: new TextStyle(
-                      color: GlobalConfig.fontColor,
-                      fontSize: 14.0),
+                      color: GlobalConfig.fontColor, fontSize: 14.0),
                 ),
               ),
             ),
@@ -256,8 +281,7 @@ class SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
-      margin: const EdgeInsets.only(
-          left: 16.0, right: 16.0, bottom: 10.0),
+      margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 10.0),
       padding: const EdgeInsets.only(bottom: 10.0),
       decoration: new BoxDecoration(
           border: new BorderDirectional(
@@ -267,13 +291,13 @@ class SearchPageState extends State<SearchPage> {
                       : Colors.black12))),
     );
   }
+
   Future handleRefresh() async {
     await HttpClientUtils.init().then((onValue) {
-    try {
-      setState(() {});
-    } catch (e) {}
-  });
-  return;
+      try {
+        setState(() {});
+      } catch (e) {}
+    });
+    return;
+  }
 }
-}
-

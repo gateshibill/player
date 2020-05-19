@@ -82,6 +82,7 @@ Set <String> searchVodKeyWordSet=Set<String>();
 //全局播放器
 IjkMediaController homeMediaController = IjkMediaController();
 
+//当前播放内容
 MediaModel currentPlayMedia;
 
 
