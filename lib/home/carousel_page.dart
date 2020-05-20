@@ -83,7 +83,7 @@ class _HomePageState extends State<CarouselPage> {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
               return new MediaPage(
-                  mediaModel: currentPlayMedia, context: context);
+                  mediaModel: currentPlayMedia, context: context,mediaController:homeMediaController);
             }));
         },
 //        child:play(

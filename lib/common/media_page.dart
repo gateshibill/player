@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 import 'package:player/data/cache_data.dart';
 import 'package:player/player/serial_detail.dart';
 import 'package:player/video/serial_page.dart';
@@ -9,7 +10,8 @@ import '../player/anchor_player.dart';
 import '../common/html_page.dart';
 import '../moive/details/live_detail.dart';
  class MediaPage extends StatelessWidget {
-  MediaPage({Key key, @required this.mediaModel,this.context});
+  MediaPage({Key key, @required this.mediaModel,this.context,this.mediaController});
+  IjkMediaController mediaController;
   MediaModel mediaModel;
   BuildContext context;
   @override
@@ -17,7 +19,7 @@ import '../moive/details/live_detail.dart';
    switch (mediaModel.getMediaType()){
      case MediaType.Video:
        currentPlayMedia=mediaModel;//为了显示标题
-       return VideoDetail(vod:mediaModel, context:this.context);
+       return VideoDetail(vod:mediaModel, context:this.context,mediaController:this.mediaController);
        break;
      case MediaType.Topic:
        return HtmlPage(mediaModel:mediaModel, context:this.context);

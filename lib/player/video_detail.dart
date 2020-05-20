@@ -20,13 +20,18 @@ import '../player/play_rcmd_page.dart';
 import '../common/player_controller.dart';
 
 class VideoDetail extends StatefulWidget {
-  VodModel vod;
-  //PlayerController   pc;
-  BuildContext context;
-  VideoDetail({Key key, @required this.vod,this.context});
-  @override
-  State<StatefulWidget> createState() => VideoDetailState(vod: this.vod,context:this.context);
+  VideoDetail(
+      {Key key, @required this.vod, this.context, this.mediaController});
 
+  VodModel vod;
+  IjkMediaController mediaController;
+  BuildContext context;
+
+  @override
+  State<StatefulWidget> createState() => VideoDetailState(
+      vod: this.vod,
+      context: this.context,
+      mediaController: this.mediaController);
 }
 
 class TabTitle {
@@ -36,34 +41,37 @@ class TabTitle {
   TabTitle(this.title, this.widget);
 }
 
-
 class VideoDetailState extends State<VideoDetail>
     with SingleTickerProviderStateMixin {
-  VideoDetailState({Key key, @required this.vod,this.context});
+  VideoDetailState(
+      {Key key, @required this.vod, this.context, this.mediaController});
+
   BuildContext context;
+  IjkMediaController mediaController;
   TabController mTabController;
   PageController mPageController = PageController(initialPage: 0);
   List<TabTitle> tabList;
   var currentPage = 0;
   var isPageCanChanged = true;
   VodModel vod;
-  PlayerController   pc;
+  PlayerController pc;
   VideoContainer videoContainer;
   String title;
 
   @override
   void initState() {
     super.initState();
-    pc=   PlayerController();
-    videoContainer = new VideoContainer(vod:this.vod,pc:this.pc);
+    pc = PlayerController();
+    videoContainer = new VideoContainer(vod: this.vod, pc: this.pc,mediaController: this.mediaController);
     initTabData();
   }
 
-   void fresh(){
-    print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv:${currentPlayMedia.getName()}");
+  void fresh() {
+    print(
+        "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv:${currentPlayMedia.getName()}");
     try {
       setState(() {
-        this.title=currentPlayMedia.getName();
+        this.title = currentPlayMedia.getName();
       });
     } catch (e) {}
   }
@@ -71,7 +79,8 @@ class VideoDetailState extends State<VideoDetail>
   initTabData() {
     print("VideoPageState:" + vod.toString());
     tabList = [
-      new TabTitle('猜你喜欢', PlayRcmdPage(vod: this.vod, pc: this.pc,callback: this.fresh)),
+      new TabTitle('猜你喜欢',
+          PlayRcmdPage(vod: this.vod, pc: this.pc, callback: this.fresh)),
       new TabTitle('比赛详情', VideoDescribe(vod: this.vod)),
     ];
     mTabController = TabController(
@@ -109,7 +118,7 @@ class VideoDetailState extends State<VideoDetail>
 
   @override
   Widget build(BuildContext context) {
-    title= currentPlayMedia.getName();
+    title = currentPlayMedia.getName();
     final CounterBloc _counterBloc = BlocProvider.of<CounterBloc>(context);
     return BlocBuilder(
       bloc: _counterBloc,
@@ -127,7 +136,6 @@ class VideoDetailState extends State<VideoDetail>
       },
     );
   }
-
 
   Widget myBody() {
     return Column(
@@ -173,25 +181,28 @@ class VideoDetailState extends State<VideoDetail>
 
 // 视频播放
 class VideoContainer extends StatefulWidget {
-  VideoContainer({Key key, @required this.vod,this.pc});
+  VideoContainer({Key key, @required this.vod, this.pc, this.mediaController});
+
   VodModel vod;
-  PlayerController  pc;
+  PlayerController pc;
+  IjkMediaController mediaController;
+
   play(String playUrl) {}
 
   @override
-  _VideoContainerState createState() => _VideoContainerState(vod: this.vod,pc:this.pc);
+  _VideoContainerState createState() =>
+      _VideoContainerState(vod: this.vod, pc: this.pc,mediaController: this.mediaController);
 }
 
 class _VideoContainerState extends State<VideoContainer> {
-  _VideoContainerState({Key key, @required this.vod,this.pc});
-
-  IjkMediaController _mediaController = IjkMediaController();
+  _VideoContainerState({Key key, @required this.vod, this.pc,this.mediaController});
+  IjkMediaController mediaController;
   VodModel vod;
-  PlayerController  pc;
+  PlayerController pc;
 
   Future<void> cache() async {
     //LogUtil.v("cache():${this.vod.toString()}");
-    await this._mediaController.getVideoInfo().then((videoInfo) {
+    await this.mediaController.getVideoInfo().then((videoInfo) {
       vod.progress = videoInfo.progress;
       vod.duration = videoInfo.duration;
     });
@@ -218,7 +229,8 @@ class _VideoContainerState extends State<VideoContainer> {
         currentCacheIndex - currentProgress; //max=60,play for 10 mins;
     if (surplusPoolsNum > MOVIE_CACHE_NUM_MAX) {
       //单部最大缓存
-      LogMyUtil.v("reach the max cache pool of ${vod.vodName}:$surplusPoolsNum");
+      LogMyUtil.v(
+          "reach the max cache pool of ${vod.vodName}:$surplusPoolsNum");
       return;
     } else if (currentCacheIndex > mmList.length) {
       //是否结束
@@ -240,9 +252,10 @@ class _VideoContainerState extends State<VideoContainer> {
       cache();
     });
   }
+
 //缓存视频
   Future initVOD() async {
-    if(false==vod.vodCopyright){
+    if (false == vod.vodCopyright) {
       LogMyUtil.v("${vod.vodName} doesn't need cache!");
       return;
     }
@@ -267,19 +280,22 @@ class _VideoContainerState extends State<VideoContainer> {
   @override
   void initState() {
     super.initState();
-    this.pc.mc=_mediaController;
+    if (null == mediaController) {
+      mediaController = IjkMediaController();
+    }
+    this.pc.mc = mediaController;
     String playUrl = this.vod.vodPlayUrl;
     if (this.vod.vodCopyright) {
       playUrl =
           "$LOCAL_VIDEO_URL/${this.vod.vodId.toString()}/${this.vod.playlistFileName}";
     }
     LogMyUtil.v("playUrl:" + playUrl);
-    _mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+    mediaController.setNetworkDataSource(playUrl, autoPlay: true);
 
-    _mediaController.getVideoInfo().then((videoInfo) {
+    mediaController.getVideoInfo().then((videoInfo) {
       vod.progress = videoInfo.progress;
       vod..duration = videoInfo.duration;
-      _mediaController.seekTo(vod.progress);
+      mediaController.seekTo(vod.progress);
     });
 
     initVOD();
@@ -290,14 +306,14 @@ class _VideoContainerState extends State<VideoContainer> {
 
   @override
   void dispose() {
-    _mediaController.dispose();
+    mediaController.dispose();
     super.dispose();
   }
 
   @override
   void play(String playUrl) {
     print("replay");
-    _mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+    mediaController.setNetworkDataSource(playUrl, autoPlay: true);
   }
 
   @override
@@ -308,7 +324,7 @@ class _VideoContainerState extends State<VideoContainer> {
         new Container(
           height: 260,
           child: IjkPlayer(
-            mediaController: _mediaController,
+            mediaController: mediaController,
           ),
         ),
 //        new Text("${this.vod.vodId.toString()}.${this.vod.vodName}",
