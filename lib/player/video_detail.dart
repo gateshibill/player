@@ -282,21 +282,28 @@ class _VideoContainerState extends State<VideoContainer> {
     super.initState();
     if (null == mediaController) {
       mediaController = IjkMediaController();
+      String playUrl = this.vod.vodPlayUrl;
+      if (this.vod.vodCopyright) {
+        playUrl =
+        "$LOCAL_VIDEO_URL/${this.vod.vodId.toString()}/${this.vod.playlistFileName}";
+      }
+      LogMyUtil.v("playUrl:" + playUrl);
+      mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+      LogMyUtil.v("play:00000000000000000000000000000000000000000000000000000000000000" );
+    }else{
+      //跳转过来重新播放
+      mediaController.play();
+      LogMyUtil.v("play:111111111111111111111111111111111111111111111111111111111111" );
     }
     this.pc.mc = mediaController;
-    String playUrl = this.vod.vodPlayUrl;
-    if (this.vod.vodCopyright) {
-      playUrl =
-          "$LOCAL_VIDEO_URL/${this.vod.vodId.toString()}/${this.vod.playlistFileName}";
-    }
-    LogMyUtil.v("playUrl:" + playUrl);
-    mediaController.setNetworkDataSource(playUrl, autoPlay: true);
 
-    mediaController.getVideoInfo().then((videoInfo) {
-      vod.progress = videoInfo.progress;
-      vod..duration = videoInfo.duration;
-      mediaController.seekTo(vod.progress);
-    });
+
+    //历史进度
+//    mediaController.getVideoInfo().then((videoInfo) {
+//      vod.progress = videoInfo.progress;
+//      vod..duration = videoInfo.duration;
+//      mediaController.seekTo(vod.progress);
+//    });
 
     initVOD();
 
@@ -306,7 +313,8 @@ class _VideoContainerState extends State<VideoContainer> {
 
   @override
   void dispose() {
-    mediaController.dispose();
+    //mediaController.dispose();
+    mediaController.pause();
     super.dispose();
   }
 

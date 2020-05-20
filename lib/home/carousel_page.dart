@@ -82,6 +82,7 @@ class _HomePageState extends State<CarouselPage> {
         onTap: () {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
+              homeMediaController.pause();
               return new MediaPage(
                   mediaModel: currentPlayMedia, context: context,mediaController:homeMediaController);
             }));
