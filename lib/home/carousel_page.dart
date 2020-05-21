@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:player/config/config.dart';
@@ -27,6 +29,7 @@ class CarouselPage extends StatefulWidget {
 
 class _HomePageState extends State<CarouselPage> {
   static const String TAG = "CarouselPage";
+  double opacityLevel=1.0;
 
   // int groupNum = 4;
   List<MediaModel> mediaList = [];
@@ -57,6 +60,7 @@ class _HomePageState extends State<CarouselPage> {
     if (mediaList.length == 0) {
       handleRefresh();
     }
+    countdown();
   }
 
   Widget cardList() {
@@ -102,16 +106,19 @@ class _HomePageState extends State<CarouselPage> {
             'https://4kkan.com/pic/carousel/ad4.png',
             "assets/images/" + 'ad6.png')),
               Positioned(
-                // child: Icon(Icons.play_circle_outline),
-                  child: Offstage(
-                      offstage: false,
-                      child:
+                  child:
+                  AnimatedOpacity(// 使用一个AnimatedOpacity Widget
+                  opacity: opacityLevel,
+                  duration: new Duration(seconds: 1),//过渡时间：1
+                  child:new Container(
+                    padding:const EdgeInsets.only(right:20.0,bottom:15.0,left:20.0),//内边距
+                    child://                      child:
                       new Text(StrUtils.subString(currentPlayMedia?.getName(), 50),
                           maxLines: 1,
                           textAlign: TextAlign.center,
-                          style: new TextStyle(color: Colors.white24,fontSize:26)
+                          style: new TextStyle(color: Colors.white24,fontSize:20)
                       ),
-                  )
+                  )  ),
               ),
             ]),
 //            new Container(
@@ -134,6 +141,17 @@ class _HomePageState extends State<CarouselPage> {
         ),
       ),
     );
+  }
+
+  void countdown(){
+    Timer timer = new Timer(new Duration(seconds: 1), () {
+      try {
+        setState(() {
+          opacityLevel=0.0;
+        });
+      } catch (e) {}
+    });
+
   }
 
   Future handleRefresh() async {
