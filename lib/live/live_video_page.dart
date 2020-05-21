@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:player/utils/ui_util.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
@@ -43,6 +44,10 @@ class _LiveVideoPageState extends State<LiveVideoPage> {
       });
     });
     LogMyUtil.v("initState setState()");
+    if(null==me.vipExpire||!me.vipExpire.isAfter(DateTime.now())){
+              UiUtil.showToast('您的VIP已到期,请到个人中心充值！');
+              return;
+    }
   }
 
   @override

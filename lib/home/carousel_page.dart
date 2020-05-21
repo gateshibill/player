@@ -262,10 +262,11 @@ class _HomePageState extends State<CarouselPage> {
               "" == mediaList[index].getPlayUrl) {
             LogMyUtil.v("playUrl is blank");
           } else {
-            if(null==me.vipExpire||!me.vipExpire.isAfter(DateTime.now())){
-              UiUtil.showToast('您的VIP已到期,请到个人中心充值！');
-              return;
-            }
+               //这里不需要
+//            if(null==me.vipExpire||!me.vipExpire.isAfter(DateTime.now())){
+//              UiUtil.showToast('您的VIP已到期,请到个人中心充值！');
+//              return;
+//            }
             homeMediaController.reset();
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
