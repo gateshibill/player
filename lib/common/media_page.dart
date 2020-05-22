@@ -24,7 +24,7 @@ import '../moive/details/live_detail.dart';
      case MediaType.Topic:
        return HtmlPage(mediaModel:mediaModel, context:this.context);
        break;
-     case MediaType.Channel:
+     case MediaType.Channel://电视频道直播
        currentPlayMedia=mediaModel;//为了显示标题
        return LiveDetail(vod:mediaModel, context:this.context);
        break;
