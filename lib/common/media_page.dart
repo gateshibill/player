@@ -8,7 +8,7 @@ import '../player/video_detail.dart';
 import '../player/movie_player.dart';
 import '../player/anchor_player.dart';
 import '../common/html_page.dart';
-import '../moive/details/live_detail.dart';
+import '../player/live_detail.dart';
  class MediaPage extends StatelessWidget {
   MediaPage({Key key, @required this.mediaModel,this.context,this.mediaController});
   IjkMediaController mediaController;
@@ -26,7 +26,7 @@ import '../moive/details/live_detail.dart';
        break;
      case MediaType.Channel://电视频道直播
        currentPlayMedia=mediaModel;//为了显示标题
-       return LiveDetail(vod:mediaModel, context:this.context);
+       return LiveDetail(vod:mediaModel, context:this.context,mediaController:this.mediaController);
        break;
      case MediaType.Anchor:
        //return LiveDetail(mediaModel:mediaModel);

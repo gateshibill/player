@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../global_config.dart';
 import '../data/cache_data.dart';
 import '../utils/log_my_util.dart';
-import './details/live_detail.dart';
+import '../player/live_detail.dart';
 import '../service/local_storage.dart';
 import '../service/http_client.dart';
 import '../model/channel_model.dart';

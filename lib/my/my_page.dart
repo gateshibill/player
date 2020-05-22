@@ -22,7 +22,7 @@ import './login/login_page.dart';
 import '../service/http_client.dart';
 import '../common/widget_common.dart';
 import '../model/channel_model.dart';
-import '../moive/details/live_detail.dart';
+import '../player/live_detail.dart';
 import '../data/cache_data.dart';
 import 'charge_page.dart';
 import 'login/register_page.dart';
