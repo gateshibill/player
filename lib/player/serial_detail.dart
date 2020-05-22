@@ -24,10 +24,11 @@ import '../common/player_controller.dart';
 class SerialDetail extends StatefulWidget {
   VodModel vod;
   BuildContext context;
-  SerialDetail({Key key, @required this.vod,this.context});
+  IjkMediaController mediaController;
+  SerialDetail({Key key, @required this.vod,this.context,this.mediaController});
 
   @override
-  State<StatefulWidget> createState() => SerialDetailState(vod: this.vod,context:this.context);
+  State<StatefulWidget> createState() => SerialDetailState(vod: this.vod,context:this.context,mediaController: this.mediaController);
 }
 
 class TabTitle {
@@ -40,9 +41,10 @@ class TabTitle {
 
 class SerialDetailState extends State<SerialDetail>
     with SingleTickerProviderStateMixin {
-  SerialDetailState({Key key, @required this.vod,this.pc,this.context});
+  SerialDetailState({Key key, @required this.vod,this.pc,this.context,this.mediaController});
   BuildContext context;
   TabController mTabController;
+  IjkMediaController mediaController;
   PageController mPageController = PageController(initialPage: 0);
   List<TabTitle> tabList;
   var currentPage = 0;
@@ -56,6 +58,7 @@ class SerialDetailState extends State<SerialDetail>
   void initState() {
     super.initState();
     pc=   PlayerController();
+    pc.mc=mediaController;
     videoContainer = new VideoContainer(vod:this.vod,pc:this.pc);
     this.vod.getMediaType();
     initTabData();
@@ -188,7 +191,7 @@ class VideoContainer extends StatefulWidget {
 class _VideoContainerState extends State<VideoContainer> {
   _VideoContainerState({Key key, @required this.vod,this.pc});
 
-  IjkMediaController _mediaController = IjkMediaController();
+  IjkMediaController _mediaController ;
   VodModel vod;
   PlayerController  pc;
 
@@ -202,15 +205,14 @@ class _VideoContainerState extends State<VideoContainer> {
           "$LOCAL_VIDEO_URL/${this.vod.vodId.toString()}/${this.vod.playlistFileName}";
     }
     LogMyUtil.v("playUrl:" + playUrl);
-    _mediaController.setNetworkDataSource(playUrl, autoPlay: true);
-
-    _mediaController.getVideoInfo().then((videoInfo) {
-      vod.progress = videoInfo.progress;
-      vod..duration = videoInfo.duration;
-      _mediaController.seekTo(vod.progress);
+    //_mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+//    _mediaController.getVideoInfo().then((videoInfo) {
+//      vod.progress = videoInfo.progress;
+//      vod..duration = videoInfo.duration;
+//      _mediaController.seekTo(vod.progress);
       currentPlayMedia= this.vod;
       LocalStorage.savaCurrentMedia(currentPlayMedia);
-    });
+  //  });
 
     //initVOD();
 
@@ -220,14 +222,21 @@ class _VideoContainerState extends State<VideoContainer> {
 
   @override
   void dispose() {
-    _mediaController.dispose();
+   // _mediaController.dispose();
+    _mediaController.pause();
     super.dispose();
   }
 
   @override
   void play(String playUrl) {
     print("replay");
-    _mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+    if(null==_mediaController){
+      _mediaController= new IjkMediaController();
+      _mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+    }else{
+      _mediaController.play();
+    }
+
   }
 
   @override

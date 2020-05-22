@@ -114,6 +114,7 @@ class VideoDetailState extends State<VideoDetail>
   void dispose() {
     super.dispose();
     mTabController.dispose();
+    super.dispose();
   }
 
   @override

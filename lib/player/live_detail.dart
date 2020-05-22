@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // UI适配库
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
-import '../../service/http_client.dart';
-import '../../utils/log_my_util.dart';
-import '../../model/client_action.dart';
-import '../../model/channel_model.dart';
+import '../service/http_client.dart';
+import '../utils/log_my_util.dart';
+import '../model/client_action.dart';
+import '../model/channel_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../data/cache_data.dart';
-import './live_rcmd_page.dart';
-import '../../player/comment_detail.dart';
-import '../../common/player_controller.dart';
-import '../../service/local_storage.dart';
+import '../data/cache_data.dart';
+import './details/live_rcmd_page.dart';
+import 'comment_detail.dart';
+import '../common/player_controller.dart';
+import '../service/local_storage.dart';
 
 class LiveDetail extends StatefulWidget {
-  LiveDetail({Key key, @required this.vod,this.context});
+  LiveDetail({Key key, @required this.vod,this.context,this.mediaController});
+  IjkMediaController mediaController;
   BuildContext context;
   ChannelModel vod;
 
   @override
-  _LiveDetailState createState() => _LiveDetailState(channel: vod,context: context);
+  _LiveDetailState createState() => _LiveDetailState(channel: vod,context: context,mediaController: this.mediaController);
 }
 
 class TabTitle {
@@ -31,11 +32,11 @@ class TabTitle {
 
 class _LiveDetailState extends State<LiveDetail>
     with SingleTickerProviderStateMixin {
-  _LiveDetailState({Key key, @required this.channel,this.context});
+  _LiveDetailState({Key key, @required this.channel,this.context,this.mediaController});
   BuildContext context;
 
   TextEditingController editingController = TextEditingController();
-  IjkMediaController mediaController = IjkMediaController();
+  IjkMediaController mediaController;
   ChannelModel channel;
   String playUrl;
   List<String> listSource = new List();
@@ -119,8 +120,7 @@ class _LiveDetailState extends State<LiveDetail>
 
   @override
   void dispose() {
-    // editingController.dispose();
-    mediaController.dispose();
+    this.mediaController.pause();
     mTabController.dispose();
     super.dispose();
   }
@@ -437,6 +437,11 @@ class _LiveDetailState extends State<LiveDetail>
   Future _playInput(String playUrl) async {
     //mediaController.dispose();
     // mediaController.stop();
-    await mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+    if(null==mediaController){
+      mediaController = new IjkMediaController();
+      await mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+    }else {
+      await mediaController.play();
+    }
   }
 }
