@@ -36,6 +36,11 @@ class _HomePageState extends State<CarouselPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("build -----------------------------------------:${homeMediaController.ijkStatus}");
+    if(IjkStatus.pause==homeMediaController.ijkStatus){
+      homeMediaController.play();
+      print("build homeMediaController.play()-----------------------------------------:${IjkStatus.pause}");
+    }
     return (mediaList.length < 1)
         ? refreshButton(this):cardList();
   }
@@ -48,8 +53,10 @@ class _HomePageState extends State<CarouselPage> {
         "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
     if (null == currentPlayMedia){
       currentPlayMedia = tvChannelList[0][0];
+      homeMediaController.setNetworkDataSource(currentPlayMedia.getPlayUrl(), autoPlay: true);
+    }else{
+      homeMediaController.play();
     }
-    homeMediaController.setNetworkDataSource(currentPlayMedia.getPlayUrl(), autoPlay: true);
 
     if (tvChannelList[0].length > 0) {
       mediaList.clear();
@@ -267,7 +274,7 @@ class _HomePageState extends State<CarouselPage> {
 //              UiUtil.showToast('您的VIP已到期,请到个人中心充值！');
 //              return;
 //            }
-            homeMediaController.reset();
+            homeMediaController.pause();
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
               return new MediaPage(
@@ -340,7 +347,8 @@ class _HomePageState extends State<CarouselPage> {
   @override
   void dispose() {
     print("33homeMediaController:${homeMediaController.ijkStatus}");
-    homeMediaController.reset();
+   // homeMediaController.reset();
+    homeMediaController.pause();
     super.dispose();
   }
 }
