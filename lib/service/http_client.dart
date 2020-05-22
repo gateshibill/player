@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:player/model/charge_card_model.dart';
 import 'dart:convert';
 import '../model/source_model.dart';
 import '../model/metadata_model.dart';
@@ -996,7 +997,7 @@ class HttpClientUtils {
     return msg;
   }
   //充值
-  static Future<Msg> charge(int userId, String cardId) async {
+  static Future<Msg> getCharge(int userId, String cardId) async {
     String url = "${user_charge_URL}userId=$userId&cardId=$cardId";
     LogMyUtil.d("$TAG charge():url:$url");
     Msg msg = new Msg();
@@ -1025,6 +1026,38 @@ class HttpClientUtils {
     return msg;
   }
 
+  //充值
+  static Future<Msg> charge(int userId, String cardId) async {
+    String url = "${user_charge_URL}userId=$userId&cardId=$cardId";
+    LogMyUtil.d("$TAG charge():url:$url");
+    ChargeCardModel card = new ChargeCardModel();
+    card.userId=userId;
+    card.cardId=cardId;
+    Msg msg = new Msg();
+    try {
+      var dio = new Dio();
+      final response = await dio.post(url, data: card.toJson());
+      String res = response.data.toString();
+      LogMyUtil.d("$TAG res:" + res);
+      String res2Json = json.encode(response.data);
+      final Map parsed = json.decode(res2Json);
+      LogMyUtil.d("$TAG 1111111111");
+      msg.code  = "${parsed["code"]}";
+      LogMyUtil.d("$TAG 22222222222：${msg.code}" );
+      msg.desc = parsed["msg"];
+      LogMyUtil.d("$TAG 3333333333333333");
+      if (msg.code == '0') {
+        LogMyUtil.d("$TAG 444444444444");
+        final Map parsedObject=parsed["object"];
+        msg.object = UserModel.fromJson(parsedObject);
+      }
+    } catch (e) {
+      msg.code = Msg.FAILURE;
+      LogMyUtil.d("$TAG fail to guest() |$e");
+    }
+    return msg;
+  }
+
   //行为上报
   static Future actionReport(ClientAction ca) async {
     if(LogMyUtil.isDebug){
@@ -1041,7 +1074,6 @@ class HttpClientUtils {
       print("fail to actionReport|$e");
     }
   }
-
   //p2p日志上报
   static Future holeReport(PeerAction pa) async {
     if(LogMyUtil.isDebug){
