@@ -423,7 +423,7 @@ class _MyPageState extends State<MyPage> {
               builder: (context, snapshot) {
                 return ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
-                    return itemBuilder1(context, index);
+                    return itemBuilderHistoryMoive(context, index);
                   },
                   itemCount: historyVodList.length,
                   scrollDirection: Axis.horizontal,
@@ -481,7 +481,7 @@ class _MyPageState extends State<MyPage> {
       ),
     ]);
   }
-  Widget itemBuilder1(BuildContext context, int index) {
+  Widget itemBuilderHistoryMoive(BuildContext context, int index) {
     String url = historyVodList[index].vodPlayUrl;
     double picWidth = 160;
     return new Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -495,7 +495,7 @@ class _MyPageState extends State<MyPage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new VideoDetail(vod: historyVodList[index]);
+                  return new VideoDetail(vod: historyVodList[index],context: this.context,);
                 }));
               }
             },
@@ -554,7 +554,7 @@ class _MyPageState extends State<MyPage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new LiveDetail(vod: historyChannelList[index]);
+                  return new LiveDetail(vod: historyChannelList[index],context: this.context);
                 }));
               }
             },
@@ -614,7 +614,7 @@ class _MyPageState extends State<MyPage> {
               } else {
                 Navigator.of(context)
                     .push(new MaterialPageRoute(builder: (context) {
-                  return new LiveDetail(vod: guessChannelList[index]);
+                  return new LiveDetail(vod: guessChannelList[index],context: this.context);
                 }));
               }
             },

@@ -437,11 +437,12 @@ class _LiveDetailState extends State<LiveDetail>
   Future _playInput(String playUrl) async {
     //mediaController.dispose();
     // mediaController.stop();
-    if(null==mediaController){
-      mediaController = new IjkMediaController();
-      await mediaController.setNetworkDataSource(playUrl, autoPlay: true);
-    }else {
-      await mediaController.play();
-    }
+    await mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+//    if(null==mediaController){
+//      mediaController = new IjkMediaController();
+//      await mediaController.setNetworkDataSource(playUrl, autoPlay: true);
+//    }else {
+//      await mediaController.play();
+//    }
   }
 }

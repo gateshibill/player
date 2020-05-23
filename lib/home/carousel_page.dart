@@ -51,12 +51,12 @@ class _HomePageState extends State<CarouselPage> {
     super.initState();
     String playUrl =
         "http://121.31.30.91:8081/ysten-business/live/cctv-3/1.m3u8";
-    if (null == currentPlayMedia){
+   // if (null == currentPlayMedia){
       currentPlayMedia = tvChannelList[0][0];
       homeMediaController.setNetworkDataSource(currentPlayMedia.getPlayUrl(), autoPlay: true);
-    }else{
-      homeMediaController.play();
-    }
+    //}else{
+   //   homeMediaController.play();
+   // }
 
     if (tvChannelList[0].length > 0) {
       mediaList.clear();
@@ -107,11 +107,13 @@ class _HomePageState extends State<CarouselPage> {
           children: <Widget>[
             new Stack(alignment: Alignment.center, children: <Widget>[
               new Container(
-                  child: play(
+                  child:
+                  play(
             context,
             homeMediaController,
             'https://4kkan.com/pic/carousel/ad4.png',
-            "assets/images/" + 'ad6.png')),
+            "assets/images/" + 'ad6.png')
+              ),
               Positioned(
                   child:
                   AnimatedOpacity(// 使用一个AnimatedOpacity Widget
@@ -260,7 +262,7 @@ class _HomePageState extends State<CarouselPage> {
         ]);
   }
 
-  Widget newRecommend(BuildContext context, int index) {
+  Widget cell(BuildContext context, int index) {
     return new Container(
       color: GlobalConfig.cardBackgroundColor,
       child: new GestureDetector(
@@ -278,7 +280,7 @@ class _HomePageState extends State<CarouselPage> {
             Navigator.of(context)
                 .push(new MaterialPageRoute(builder: (context) {
               return new MediaPage(
-                  mediaModel: mediaList[index], context: context);
+                  mediaModel: mediaList[index], context: context,mediaController: homeMediaController);
             }));
           }
         },
@@ -286,15 +288,22 @@ class _HomePageState extends State<CarouselPage> {
           children: <Widget>[
             new Stack(alignment: Alignment.center, children: <Widget>[
               new Container(
-                  child: new AspectRatio(
+                  child:
+                  new AspectRatio(
                       aspectRatio: 3.5 / 2,
                       child: new CachedNetworkImage(
                         imageUrl: "${mediaList[index].getPics()[0]}",
                         placeholder: (context, url) => cachPlaceHolder(),
                         errorWidget: (context, url, error) =>
                             new Icon(Icons.error),
-                      )),
-                  //  child: play(mediaController, vodList[index].vodPic),
+                      )
+                  ),
+//        play(
+//            context,
+//            homeMediaController,
+//            mediaList[index].getPics()[0],
+//            "assets/images/" + 'ad6.png'),
+//                  //  child: play(mediaController, vodList[index].vodPic),
                   margin: new EdgeInsets.only(top: 10.0, bottom: 4.0),
                   alignment: Alignment.topLeft),
               Positioned(
@@ -337,11 +346,11 @@ class _HomePageState extends State<CarouselPage> {
             children: <Widget>[
               carouselPlay(),
               hot(),
-                newRecommend(context, index)
+                cell(context, index)
               ])
         : (mediaList.length < 1)
             ? refreshButton(this)
-            : newRecommend(context, index));
+            : cell(context, index));
   }
 
   @override
