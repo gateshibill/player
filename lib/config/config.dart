@@ -31,9 +31,9 @@ const int HTTP_SERVER_PORT=12017;
 const String PLAYLIST_M3U8 ="playlist.m3u8";//零时预定，有可能不妥
 const String VIDEO_SERVER_IP="119.28.188.181";
 const String TURN_SERVER_IP="119.28.188.181";
-const String MAIN_SERVER_URL="https://4kkan.com";
+const String MAIN_SERVER_URL="https://feikantec.com";
 
-const String BASE_SERVER_URL="http://119.28.180.177:8080/pvideo";
+const String BASE_SERVER_URL="http://video.feikantec.com/pvideo";
 
 
 const String BASE_VIDEO_URL="http://$VIDEO_SERVER_IP";
